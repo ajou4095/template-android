@@ -1,0 +1,38 @@
+package com.ray.template.common.ui
+
+import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.databinding.ViewDataBinding
+import androidx.fragment.app.Fragment
+
+abstract class BaseFragment<B : ViewDataBinding>(
+    private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
+) : Fragment() {
+    protected lateinit var binding: B
+        private set
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = inflater(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initView()
+        initObserver()
+    }
+
+    protected open fun initView() = Unit
+
+    protected open fun initObserver() = Unit
+
+    protected fun bind(action: B.() -> Unit) {
+        binding.action()
+    }
+}
