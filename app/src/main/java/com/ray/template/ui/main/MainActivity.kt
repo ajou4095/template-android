@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.viewModels
 import com.ray.template.common.ui.BaseActivity
 import com.ray.template.databinding.ActivityMainBinding
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
     private val viewModel: MainViewModel by viewModels()
 
