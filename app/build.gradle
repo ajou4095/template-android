@@ -76,6 +76,9 @@ dependencies {
     //coroutine
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutineVersion"
 
+    //ted permission
+    implementation "io.github.ParkSangGwon:tedpermission-coroutine:$tedPermissionVersion"
+
     //lottie
     implementation "com.airbnb.android:lottie:$lottieVersion"
 
