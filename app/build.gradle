@@ -11,8 +11,8 @@ android {
 
     defaultConfig {
         applicationId "com.ray.template"
-        minSdk  rootProject.minSdkVersion
-        targetSdk  rootProject.targetSdkVersion
+        minSdk rootProject.minSdkVersion
+        targetSdk rootProject.targetSdkVersion
         versionCode rootProject.versionCode
         versionName rootProject.versionName
 
@@ -59,8 +59,10 @@ dependencies {
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-moshi:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-scalars:$retrofitVersion"
-    implementation "com.squareup.moshi:moshi-kotlin:1.13.0"
-    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:0.9.2"
+    implementation "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:$retrofitCoroutineAdapterVersion"
+
+    //moshi
+    implementation "com.squareup.moshi:moshi-kotlin:$moshiVersion"
 
     //lifecycle
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:$lifecycleVersion"
@@ -79,6 +81,16 @@ dependencies {
 
     //timber
     implementation "com.jakewharton.timber:timber:$timberVersion"
+
+    //flipper
+    debugImplementation "com.facebook.flipper:flipper:$flipperVersion"
+    debugImplementation "com.facebook.flipper:flipper-network-plugin:$flipperVersion"
+    debugImplementation "com.facebook.flipper:flipper-leakcanary2-plugin:$flipperVersion"
+    debugImplementation "com.facebook.flipper:flipper:$flipperVersion"
+    debugImplementation "com.facebook.soloader:soloader:$flipperSoLoaderVersion"
+
+    //leak canary
+    implementation "com.squareup.leakcanary:leakcanary-android:$leakcanaryVersion"
 
     //androidx
     implementation "androidx.core:core-ktx:$androidXCoreVersion"
