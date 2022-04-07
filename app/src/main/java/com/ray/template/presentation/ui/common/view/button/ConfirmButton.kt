@@ -15,7 +15,7 @@ import com.ray.template.presentation.ui.common.UiCommonContract
 class ConfirmButton @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
-    defStyle: Int = androidx.appcompat.R.attr.buttonStyle
+    defStyle: Int = R.attr.typographyButton
 ) : AppCompatButton(context, attributeSet, defStyle) {
 
     var onIntervalClick: OnClickListener? = null
@@ -48,9 +48,5 @@ class ConfirmButton @JvmOverloads constructor(
 
         setPadding(resources.getDimension(R.dimen.spacing_s).toInt())
         setBackgroundResource(R.drawable.bg_confirm_button)
-
-        setTextSize(TypedValue.COMPLEX_UNIT_PX, 16.dp)
-        setTextColor(context.getColor(R.color.blue_gray_50))
-        setTypeface(null, Typeface.BOLD)
     }
 }

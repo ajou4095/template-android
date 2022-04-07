@@ -8,7 +8,7 @@
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
-        android:theme="@style/Theme.Template">
+        android:theme="@style/Typography">
         <activity
             android:name=".presentation.ui.main.MainActivity"
             android:exported="true">
