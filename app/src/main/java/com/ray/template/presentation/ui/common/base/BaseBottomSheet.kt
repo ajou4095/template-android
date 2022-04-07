@@ -1,15 +1,15 @@
-package com.ray.template.ui.common.base
+package com.ray.template.presentation.ui.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
-import androidx.fragment.app.Fragment
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-abstract class BaseFragment<B : ViewDataBinding>(
+abstract class BaseBottomSheet<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
-) : Fragment() {
+) : BottomSheetDialogFragment() {
     protected lateinit var binding: B
         private set
 

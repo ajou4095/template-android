@@ -1,4 +1,4 @@
-package com.ray.template.ui.common.base
+package com.ray.template.presentation.ui.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
