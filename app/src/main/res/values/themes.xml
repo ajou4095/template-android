@@ -24,6 +24,7 @@
         <item name="typographyButton">@style/Typography.TextAppearance.Button</item>
     </style>
 
+    <!-- TextAppearance -->
     <style name="Typography.TextAppearance">
         <item name="android:textColor">@color/blue_gray_900</item>
         <item name="android:textStyle">normal</item>
@@ -95,6 +96,18 @@
     <style name="Typography.TextAppearance.Button" parent="Typography.TextAppearance.Medium">
         <item name="android:textSize">@dimen/typography_button</item>
         <item name="android:lineSpacingExtra">1.25dp</item>
+    </style>
+
+    <!-- Button -->
+    <style name="Typography.ConfirmButton" parent="Typography.TextAppearance.Button" />
+
+    <style name="Typography.ConfirmButton.Blue">
+        <item name="android:background">@drawable/bg_confirm_button_blue</item>
         <item name="android:textColor">@color/blue_gray_50</item>
+    </style>
+
+    <style name="Typography.ConfirmButton.BlueGray">
+        <item name="android:background">@drawable/bg_confirm_button_blue_gray</item>
+        <item name="android:textColor">@color/blue_gray_900</item>
     </style>
 </resources>

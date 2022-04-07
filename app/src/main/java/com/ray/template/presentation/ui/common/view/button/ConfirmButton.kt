@@ -9,6 +9,13 @@ import com.ray.template.R
 import com.ray.template.common.util.delayOnLifecycle
 import com.ray.template.presentation.ui.common.UiCommonContract
 
+/**
+ * 사용법
+ * style="Typography.ConfirmButton.Blue" 와 같이 스타일을 지정해 색을 설정한다.
+ *
+ * attribute
+ * onIntervalClick : 딜레이를 넣어 다중 클릭을 방지한다.
+ */
 class ConfirmButton @JvmOverloads constructor(
     context: Context,
     attributeSet: AttributeSet? = null,
@@ -44,6 +51,5 @@ class ConfirmButton @JvmOverloads constructor(
         stateListAnimator = null
 
         setPadding(resources.getDimension(R.dimen.spacing_s).toInt())
-        setBackgroundResource(R.drawable.bg_confirm_button)
     }
 }
