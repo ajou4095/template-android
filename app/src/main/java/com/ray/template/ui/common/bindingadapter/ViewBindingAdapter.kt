@@ -1,4 +1,4 @@
-package com.ray.template.common.bindingadapter
+package com.ray.template.ui.common.bindingadapter
 
 import android.view.View
 import androidx.core.view.isVisible
