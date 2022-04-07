@@ -50,7 +50,7 @@ class ConfirmButton @JvmOverloads constructor(
         setBackgroundResource(R.drawable.bg_confirm_button)
 
         setTextSize(TypedValue.COMPLEX_UNIT_PX, 16.dp)
-        setTextColor(context.getColor(R.color.blue_grey_50))
+        setTextColor(context.getColor(R.color.blue_gray_50))
         setTypeface(null, Typeface.BOLD)
     }
 }
