@@ -42,59 +42,58 @@
         <item name="android:fontFamily">@font/notosans_medium</item>
     </style>
 
-
     <style name="Typography.TextAppearance.Headline1" parent="Typography.TextAppearance.Light">
-        <item name="android:textSize">96dp</item>
+        <item name="android:textSize">@dimen/typography_headline1</item>
         <item name="android:lineSpacingExtra">-1.5dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Headline2" parent="Typography.TextAppearance.Light">
-        <item name="android:textSize">60dp</item>
+        <item name="android:textSize">@dimen/typography_headline2</item>
         <item name="android:lineSpacingExtra">-0.5dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Headline3" parent="Typography.TextAppearance.Regular">
-        <item name="android:textSize">48dp</item>
+        <item name="android:textSize">@dimen/typography_headline3</item>
         <item name="android:lineSpacingExtra">0dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Headline4" parent="Typography.TextAppearance.Regular">
-        <item name="android:textSize">34dp</item>
+        <item name="android:textSize">@dimen/typography_headline4</item>
         <item name="android:lineSpacingExtra">0.25dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Headline5" parent="Typography.TextAppearance.Regular">
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">@dimen/typography_headline5</item>
         <item name="android:lineSpacingExtra">0dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Headline6" parent="Typography.TextAppearance.Medium">
-        <item name="android:textSize">20dp</item>
+        <item name="android:textSize">@dimen/typography_headline6</item>
         <item name="android:lineSpacingExtra">0.15dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Subtitle1" parent="Typography.TextAppearance.Regular">
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">@dimen/typography_subtitle1</item>
         <item name="android:lineSpacingExtra">0.15dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Subtitle2" parent="Typography.TextAppearance.Medium">
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">@dimen/typography_subtitle2</item>
         <item name="android:lineSpacingExtra">0.1dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Body1" parent="Typography.TextAppearance.Regular">
-        <item name="android:textSize">16dp</item>
+        <item name="android:textSize">@dimen/typography_body1</item>
         <item name="android:lineSpacingExtra">0.5dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Body2" parent="Typography.TextAppearance.Regular">
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">@dimen/typography_body2</item>
         <item name="android:lineSpacingExtra">0.25dp</item>
     </style>
 
     <style name="Typography.TextAppearance.Button" parent="Typography.TextAppearance.Medium">
-        <item name="android:textSize">14dp</item>
+        <item name="android:textSize">@dimen/typography_button</item>
         <item name="android:lineSpacingExtra">1.25dp</item>
         <item name="android:textColor">@color/blue_gray_50</item>
     </style>

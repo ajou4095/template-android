@@ -1,15 +1,12 @@
 package com.ray.template.presentation.ui.common.view.button
 
 import android.content.Context
-import android.graphics.Typeface
 import android.util.AttributeSet
-import android.util.TypedValue
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.setPadding
 import com.ray.template.R
 import com.ray.template.common.util.delayOnLifecycle
-import com.ray.template.common.util.dp
 import com.ray.template.presentation.ui.common.UiCommonContract
 
 class ConfirmButton @JvmOverloads constructor(

@@ -7,4 +7,16 @@
     <dimen name="spacing_l">25dp</dimen>
     <dimen name="spacing_xl">30dp</dimen>
     <dimen name="spacing_xxl">35dp</dimen>
+
+    <dimen name="typography_headline1">96dp</dimen>
+    <dimen name="typography_headline2">60dp</dimen>
+    <dimen name="typography_headline3">48dp</dimen>
+    <dimen name="typography_headline4">34dp</dimen>
+    <dimen name="typography_headline5">24dp</dimen>
+    <dimen name="typography_headline6">20dp</dimen>
+    <dimen name="typography_subtitle1">16dp</dimen>
+    <dimen name="typography_subtitle2">14dp</dimen>
+    <dimen name="typography_body1">16dp</dimen>
+    <dimen name="typography_body2">14dp</dimen>
+    <dimen name="typography_button">14dp</dimen>
 </resources>
