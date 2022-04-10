@@ -16,7 +16,7 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
 
     var onCancel: (() -> Unit)? = null
 
-    var onConfirm: (() -> Unit)? = null
+    var onConfirm: (() -> Any)? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
