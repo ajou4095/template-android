@@ -1,6 +1,9 @@
 package com.ray.template.common.util
 
+import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
+import com.ray.template.common.util.livedata.Event
+import com.ray.template.common.util.livedata.EventObserver
 
 val LiveData<Boolean>.valueOrDefault: Boolean
     get() = value ?: false
@@ -28,3 +31,7 @@ val LiveData<Short>.valueOrDefault: Short
 
 val LiveData<String>.valueOrDefault: String
     get() = value ?: ""
+
+fun <T> LiveData<Event<T>>.eventObserve(owner: LifecycleOwner, onEventUnhandledContent: (T) -> Unit) {
+    this.observe(owner, EventObserver(onEventUnhandledContent))
+}
