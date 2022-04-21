@@ -14,16 +14,18 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/spacing_xs"
-        android:background="@drawable/bg_modal">
+        android:layout_margin="@dimen/spacing_xs">
 
         <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/title"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/spacing_s"
+            android:layout_marginBottom="@dimen/spacing_xs"
             android:gravity="center"
             android:text="@{vm.title}"
-            android:textAppearance="?attr/typographyHeadline4"
+            android:textAppearance="?attr/typographyHeadline5"
+            app:layout_constraintBottom_toTopOf="@id/message"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -33,8 +35,8 @@
             android:id="@+id/message"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/spacing_xs"
-            android:layout_marginBottom="@dimen/spacing_m"
+            android:layout_marginTop="@dimen/spacing_xxs"
+            android:layout_marginBottom="@dimen/spacing_xs"
             android:gravity="center"
             android:text="@{vm.message}"
             android:textAppearance="?attr/typographyBody1"
@@ -70,7 +72,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@id/cancel"
+            app:layout_constraintTop_toBottomOf="@id/message"
             tools:text="확인" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

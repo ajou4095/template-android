@@ -34,7 +34,6 @@ class AlertDialogViewModel @Inject constructor(
     }
 
     private val _event = MutableLiveData<Event<AlertDialogViewEvent>>()
-
     val event: LiveData<Event<AlertDialogViewEvent>>
         get() = _event
 

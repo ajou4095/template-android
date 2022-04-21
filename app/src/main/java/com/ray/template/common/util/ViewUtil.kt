@@ -11,3 +11,7 @@ val Int.dp: Float
             Resources.getSystem().displayMetrics
         )
     }
+
+fun getDisplayWidth() = Resources.getSystem().displayMetrics.widthPixels
+
+fun getDisplayHeight() = Resources.getSystem().displayMetrics.heightPixels

@@ -1,12 +1,13 @@
 package com.ray.template.presentation.ui.common.base
 
-import android.content.res.Resources
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import com.ray.template.R
+import com.ray.template.common.util.getDisplayWidth
 
 abstract class BaseDialogFragment<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
@@ -36,9 +37,11 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
     }
 
     protected open fun initWidth() {
-        val maxWidth = Resources.getSystem().displayMetrics.widthPixels
-        val width = (maxWidth * 0.9).toInt()
+        val maxWidth = getDisplayWidth()
+        val width = (maxWidth * 0.8).toInt()
+
         dialog?.window?.setLayout(width, ViewGroup.LayoutParams.WRAP_CONTENT)
+        dialog?.window?.setBackgroundDrawableResource(R.drawable.bg_modal)
     }
 
     protected open fun initView() = Unit

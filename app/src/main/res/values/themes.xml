@@ -22,13 +22,14 @@
         <item name="typographyBody1">@style/Typography.TextAppearance.Body1</item>
         <item name="typographyBody2">@style/Typography.TextAppearance.Body2</item>
         <item name="typographyButton">@style/Typography.TextAppearance.Button</item>
+
+        <item name="android:includeFontPadding">false</item>
     </style>
 
     <!-- TextAppearance -->
     <style name="Typography.TextAppearance">
         <item name="android:textColor">@color/blue_gray_900</item>
         <item name="android:textStyle">normal</item>
-        <item name="android:includeFontPadding">false</item>
     </style>
 
     <style name="Typography.TextAppearance.Light">

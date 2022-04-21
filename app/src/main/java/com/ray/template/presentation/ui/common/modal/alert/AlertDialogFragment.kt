@@ -7,9 +7,7 @@ import com.ray.template.presentation.ui.common.base.BaseDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class AlertDialogFragment : BaseDialogFragment<ViewAlertDialogBinding>(
-    ViewAlertDialogBinding::inflate
-) {
+class AlertDialogFragment : BaseDialogFragment<ViewAlertDialogBinding>(ViewAlertDialogBinding::inflate) {
     private val viewModel: AlertDialogViewModel by viewModels()
 
     override fun initView() {
