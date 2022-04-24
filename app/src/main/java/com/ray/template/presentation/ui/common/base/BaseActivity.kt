@@ -12,7 +12,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
     protected lateinit var binding: B
         private set
 
-    protected val tag: String
+    val tag: String
         get() = this.javaClass.simpleName ?: "BaseActivity"
 
     override fun onCreate(savedInstanceState: Bundle?) {
