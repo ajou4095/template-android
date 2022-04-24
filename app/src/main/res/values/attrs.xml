@@ -11,4 +11,9 @@
     <attr name="typographyBody1" format="reference" />
     <attr name="typographyBody2" format="reference" />
     <attr name="typographyButton" format="reference" />
+
+    <declare-styleable name="SelectItem">
+        <attr name="android:text" />
+        <attr name="android:src" />
+    </declare-styleable>
 </resources>

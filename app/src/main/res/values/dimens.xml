@@ -21,4 +21,6 @@
     <dimen name="typography_body1">16dp</dimen>
     <dimen name="typography_body2">14dp</dimen>
     <dimen name="typography_button">14dp</dimen>
+
+    <dimen name="size_icon">25dp</dimen>
 </resources>
