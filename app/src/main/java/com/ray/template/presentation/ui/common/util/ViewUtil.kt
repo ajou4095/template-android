@@ -1,4 +1,4 @@
-package com.ray.template.common.util
+package com.ray.template.presentation.ui.common.util
 
 import android.content.res.Resources
 import android.util.TypedValue
