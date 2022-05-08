@@ -8,6 +8,7 @@ import androidx.core.content.res.getBooleanOrThrow
 import androidx.core.content.res.getFloatOrThrow
 import androidx.core.content.res.getIntegerOrThrow
 import androidx.core.content.res.getStringOrThrow
+import androidx.core.content.res.getTextOrThrow
 
 val Int.dp: Float
     get() {
@@ -22,11 +23,13 @@ fun getDisplayWidth() = Resources.getSystem().displayMetrics.widthPixels
 
 fun getDisplayHeight() = Resources.getSystem().displayMetrics.heightPixels
 
-fun TypedArray.getStringOrNull(@StyleableRes index: Int): String? {
-    return if (hasValue(index)) {
-        getStringOrThrow(index)
-    } else {
-        null
+inline fun TypedArray.getTextIfCan(
+    @StyleableRes index: Int,
+    onSuccess: (CharSequence) -> Unit
+) {
+    if (hasValue(index)) {
+        val value = getTextOrThrow(index)
+        onSuccess(value)
     }
 }
 
