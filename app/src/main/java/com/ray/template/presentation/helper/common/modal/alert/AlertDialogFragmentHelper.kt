@@ -33,7 +33,9 @@ object AlertDialogFragmentHelper {
             putString(CONFIRM_MESSAGE, confirmMessage)
         }
         val fragment = AlertDialogFragment().apply {
-            arguments = args
+            arguments = Bundle().also {
+                it.putBundle(BUNDLE, args)
+            }
             this.onCancel = onCancel
             this.onConfirm = onConfirm
         }
