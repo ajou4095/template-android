@@ -3,11 +3,13 @@ package com.ray.template.presentation.helper.common.modal.alert
 import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 import com.ray.template.common.util.getBooleanOrDefault
+import com.ray.template.common.util.getBundle
 import com.ray.template.common.util.getStringOrDefault
 import com.ray.template.presentation.ui.common.modal.alert.AlertDialogFragment
 import com.ray.template.presentation.ui.common.modal.alert.AlertDialogFragmentContract
 
 object AlertDialogFragmentHelper {
+    private const val BUNDLE = "key_BUNDLE"
     private const val TITLE = "key_TITLE"
     private const val MESSAGE = "key_MESSAGE"
     private const val IS_TWO_BUTTON = "key_IS_TWO_BUTTON"
@@ -38,23 +40,27 @@ object AlertDialogFragmentHelper {
         return fragment
     }
 
-    fun getTitle(savedStateHandle: SavedStateHandle): String {
-        return savedStateHandle.getStringOrDefault(TITLE)
+    fun getBundle(savedStateHandle: SavedStateHandle): Bundle? {
+        return savedStateHandle.getBundle(BUNDLE)
     }
 
-    fun getMessage(savedStateHandle: SavedStateHandle): String {
-        return savedStateHandle.getStringOrDefault(MESSAGE)
+    fun getTitle(bundle: Bundle?): String {
+        return bundle.getStringOrDefault(TITLE)
     }
 
-    fun isTwoButton(savedStateHandle: SavedStateHandle): Boolean {
-        return savedStateHandle.getBooleanOrDefault(IS_TWO_BUTTON)
+    fun getMessage(bundle: Bundle?): String {
+        return bundle.getStringOrDefault(MESSAGE)
     }
 
-    fun getCancelMessage(savedStateHandle: SavedStateHandle): String {
-        return savedStateHandle.getStringOrDefault(CANCEL_MESSAGE)
+    fun isTwoButton(bundle: Bundle?): Boolean {
+        return bundle.getBooleanOrDefault(IS_TWO_BUTTON)
     }
 
-    fun getConfirmMessage(savedStateHandle: SavedStateHandle): String {
-        return savedStateHandle.getStringOrDefault(CONFIRM_MESSAGE)
+    fun getCancelMessage(bundle: Bundle?): String {
+        return bundle.getStringOrDefault(CANCEL_MESSAGE)
+    }
+
+    fun getConfirmMessage(bundle: Bundle?): String {
+        return bundle.getStringOrDefault(CONFIRM_MESSAGE)
     }
 }

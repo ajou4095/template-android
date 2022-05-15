@@ -1,5 +1,6 @@
 package com.ray.template.presentation.ui.common.modal.alert
 
+import android.os.Bundle
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
@@ -13,24 +14,28 @@ import javax.inject.Inject
 class AlertDialogViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : ViewModel() {
+    val bundle: Bundle? by lazy {
+        AlertDialogFragmentHelper.getBundle(savedStateHandle)
+    }
+
     val title: String by lazy {
-        AlertDialogFragmentHelper.getTitle(savedStateHandle)
+        AlertDialogFragmentHelper.getTitle(bundle)
     }
 
     val message: String by lazy {
-        AlertDialogFragmentHelper.getMessage(savedStateHandle)
+        AlertDialogFragmentHelper.getMessage(bundle)
     }
 
     val isTwoButton: Boolean by lazy {
-        AlertDialogFragmentHelper.isTwoButton(savedStateHandle)
+        AlertDialogFragmentHelper.isTwoButton(bundle)
     }
 
     val cancelMessage: String by lazy {
-        AlertDialogFragmentHelper.getCancelMessage(savedStateHandle)
+        AlertDialogFragmentHelper.getCancelMessage(bundle)
     }
 
     val confirmMessage: String by lazy {
-        AlertDialogFragmentHelper.getConfirmMessage(savedStateHandle)
+        AlertDialogFragmentHelper.getConfirmMessage(bundle)
     }
 
     private val _event = MutableLiveData<Event<AlertDialogViewEvent>>()

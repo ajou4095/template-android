@@ -1,66 +1,73 @@
 package com.ray.template.common.util
 
+import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle
 
-fun SavedStateHandle.getBooleanOrDefault(
+fun SavedStateHandle.getBundle(
+    key: String
+): Bundle? {
+    return get<Bundle>(key)
+}
+
+fun Bundle?.getBooleanOrDefault(
     key: String,
-    defaultValue: Boolean = false
+    defaultValue: Boolean? = null
 ): Boolean {
-    return get<Boolean>(key) ?: defaultValue
+    return (this?.getBoolean(key) ?: defaultValue).orFalse()
 }
 
-fun SavedStateHandle.getByteOrDefault(
+fun Bundle?.getByteOrDefault(
     key: String,
-    defaultValue: Byte = 0
+    defaultValue: Byte? = null
 ): Byte {
-    return get<Byte>(key) ?: defaultValue
+    return (this?.getByte(key) ?: defaultValue).orZero()
 }
 
-fun SavedStateHandle.getCharOrDefault(
+fun Bundle?.getCharOrDefault(
     key: String,
-    defaultValue: Char = Char.MIN_VALUE
+    defaultValue: Char? = null
 ): Char {
-    return get<Char>(key) ?: defaultValue
+    return (this?.getChar(key) ?: defaultValue).orEmpty()
 }
 
-fun SavedStateHandle.getDoubleOrDefault(
+fun Bundle?.getDoubleOrDefault(
     key: String,
-    defaultValue: Double = 0.0
+    defaultValue: Double? = null
 ): Double {
-    return get<Double>(key) ?: defaultValue
+    return (this?.getDouble(key) ?: defaultValue).orZero()
 }
 
-fun SavedStateHandle.getFloatOrDefault(
+fun Bundle?.getFloatOrDefault(
     key: String,
-    defaultValue: Float = 0f
+    defaultValue: Float? = null
 ): Float {
-    return get<Float>(key) ?: defaultValue
+    return (this?.getFloat(key) ?: defaultValue).orZero()
 }
 
-fun SavedStateHandle.getIntOrDefault(
+fun Bundle?.getIntOrDefault(
     key: String,
-    defaultValue: Int = 0
+    defaultValue: Int? = null
 ): Int {
-    return get<Int>(key) ?: defaultValue
+    return (this?.getInt(key) ?: defaultValue).orZero()
 }
 
-fun SavedStateHandle.getLongOrDefault(
+fun Bundle?.getLongOrDefault(
     key: String,
-    defaultValue: Long = 0L
+    defaultValue: Long? = null
 ): Long {
-    return get<Long>(key) ?: defaultValue
+    return (this?.getLong(key) ?: defaultValue).orZero()
 }
 
-fun SavedStateHandle.getShortOrDefault(
+fun Bundle?.getShortOrDefault(
     key: String,
-    defaultValue: Short = 0
+    defaultValue: Short? = null
 ): Short {
-    return get<Short>(key) ?: defaultValue
+    return (this?.getShort(key) ?: defaultValue).orZero()
 }
 
-fun SavedStateHandle.getStringOrDefault(
+fun Bundle?.getStringOrDefault(
     key: String,
-    defaultValue: String = ""
+    defaultValue: String? = null
 ): String {
-    return get<String>(key) ?: defaultValue
+    return (this?.getString(key) ?: defaultValue).orEmpty()
 }
