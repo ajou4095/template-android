@@ -1,4 +1,5 @@
 package com.ray.template.common.util
 
-val CharSequence?.isNotEmpty: Boolean
-    get() = !isNullOrEmpty()
+fun Char?.orEmpty(): Char {
+    return this ?: Char.MIN_VALUE
+}
