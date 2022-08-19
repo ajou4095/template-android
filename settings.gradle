@@ -7,8 +7,19 @@ pluginManagement {
 
     resolutionStrategy {
         eachPlugin {
-            if (requested.id.id == 'dagger.hilt.android.plugin') {
-                useModule("com.google.dagger:hilt-android-gradle-plugin:${requested.version}")
+            if (requested.id.id == '') {
+                useModule("")
+            }
+            switch (requested.id.id) {
+                case "com.android.application":
+                    useModule("com.android.tools.build:gradle:${requested.version}")
+                    break
+                case "dagger.hilt.android.plugin":
+                    useModule("com.google.dagger:hilt-android-gradle-plugin:${requested.version}")
+                    break
+                case "org.jetbrains.kotlin.android":
+                    useModule("org.jetbrains.kotlin:kotlin-gradle-plugin:${requested.version}")
+                    break
             }
         }
     }
@@ -23,5 +34,4 @@ dependencyResolutionManagement {
 }
 
 rootProject.name = "template"
-include ':app'
-include ':core'
+include ':app', ':core'
