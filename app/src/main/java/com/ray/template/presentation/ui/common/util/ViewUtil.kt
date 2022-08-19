@@ -1,5 +1,6 @@
 package com.ray.template.presentation.ui.common.util
 
+import android.content.Context
 import android.content.res.Resources
 import android.content.res.TypedArray
 import android.util.TypedValue
@@ -9,6 +10,7 @@ import androidx.core.content.res.getFloatOrThrow
 import androidx.core.content.res.getIntegerOrThrow
 import androidx.core.content.res.getStringOrThrow
 import androidx.core.content.res.getTextOrThrow
+import androidx.databinding.ViewDataBinding
 
 val Int.dp: Float
     get() {
@@ -23,7 +25,10 @@ fun getDisplayWidth() = Resources.getSystem().displayMetrics.widthPixels
 
 fun getDisplayHeight() = Resources.getSystem().displayMetrics.heightPixels
 
-inline fun TypedArray.getTextIfCan(
+val ViewDataBinding.context: Context
+    get() = root.context
+
+inline fun TypedArray.getText(
     @StyleableRes index: Int,
     onSuccess: (CharSequence) -> Unit
 ) {
@@ -33,7 +38,7 @@ inline fun TypedArray.getTextIfCan(
     }
 }
 
-inline fun TypedArray.getStringIfCan(
+inline fun TypedArray.getString(
     @StyleableRes index: Int,
     onSuccess: (String) -> Unit
 ) {
@@ -51,7 +56,7 @@ fun TypedArray.getIntegerOrNull(@StyleableRes index: Int): Int? {
     }
 }
 
-inline fun TypedArray.getIntegerIfCan(
+inline fun TypedArray.getInteger(
     @StyleableRes index: Int,
     onSuccess: (Int) -> Unit
 ) {
@@ -69,7 +74,7 @@ fun TypedArray.getBooleanOrNull(@StyleableRes index: Int): Boolean? {
     }
 }
 
-inline fun TypedArray.getBooleanIfCan(
+inline fun TypedArray.getBoolean(
     @StyleableRes index: Int,
     onSuccess: (Boolean) -> Unit
 ) {
@@ -87,7 +92,7 @@ fun TypedArray.getFloatOrNull(@StyleableRes index: Int): Float? {
     }
 }
 
-inline fun TypedArray.getFloatIfCan(
+inline fun TypedArray.getFloat(
     @StyleableRes index: Int,
     onSuccess: (Float) -> Unit
 ) {
@@ -108,11 +113,11 @@ fun TypedArray.getLongOrNull(@StyleableRes index: Int): Long? {
     return getIntegerOrNull(index)?.toLong()
 }
 
-inline fun TypedArray.getLongIfCan(
+inline fun TypedArray.getLong(
     @StyleableRes index: Int,
     onSuccess: (Long) -> Unit
 ) {
-    getIntegerIfCan(index) {
+    getInteger(index) {
         onSuccess(it.toLong())
     }
 }
