@@ -1,20 +1,20 @@
 plugins {
     id("com.android.application")
-    id("kotlin-android")
-    id("kotlin-parcelize")
-    id("kotlin-kapt")
     id("dagger.hilt.android.plugin")
+    id("kotlin-parcelize")
+    kotlin("android")
+    kotlin("kapt")
 }
 
 android {
-    compileSdk = Versions.compileSdkVersion
+    compileSdk = Versions.Sdk.compile
 
     defaultConfig {
         applicationId = "com.ray.template"
-        minSdk = Versions.minSdkVersion
-        targetSdk = Versions.targetSdkVersion
-        versionCode = Versions.versionCode
-        versionName = Versions.versionName
+        minSdk = Versions.Sdk.min
+        targetSdk = Versions.Sdk.target
+        versionCode = Versions.App.code
+        versionName = Versions.App.name
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -55,62 +55,62 @@ dependencies {
     implementation(project(":core"))
 
     //hilt
-    implementation("com.google.dagger:hilt-android:${Versions.hiltVersion}")
-    kapt("com.google.dagger:hilt-android-compiler:${Versions.hiltVersion}")
+    implementation("com.google.dagger:hilt-android:${Versions.Dependency.hilt}")
+    kapt("com.google.dagger:hilt-android-compiler:${Versions.Dependency.hilt}")
 
     //room
-    implementation("androidx.room:room-runtime:${Versions.roomVersion}")
-    implementation("androidx.room:room-ktx:${Versions.roomVersion}")
-    kapt("androidx.room:room-compiler:${Versions.roomVersion}")
+    implementation("androidx.room:room-runtime:${Versions.Dependency.room}")
+    implementation("androidx.room:room-ktx:${Versions.Dependency.room}")
+    kapt("androidx.room:room-compiler:${Versions.Dependency.room}")
 
     //retrofit
-    implementation("com.squareup.retrofit2:retrofit:${Versions.retrofitVersion}")
-    implementation("com.squareup.retrofit2:converter-moshi:${Versions.retrofitVersion}")
-    implementation("com.squareup.retrofit2:converter-scalars:${Versions.retrofitVersion}")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.retrofitCoroutineAdapterVersion}")
-    implementation("com.github.skydoves:sandwich:${Versions.sandwichVersion}")
+    implementation("com.squareup.retrofit2:retrofit:${Versions.Dependency.retrofit}")
+    implementation("com.squareup.retrofit2:converter-moshi:${Versions.Dependency.retrofit}")
+    implementation("com.squareup.retrofit2:converter-scalars:${Versions.Dependency.retrofit}")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.Dependency.retrofitCoroutineAdapter}")
+    implementation("com.github.skydoves:sandwich:${Versions.Dependency.sandwich}")
 
     //moshi
-    implementation("com.squareup.moshi:moshi-kotlin:${Versions.moshiVersion}")
+    implementation("com.squareup.moshi:moshi-kotlin:${Versions.Dependency.moshi}")
 
     //lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.lifecycleVersion}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.lifecycleVersion}")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycleVersion}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Dependency.lifecycle}")
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Dependency.lifecycle}")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Dependency.lifecycle}")
 
     //glide
-    implementation("com.github.bumptech.glide:glide:${Versions.glideVersion}")
-    kapt("com.github.bumptech.glide:compiler:${Versions.glideVersion}")
+    implementation("com.github.bumptech.glide:glide:${Versions.Dependency.glide}")
+    kapt("com.github.bumptech.glide:compiler:${Versions.Dependency.glide}")
 
     //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.coroutineVersion}")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Dependency.coroutine}")
 
     //ted permission
-    implementation("io.github.ParkSangGwon:tedpermission-coroutine:${Versions.tedPermissionVersion}")
+    implementation("io.github.ParkSangGwon:tedpermission-coroutine:${Versions.Dependency.tedPermission}")
 
     //lottie
-    implementation("com.airbnb.android:lottie:${Versions.lottieVersion}")
+    implementation("com.airbnb.android:lottie:${Versions.Dependency.lottie}")
 
     //timber
-    implementation("com.jakewharton.timber:timber:${Versions.timberVersion}")
+    implementation("com.jakewharton.timber:timber:${Versions.Dependency.timber}")
 
     //flipper
-    debugImplementation("com.facebook.flipper:flipper:${Versions.flipperVersion}")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:${Versions.flipperVersion}")
-    debugImplementation("com.facebook.flipper:flipper-leakcanary2-plugin:${Versions.flipperVersion}")
-    debugImplementation("com.facebook.flipper:flipper:${Versions.flipperVersion}")
-    debugImplementation("com.facebook.soloader:soloader:${Versions.flipperSoLoaderVersion}")
+    debugImplementation("com.facebook.flipper:flipper:${Versions.Dependency.flipper}")
+    debugImplementation("com.facebook.flipper:flipper-network-plugin:${Versions.Dependency.flipper}")
+    debugImplementation("com.facebook.flipper:flipper-leakcanary2-plugin:${Versions.Dependency.flipper}")
+    debugImplementation("com.facebook.flipper:flipper:${Versions.Dependency.flipper}")
+    debugImplementation("com.facebook.soloader:soloader:${Versions.Dependency.flipperSoLoader}")
 
     //leak canary
-    implementation("com.squareup.leakcanary:leakcanary-android:${Versions.leakcanaryVersion}")
+    implementation("com.squareup.leakcanary:leakcanary-android:${Versions.Dependency.leakcanary}")
 
     //androidx
-    implementation("androidx.core:core-ktx:${Versions.androidXCoreVersion}")
-    implementation("androidx.appcompat:appcompat:${Versions.androidXAppCompatVersion}")
-    implementation("androidx.constraintlayout:constraintlayout:${Versions.androidXConstraintLayoutVersion}")
-    implementation("androidx.fragment:fragment-ktx:${Versions.androidXFragmentVersion}")
+    implementation("androidx.core:core-ktx:${Versions.Dependency.androidXCore}")
+    implementation("androidx.appcompat:appcompat:${Versions.Dependency.androidXAppCompat}")
+    implementation("androidx.constraintlayout:constraintlayout:${Versions.Dependency.androidXConstraintLayout}")
+    implementation("androidx.fragment:fragment-ktx:${Versions.Dependency.androidXFragment}")
 
-    implementation("com.google.android.material:material:${Versions.androidMaterialVersion}")
+    implementation("com.google.android.material:material:${Versions.Dependency.androidMaterial}")
 
     testImplementation("junit:junit:4.13.2")
     testImplementation("androidx.room:room-testing:2.4.2")
