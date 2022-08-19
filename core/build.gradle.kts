@@ -16,14 +16,11 @@ android {
 }
 
 dependencies {
-    //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Dependency.coroutine}")
+    implementation(Dependency.Coroutine.core)
+    implementation(Dependency.Coroutine.android)
 
-    //lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Dependency.lifecycle}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Dependency.lifecycle}")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Dependency.lifecycle}")
+    implementation(Dependency.Lifecycle.viewModel)
+    implementation(Dependency.Lifecycle.liveData)
 
-    //androidx
-    implementation("androidx.fragment:fragment-ktx:${Versions.Dependency.androidXFragment}")
+    implementation(Dependency.AndroidX.fragment)
 }

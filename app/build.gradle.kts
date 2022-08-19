@@ -54,66 +54,43 @@ android {
 dependencies {
     implementation(project(":core"))
 
-    //hilt
-    implementation("com.google.dagger:hilt-android:${Versions.Dependency.hilt}")
-    kapt("com.google.dagger:hilt-android-compiler:${Versions.Dependency.hilt}")
+    implementation(Dependency.Hilt.hilt)
+    kapt(Dependency.Hilt.compiler)
 
-    //room
-    implementation("androidx.room:room-runtime:${Versions.Dependency.room}")
-    implementation("androidx.room:room-ktx:${Versions.Dependency.room}")
-    kapt("androidx.room:room-compiler:${Versions.Dependency.room}")
+    implementation(Dependency.Room.runtime)
+    implementation(Dependency.Room.coroutine)
+    kapt(Dependency.Room.compiler)
 
-    //retrofit
-    implementation("com.squareup.retrofit2:retrofit:${Versions.Dependency.retrofit}")
-    implementation("com.squareup.retrofit2:converter-moshi:${Versions.Dependency.retrofit}")
-    implementation("com.squareup.retrofit2:converter-scalars:${Versions.Dependency.retrofit}")
-    implementation("com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter:${Versions.Dependency.retrofitCoroutineAdapter}")
-    implementation("com.github.skydoves:sandwich:${Versions.Dependency.sandwich}")
+    implementation(Dependency.Retrofit2.retrofit)
+    implementation(Dependency.Retrofit2.Adapter.sandwich)
+    implementation(Dependency.Retrofit2.Adapter.coroutine)
+    implementation(Dependency.Retrofit2.Converter.moshi)
+    implementation(Dependency.Retrofit2.Converter.scalars)
 
-    //moshi
-    implementation("com.squareup.moshi:moshi-kotlin:${Versions.Dependency.moshi}")
+    implementation(Dependency.Lifecycle.viewModel)
+    implementation(Dependency.Lifecycle.liveData)
 
-    //lifecycle
-    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:${Versions.Dependency.lifecycle}")
-    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:${Versions.Dependency.lifecycle}")
-    implementation("androidx.lifecycle:lifecycle-livedata-ktx:${Versions.Dependency.lifecycle}")
+    implementation(Dependency.Glide.glide)
+    kapt(Dependency.Glide.compiler)
 
-    //glide
-    implementation("com.github.bumptech.glide:glide:${Versions.Dependency.glide}")
-    kapt("com.github.bumptech.glide:compiler:${Versions.Dependency.glide}")
+    implementation(Dependency.Coroutine.core)
+    implementation(Dependency.Coroutine.android)
 
-    //coroutine
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:${Versions.Dependency.coroutine}")
+    implementation(Dependency.moshi)
+    implementation(Dependency.tedPermission)
+    implementation(Dependency.lottie)
+    implementation(Dependency.timber)
 
-    //ted permission
-    implementation("io.github.ParkSangGwon:tedpermission-coroutine:${Versions.Dependency.tedPermission}")
+    debugImplementation(Dependency.Flipper.flipper)
+    debugImplementation(Dependency.Flipper.soLoader)
+    debugImplementation(Dependency.Flipper.Plugin.network)
+    debugImplementation(Dependency.Flipper.Plugin.leakCanary)
 
-    //lottie
-    implementation("com.airbnb.android:lottie:${Versions.Dependency.lottie}")
+    implementation(Dependency.leakCanary)
 
-    //timber
-    implementation("com.jakewharton.timber:timber:${Versions.Dependency.timber}")
-
-    //flipper
-    debugImplementation("com.facebook.flipper:flipper:${Versions.Dependency.flipper}")
-    debugImplementation("com.facebook.flipper:flipper-network-plugin:${Versions.Dependency.flipper}")
-    debugImplementation("com.facebook.flipper:flipper-leakcanary2-plugin:${Versions.Dependency.flipper}")
-    debugImplementation("com.facebook.flipper:flipper:${Versions.Dependency.flipper}")
-    debugImplementation("com.facebook.soloader:soloader:${Versions.Dependency.flipperSoLoader}")
-
-    //leak canary
-    implementation("com.squareup.leakcanary:leakcanary-android:${Versions.Dependency.leakcanary}")
-
-    //androidx
-    implementation("androidx.core:core-ktx:${Versions.Dependency.androidXCore}")
-    implementation("androidx.appcompat:appcompat:${Versions.Dependency.androidXAppCompat}")
-    implementation("androidx.constraintlayout:constraintlayout:${Versions.Dependency.androidXConstraintLayout}")
-    implementation("androidx.fragment:fragment-ktx:${Versions.Dependency.androidXFragment}")
-
-    implementation("com.google.android.material:material:${Versions.Dependency.androidMaterial}")
-
-    testImplementation("junit:junit:4.13.2")
-    testImplementation("androidx.room:room-testing:2.4.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.3")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.4.0")
+    implementation(Dependency.AndroidX.core)
+    implementation(Dependency.AndroidX.appcompat)
+    implementation(Dependency.AndroidX.constraintLayout)
+    implementation(Dependency.AndroidX.fragment)
+    implementation(Dependency.AndroidX.material)
 }
