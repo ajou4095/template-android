@@ -49,6 +49,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":core"))
 
     //hilt
     implementation "com.google.dagger:hilt-android:$hiltVersion"

@@ -1,9 +1,9 @@
-package com.ray.template.common.util
+package com.ray.template.core.util
 
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.LiveData
-import com.ray.template.common.util.livedata.Event
-import com.ray.template.common.util.livedata.EventObserver
+import com.ray.template.core.util.livedata.Event
+import com.ray.template.core.util.livedata.EventObserver
 
 val LiveData<Boolean>.valueOrDefault: Boolean
     get() = value ?: false

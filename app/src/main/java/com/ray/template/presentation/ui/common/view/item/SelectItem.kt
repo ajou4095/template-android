@@ -9,7 +9,7 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import com.ray.template.R
-import com.ray.template.common.util.delayOnLifecycle
+import com.ray.template.core.util.delayOnLifecycle
 import com.ray.template.databinding.ViewSelectItemBinding
 import com.ray.template.presentation.ui.common.UiCommonContract
 import com.ray.template.presentation.ui.common.util.dp

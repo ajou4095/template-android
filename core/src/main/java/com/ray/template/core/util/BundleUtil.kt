@@ -1,4 +1,4 @@
-package com.ray.template.common.util
+package com.ray.template.core.util
 
 import android.os.Bundle
 import androidx.lifecycle.SavedStateHandle

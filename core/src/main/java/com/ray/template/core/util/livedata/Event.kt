@@ -1,4 +1,4 @@
-package com.ray.template.common.util.livedata
+package com.ray.template.core.util.livedata
 
 /**
  * Used as a wrapper for data that is exposed via a LiveData that represents an event.

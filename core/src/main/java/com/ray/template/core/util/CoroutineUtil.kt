@@ -1,4 +1,4 @@
-package com.ray.template.common.util
+package com.ray.template.core.util
 
 import android.view.View
 import androidx.lifecycle.coroutineScope

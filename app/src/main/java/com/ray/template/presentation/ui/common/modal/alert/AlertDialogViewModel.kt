@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.ray.template.common.util.livedata.Event
+import com.ray.template.core.util.livedata.Event
 import com.ray.template.presentation.helper.common.modal.alert.AlertDialogFragmentHelper
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
