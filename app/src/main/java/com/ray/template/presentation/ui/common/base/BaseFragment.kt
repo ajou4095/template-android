@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.Fragment
-import com.facebook.flipper.plugins.navigation.NavigationFlipperPlugin
 
 abstract class BaseFragment<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
@@ -29,7 +28,6 @@ abstract class BaseFragment<B : ViewDataBinding>(
         super.onViewCreated(view, savedInstanceState)
         initView()
         initObserver()
-        NavigationFlipperPlugin.getInstance().sendNavigationEvent(tag, tag, null)
     }
 
     protected open fun initView() = Unit

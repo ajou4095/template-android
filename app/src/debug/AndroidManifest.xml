@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.ray.template">
+
+    <application
+        android:name=".TemplateDebugApplication"
+        android:icon="@drawable/ic_launcher"
+        tools:node="merge"
+        tools:replace="android:name" />
+
+</manifest>
