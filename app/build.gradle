@@ -31,12 +31,16 @@ android {
             debuggable true
         }
     }
+    /**
+     * Gradle 7.0.0 이상에서는 JDK 11 을 기본으로 사용한다.
+     * url : https://cliearl.github.io/posts/android/android-gradle-java-11/
+     */
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
     }
     kotlinOptions {
-        jvmTarget = '1.8'
+        jvmTarget = JavaVersion.VERSION_11.toString()
     }
     buildFeatures {
         dataBinding true
