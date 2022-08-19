@@ -9,9 +9,8 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import com.ray.template.R
-import com.ray.template.core.util.delayOnLifecycle
 import com.ray.template.databinding.ViewSelectItemBinding
-import com.ray.template.presentation.ui.common.UiCommonContract
+import com.ray.template.presentation.ui.common.bindingadapter.setOnIntervalClick
 import com.ray.template.presentation.ui.common.util.dp
 
 class SelectItem @JvmOverloads constructor(
@@ -24,15 +23,7 @@ class SelectItem @JvmOverloads constructor(
     var onIntervalClick: OnClickListener? = null
         set(value) {
             field = value
-            this.setOnClickListener {
-                if (isClickable) {
-                    isClickable = false
-                    delayOnLifecycle(UiCommonContract.INTERVAL_CLICK_DURATION) {
-                        isClickable = true
-                    }
-                    value?.onClick(it)
-                }
-            }
+            setOnIntervalClick(field)
         }
 
     init {

@@ -6,8 +6,7 @@ import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.setPadding
 import com.ray.template.R
-import com.ray.template.core.util.delayOnLifecycle
-import com.ray.template.presentation.ui.common.UiCommonContract
+import com.ray.template.presentation.ui.common.bindingadapter.setOnIntervalClick
 
 /**
  * 사용법
@@ -25,15 +24,7 @@ class ConfirmButton @JvmOverloads constructor(
     var onIntervalClick: OnClickListener? = null
         set(value) {
             field = value
-            this.setOnClickListener {
-                if (isClickable) {
-                    isClickable = false
-                    delayOnLifecycle(UiCommonContract.INTERVAL_CLICK_DURATION) {
-                        isClickable = true
-                    }
-                    value?.onClick(it)
-                }
-            }
+            setOnIntervalClick(field)
         }
 
     init {
