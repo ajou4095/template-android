@@ -1,4 +1,4 @@
-package com.ray.template.presentation.ui.common.bindingadapter
+package com.ray.template.core.presentation.bindingadapter
 
 import android.widget.ImageView
 import androidx.databinding.BindingAdapter

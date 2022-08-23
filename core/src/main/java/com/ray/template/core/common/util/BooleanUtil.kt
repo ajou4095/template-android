@@ -1,4 +1,4 @@
-package com.ray.template.core.util
+package com.ray.template.core.common.util
 
 fun Boolean?.orFalse(): Boolean {
     return this ?: false

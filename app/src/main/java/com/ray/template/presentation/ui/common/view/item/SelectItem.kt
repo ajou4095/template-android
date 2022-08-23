@@ -9,9 +9,9 @@ import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
 import com.ray.template.R
+import com.ray.template.core.presentation.bindingadapter.setOnIntervalClick
+import com.ray.template.core.presentation.util.dp
 import com.ray.template.databinding.ViewSelectItemBinding
-import com.ray.template.presentation.ui.common.bindingadapter.setOnIntervalClick
-import com.ray.template.presentation.ui.common.util.dp
 
 class SelectItem @JvmOverloads constructor(
     context: Context,

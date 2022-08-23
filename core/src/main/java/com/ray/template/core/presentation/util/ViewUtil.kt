@@ -1,4 +1,4 @@
-package com.ray.template.presentation.ui.common.util
+package com.ray.template.core.presentation.util
 
 import android.content.Context
 import android.content.res.Resources

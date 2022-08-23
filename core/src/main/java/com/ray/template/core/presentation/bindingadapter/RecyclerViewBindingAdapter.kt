@@ -1,4 +1,4 @@
-package com.ray.template.presentation.ui.common.bindingadapter
+package com.ray.template.core.presentation.bindingadapter
 
 import androidx.databinding.BindingAdapter
 import androidx.recyclerview.widget.ListAdapter

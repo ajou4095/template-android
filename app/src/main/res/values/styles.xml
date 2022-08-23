@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Button -->
+    <style name="Typography.ConfirmButton" parent="Typography.TextAppearance.Button" />
+
+    <style name="Typography.ConfirmButton.Blue">
+        <item name="android:background">@drawable/bg_confirm_button_blue</item>
+        <item name="android:textColor">@color/blue_gray_50</item>
+    </style>
+
+    <style name="Typography.ConfirmButton.BlueGray">
+        <item name="android:background">@drawable/bg_confirm_button_blue_gray</item>
+        <item name="android:textColor">@color/blue_gray_900</item>
+    </style>
+</resources>

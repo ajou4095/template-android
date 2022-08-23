@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="typographyHeadline1" format="reference" />
+    <attr name="typographyHeadline2" format="reference" />
+    <attr name="typographyHeadline3" format="reference" />
+    <attr name="typographyHeadline4" format="reference" />
+    <attr name="typographyHeadline5" format="reference" />
+    <attr name="typographyHeadline6" format="reference" />
+    <attr name="typographySubtitle1" format="reference" />
+    <attr name="typographySubtitle2" format="reference" />
+    <attr name="typographyBody1" format="reference" />
+    <attr name="typographyBody2" format="reference" />
+    <attr name="typographyButton" format="reference" />
+</resources>

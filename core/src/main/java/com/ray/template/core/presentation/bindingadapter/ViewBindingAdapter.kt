@@ -1,10 +1,10 @@
-package com.ray.template.presentation.ui.common.bindingadapter
+package com.ray.template.core.presentation.bindingadapter
 
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import com.ray.template.core.util.delayOnLifecycle
-import com.ray.template.presentation.ui.common.UiCommonContract.INTERVAL_CLICK_DURATION
+import com.ray.template.core.common.util.delayOnLifecycle
+import com.ray.template.core.presentation.UiCommonContract.INTERVAL_CLICK_DURATION
 
 @BindingAdapter("visibleOrGone")
 fun View.setVisibleOrGone(isVisible: Boolean?) {
