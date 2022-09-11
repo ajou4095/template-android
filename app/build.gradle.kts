@@ -1,3 +1,5 @@
+import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
+
 plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
@@ -93,4 +95,8 @@ dependencies {
     implementation(Dependency.AndroidX.constraintLayout)
     implementation(Dependency.AndroidX.fragment)
     implementation(Dependency.AndroidX.material)
+}
+
+fun getLocalProperty(propertyKey: String): String {
+    return gradleLocalProperties(rootDir).getProperty(propertyKey)
 }
