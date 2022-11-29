@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    compileSdk = Versions.Sdk.compile
+    compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
-        minSdk = Versions.Sdk.min
-        targetSdk = Versions.Sdk.target
+        minSdk = libs.versions.sdk.min.get().toInt()
+        targetSdk = libs.versions.sdk.target.get().toInt()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -28,20 +28,11 @@ android {
 }
 
 dependencies {
-    implementation(Dependency.Coroutine.core)
-    implementation(Dependency.Coroutine.android)
+    implementation(libs.bundles.kotlin)
+    implementation(libs.bundles.androidx.presentation)
+    implementation(libs.google.material)
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
 
-    implementation(Dependency.Lifecycle.viewModel)
-    implementation(Dependency.Lifecycle.liveData)
-
-    implementation(Dependency.Glide.glide)
-    kapt(Dependency.Glide.compiler)
-
-    implementation(Dependency.timber)
-
-    implementation(Dependency.AndroidX.core)
-    implementation(Dependency.AndroidX.appcompat)
-    implementation(Dependency.AndroidX.constraintLayout)
-    implementation(Dependency.AndroidX.fragment)
-    implementation(Dependency.AndroidX.material)
+    implementation(libs.timber)
 }

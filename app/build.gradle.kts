@@ -9,14 +9,14 @@ plugins {
 }
 
 android {
-    compileSdk = Versions.Sdk.compile
+    compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
         applicationId = "com.ray.template"
-        minSdk = Versions.Sdk.min
-        targetSdk = Versions.Sdk.target
-        versionCode = Versions.App.code
-        versionName = Versions.App.name
+        minSdk = libs.versions.sdk.min.get().toInt()
+        targetSdk = libs.versions.sdk.target.get().toInt()
+        versionCode = libs.versions.app.versioncode.get().toInt()
+        versionName = libs.versions.app.versionname.get()
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -54,47 +54,28 @@ android {
 }
 
 dependencies {
-
     implementation(project(":common"))
-    implementation(Dependency.Hilt.hilt)
-    kapt(Dependency.Hilt.compiler)
 
-    implementation(Dependency.Room.runtime)
-    implementation(Dependency.Room.coroutine)
-    kapt(Dependency.Room.compiler)
+    implementation(libs.bundles.kotlin)
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
 
-    implementation(Dependency.Retrofit2.retrofit)
-    implementation(Dependency.Retrofit2.Adapter.sandwich)
-    implementation(Dependency.Retrofit2.Adapter.coroutine)
-    implementation(Dependency.Retrofit2.Converter.moshi)
-    implementation(Dependency.Retrofit2.Converter.scalars)
+    implementation(libs.bundles.androidx.presentation)
+    implementation(libs.google.material)
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
+    implementation(libs.lottie)
+    implementation(libs.shimmer)
 
-    implementation(Dependency.Lifecycle.viewModel)
-    implementation(Dependency.Lifecycle.liveData)
+    implementation(libs.bundles.androidx.data)
+    implementation(libs.bundles.network)
+    kapt(libs.androidx.room.compiler)
 
-    implementation(Dependency.Glide.glide)
-    kapt(Dependency.Glide.compiler)
+    implementation(libs.ted.permission)
 
-    implementation(Dependency.Coroutine.core)
-    implementation(Dependency.Coroutine.android)
-
-    implementation(Dependency.moshi)
-    implementation(Dependency.tedPermission)
-    implementation(Dependency.lottie)
-    implementation(Dependency.timber)
-
-    debugImplementation(Dependency.Flipper.flipper)
-    debugImplementation(Dependency.Flipper.soLoader)
-    debugImplementation(Dependency.Flipper.Plugin.network)
-    debugImplementation(Dependency.Flipper.Plugin.leakCanary)
-
-    implementation(Dependency.leakCanary)
-
-    implementation(Dependency.AndroidX.core)
-    implementation(Dependency.AndroidX.appcompat)
-    implementation(Dependency.AndroidX.constraintLayout)
-    implementation(Dependency.AndroidX.fragment)
-    implementation(Dependency.AndroidX.material)
+    implementation(libs.timber)
+    implementation(libs.leakcanary)
+    debugImplementation(libs.bundles.flipper)
 }
 
 fun getLocalProperty(propertyKey: String): String {
