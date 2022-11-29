@@ -54,8 +54,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":core"))
 
+    implementation(project(":common"))
     implementation(Dependency.Hilt.hilt)
     kapt(Dependency.Hilt.compiler)
 
