@@ -1,4 +1,4 @@
-package com.ray.template.di
+package com.ray.template.data.di
 
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -6,6 +6,6 @@ import dagger.hilt.components.SingletonComponent
 
 @Module
 @InstallIn(SingletonComponent::class)
-class RepositoryModule {
+class ApiModule {
 
 }

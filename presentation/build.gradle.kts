@@ -1,7 +1,7 @@
 import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
-    id("com.android.application")
+    id("com.android.library")
     id("dagger.hilt.android.plugin")
     id("kotlin-parcelize")
     kotlin("android")
@@ -9,30 +9,19 @@ plugins {
 }
 
 android {
-    namespace = "com.ray.template"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
-        applicationId = "com.ray.template"
         minSdk = libs.versions.sdk.min.get().toInt()
         targetSdk = libs.versions.sdk.target.get().toInt()
-        versionCode = libs.versions.app.versioncode.get().toInt()
-        versionName = libs.versions.app.versionname.get()
     }
 
     buildTypes {
-        release {
-            isMinifyEnabled = true
-            isShrinkResources = true
-            isDebuggable = false
+        debug {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
-        debug {
-            isMinifyEnabled = false
-            isShrinkResources = false
-            isDebuggable = true
+        release {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
-            applicationIdSuffix = ".debug"
         }
     }
     /**
@@ -46,17 +35,28 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+    buildFeatures {
+        dataBinding = true
+        viewBinding = true
+    }
 }
 
 dependencies {
     implementation(project(":common"))
-    implementation(project(":data"))
     implementation(project(":domain"))
-    implementation(project(":presentation"))
 
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    implementation(libs.bundles.androidx.presentation)
+    implementation(libs.google.material)
+    implementation(libs.glide)
+    kapt(libs.glide.compiler)
+    implementation(libs.lottie)
+    implementation(libs.shimmer)
+
+    implementation(libs.ted.permission)
 
     implementation(libs.timber)
     implementation(libs.leakcanary)

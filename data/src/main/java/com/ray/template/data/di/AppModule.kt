@@ -1,4 +1,4 @@
-package com.ray.template.di
+package com.ray.template.data.di
 
 import android.content.Context
 import com.ray.template.data.local.SharedPreferencesManager
