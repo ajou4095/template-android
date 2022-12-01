@@ -2,7 +2,7 @@ package com.ray.template.presentation.ui.common.modal.alert
 
 import androidx.fragment.app.viewModels
 import com.ray.template.core.common.util.eventObserve
-import com.ray.template.databinding.ViewAlertDialogBinding
+import com.ray.template.presentation.databinding.ViewAlertDialogBinding
 import com.ray.template.presentation.ui.common.base.BaseDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -25,6 +25,7 @@ class AlertDialogFragment : BaseDialogFragment<ViewAlertDialogBinding>(ViewAlert
                     //dismiss()
                     dismissAllowingStateLoss()
                 }
+
                 AlertDialogViewEvent.OnConfirm -> {
                     onConfirm?.invoke()
                     //dismiss()

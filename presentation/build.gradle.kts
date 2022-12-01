@@ -35,9 +35,11 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+    sourceSets.getByName("main") {
+        res.srcDirs("src/main/res", "src/main/design-system")
+    }
     buildFeatures {
         dataBinding = true
-        viewBinding = true
     }
 }
 

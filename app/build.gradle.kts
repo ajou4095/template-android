@@ -46,6 +46,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
+    buildFeatures {
+        dataBinding = true
+    }
 }
 
 dependencies {
@@ -57,6 +60,9 @@ dependencies {
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
+
+    implementation(libs.bundles.androidx.data)
+    implementation(libs.bundles.network)
 
     implementation(libs.timber)
     implementation(libs.leakcanary)

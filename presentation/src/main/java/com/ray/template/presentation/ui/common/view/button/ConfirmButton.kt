@@ -5,8 +5,8 @@ import android.util.AttributeSet
 import android.view.Gravity
 import androidx.appcompat.widget.AppCompatButton
 import androidx.core.view.setPadding
-import com.ray.template.core.R
-import com.ray.template.core.presentation.bindingadapter.setOnIntervalClick
+import com.ray.template.presentation.R
+import com.ray.template.presentation.util.bindingadapter.setOnIntervalClick
 
 /**
  * 사용법

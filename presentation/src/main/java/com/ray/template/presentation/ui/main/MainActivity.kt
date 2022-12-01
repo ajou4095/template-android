@@ -2,8 +2,8 @@ package com.ray.template.presentation.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
+import com.ray.template.presentation.databinding.ActivityMainBinding
 import com.ray.template.presentation.ui.common.base.BaseActivity
-import com.ray.template.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
