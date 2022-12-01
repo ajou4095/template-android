@@ -16,6 +16,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
     }
 
     override fun initView() {
+        // TODO : Compose + NavigationUI
         bind {
             vm = viewModel
             lifecycleOwner = this@MainActivity

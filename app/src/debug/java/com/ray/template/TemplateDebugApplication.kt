@@ -13,7 +13,7 @@ import com.facebook.flipper.plugins.navigation.NavigationFlipperPlugin
 import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
 import com.facebook.flipper.plugins.sharedpreferences.SharedPreferencesFlipperPlugin
 import com.facebook.soloader.SoLoader
-import com.ray.template.data.local.SharedPreferencesManager
+import com.ray.template.data.remote.local.SharedPreferencesManager
 import leakcanary.LeakCanary
 import timber.log.Timber
 

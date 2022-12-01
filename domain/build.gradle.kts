@@ -8,6 +8,7 @@ plugins {
     kotlin("kapt")
 }
 
+// TODO : Android 종속성 제거
 android {
     compileSdk = libs.versions.sdk.compile.get().toInt()
 

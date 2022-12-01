@@ -3,7 +3,7 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("com.android.library")
     id("dagger.hilt.android.plugin")
-    id("kotlin-parcelize")
+    kotlin("plugin.parcelize")
     kotlin("android")
     kotlin("kapt")
 }
