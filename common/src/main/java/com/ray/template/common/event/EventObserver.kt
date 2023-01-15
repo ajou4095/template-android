@@ -1,4 +1,4 @@
-package com.ray.template.core.common.util.event
+package com.ray.template.common.event
 
 import androidx.lifecycle.Observer
 

@@ -3,7 +3,7 @@ package com.ray.template.presentation.util.bindingadapter
 import android.view.View
 import androidx.core.view.isVisible
 import androidx.databinding.BindingAdapter
-import com.ray.template.core.common.util.delayOnLifecycle
+import com.ray.template.common.delayOnLifecycle
 import com.ray.template.presentation.util.UiCommonContract.INTERVAL_CLICK_DURATION
 
 @BindingAdapter("visibleOrGone")

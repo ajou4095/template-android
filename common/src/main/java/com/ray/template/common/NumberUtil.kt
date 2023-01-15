@@ -1,4 +1,4 @@
-package com.ray.template.core.common.util
+package com.ray.template.common
 
 fun Double?.orZero(): Double {
     return this ?: 0.0
