@@ -9,6 +9,7 @@ plugins {
 }
 
 android {
+    namespace = "com.ray.template.presentation"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {

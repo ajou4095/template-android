@@ -10,7 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
 import androidx.fragment.app.FragmentContainerView
 import androidx.fragment.app.commit
-import com.ray.template.presentation.R
+import com.ray.rds.R
 
 inline fun <reified F : Fragment> FragmentActivity.slideFragment(
     container: FragmentContainerView,

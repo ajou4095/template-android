@@ -6,8 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import com.ray.template.presentation.R
-import com.ray.template.presentation.util.getDisplayWidth
+import com.ray.rds.R
+import com.ray.rds.util.getDisplayWidth
+import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 
 abstract class BaseDialogFragment<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
@@ -17,9 +18,7 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
     protected val binding
         get() = _binding!!
 
-    var onCancel: (() -> Unit)? = null
-
-    var onConfirm: (() -> Any)? = null
+    private var loadingDialog: DialogFragment? = null
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -53,6 +52,43 @@ abstract class BaseDialogFragment<B : ViewDataBinding>(
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    fun DialogFragment.show() {
+        if (
+            this@BaseDialogFragment.activity?.isFinishing == false
+            && this@BaseDialogFragment.activity?.isDestroyed == false
+            && !this@BaseDialogFragment.childFragmentManager.isDestroyed
+            && !this@BaseDialogFragment.childFragmentManager.isStateSaved
+        ) {
+            show(this@BaseDialogFragment.childFragmentManager, javaClass.simpleName)
+        }
+    }
+
+    protected fun showLoading() {
+        if (
+            this@BaseDialogFragment.activity?.isFinishing == false
+            && this@BaseDialogFragment.activity?.isDestroyed == false
+            && !this@BaseDialogFragment.parentFragmentManager.isDestroyed
+            && !this@BaseDialogFragment.parentFragmentManager.isStateSaved
+            && loadingDialog == null
+        ) {
+            loadingDialog = LoadingDialogFragmentProvider.makeLoadingDialog()
+            loadingDialog?.show()
+        }
+    }
+
+    protected fun hideLoading() {
+        if (
+            this@BaseDialogFragment.activity?.isFinishing == false
+            && this@BaseDialogFragment.activity?.isDestroyed == false
+            && loadingDialog?.parentFragmentManager?.isDestroyed == false
+            && loadingDialog?.parentFragmentManager?.isStateSaved == false
+            && loadingDialog != null
+        ) {
+            loadingDialog?.dismiss()
+            loadingDialog = null
+        }
     }
 
     protected fun bind(action: B.() -> Unit) {

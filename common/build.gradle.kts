@@ -5,6 +5,7 @@ plugins {
 }
 
 android {
+    namespace = "com.ray.template.common"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {

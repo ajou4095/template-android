@@ -8,9 +8,9 @@ import androidx.annotation.DrawableRes
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.content.res.ResourcesCompat
 import androidx.core.view.isVisible
+import com.ray.rds.util.bindingadapter.setOnIntervalClick
+import com.ray.rds.util.dp
 import com.ray.template.presentation.R
-import com.ray.template.presentation.util.bindingadapter.setOnIntervalClick
-import com.ray.template.presentation.util.dp
 import com.ray.template.presentation.databinding.ViewSelectItemBinding
 
 class SelectItem @JvmOverloads constructor(
