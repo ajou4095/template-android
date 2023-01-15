@@ -57,6 +57,7 @@ dependencies {
     kapt(libs.glide.compiler)
     implementation(libs.lottie)
     implementation(libs.shimmer)
+    implementation(libs.rds)
 
     implementation(libs.ted.permission)
 
