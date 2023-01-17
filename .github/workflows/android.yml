@@ -1,0 +1,31 @@
+name: Android CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: JDK 11
+        uses: actions/setup-java@v1
+        with:
+          java-version: 11.0.3
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Grant Build Permission
+        run: chmod +x ./gradlew
+
+      - name: Build Debug
+        run: ./gradlew assembleDebug
+
+      - name: Build Release
+        run: ./gradlew assembleRelease
