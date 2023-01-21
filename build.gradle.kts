@@ -1,10 +1,11 @@
+@Suppress("DSL_SCOPE_VIOLATION") // Because of IDE bug https://youtrack.jetbrains.com/issue/KTIJ-19370
 plugins {
-    id("com.android.application") version "7.3.1" apply false
-    id("com.android.library") version "7.3.1" apply false
-    kotlin("android") version "1.7.21" apply false
-    kotlin("kapt") version "1.7.21" apply false
-    kotlin("plugin.serialization") version "1.7.21" apply false
-    id("com.google.dagger.hilt.android") version "2.44.2" apply false
+    alias(libs.plugins.android.application) apply false
+    alias(libs.plugins.android.library) apply false
+    alias(libs.plugins.kotlin.android) apply false
+    alias(libs.plugins.kotlin.kapt) apply false
+    alias(libs.plugins.kotlin.serialization) apply false
+    alias(libs.plugins.hilt) apply false
 }
 
 task("clean", Delete::class) {

@@ -86,6 +86,14 @@ flipper-soloader = { module = "com.facebook.soloader:soloader", version.ref = "f
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
 
+[plugins]
+android-application = { id = "com.android.application", version.ref = "plugin-gradle" }
+android-library = { id = "com.android.library", version.ref = "plugin-gradle" }
+kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
+kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+
 [bundles]
 kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core"]
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-constraintlayout", "androidx-fragment", "androidx-viewmodel", "androidx-livedata"]
