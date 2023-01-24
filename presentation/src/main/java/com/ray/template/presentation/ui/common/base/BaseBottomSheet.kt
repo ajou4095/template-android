@@ -4,10 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.annotation.DrawableRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
+import com.ray.rds.window.snackbar.MessageSnackBar
 
 abstract class BaseBottomSheet<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
@@ -77,6 +79,25 @@ abstract class BaseBottomSheet<B : ViewDataBinding>(
         ) {
             loadingDialog?.dismiss()
             loadingDialog = null
+        }
+    }
+
+    protected fun showMessageSnackBar(
+        anchorView: View? = null,
+        message: String? = null,
+        @DrawableRes iconRes: Int? = null,
+        buttonText: String? = null,
+        listener: (() -> Unit)? = null
+    ) {
+        (dialog?.window?.decorView as? ViewGroup)?.let { parent ->
+            MessageSnackBar.make(
+                parent = parent,
+                anchorView = anchorView,
+                message = message,
+                iconRes = iconRes,
+                buttonText = buttonText,
+                listener = listener
+            ).show()
         }
     }
 
