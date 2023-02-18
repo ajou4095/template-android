@@ -2,13 +2,11 @@ package com.ray.template.presentation.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.lifecycleScope
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
+import com.ray.template.common.repeatOnStarted
 import com.ray.template.presentation.databinding.ActivityMainBinding
 import com.ray.template.presentation.ui.common.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -68,7 +66,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
 
-        lifecycleScope.launch(Dispatchers.Main) {
+        repeatOnStarted {
             viewModel.state.collect { state ->
                 when (state) {
                     is MainState.Init -> {
@@ -81,7 +79,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
 
-        lifecycleScope.launch(Dispatchers.Main) {
+        repeatOnStarted {
             viewModel.event.collect { event ->
                 when (event) {
                     MainViewEvent.Confirm -> {

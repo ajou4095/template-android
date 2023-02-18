@@ -36,19 +36,21 @@ class MainViewModel @Inject constructor(
         get() = _sampleInformation
 
     init {
-        _state.tryEmit(MainState.Init.Request)
+        viewModelScope.launch {
+            _state.emit(MainState.Init.Request)
+        }
     }
 
     fun initialize() {
         viewModelScope.launch(Dispatchers.Main) {
             getSampleInformationUseCase()
                 .onStart {
-                    _state.tryEmit(MainState.Init.Loading)
+                    _state.emit(MainState.Init.Loading)
                 }.catch {
-                    _state.tryEmit(MainState.Init.Fail(it))
+                    _state.emit(MainState.Init.Fail(it))
                 }.collect {
                     _sampleInformation.value = it.toUiModel()
-                    _state.tryEmit(MainState.Init.Success)
+                    _state.emit(MainState.Init.Success)
                 }
         }
     }
@@ -59,11 +61,13 @@ class MainViewModel @Inject constructor(
             withContext(Dispatchers.IO) {
                 delay(1000L)
             }
-            _state.tryEmit(MainState.SomeAction.Success)
+            _state.emit(MainState.SomeAction.Success)
         }
     }
 
     fun onConfirm() {
-        _event.tryEmit(MainViewEvent.Confirm)
+        viewModelScope.launch {
+            _event.emit(MainViewEvent.Confirm)
+        }
     }
 }
