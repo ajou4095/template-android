@@ -9,6 +9,9 @@ import com.ray.template.domain.usecase.GetSampleInformationUseCase
 import com.ray.template.presentation.model.toUiModel
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
@@ -30,13 +33,16 @@ class MainViewModel @Inject constructor(
     }
 
     fun initialize() {
-        viewModelScope.launch {
-            // TODO : state 관리
-            _state.value = Event(MainState.Init.Loading)
-            getSampleInformationUseCase().collect {
-                Timber.d("UseCase Result : ${it.toUiModel()}")
-                _state.value = Event(MainState.Init.Success)
-            }
+        viewModelScope.launch(Dispatchers.Main) {
+            getSampleInformationUseCase()
+                .onStart {
+                    _state.value = Event(MainState.Init.Loading)
+                }.catch {
+                    _state.value = Event(MainState.Init.Fail(it))
+                }.collect {
+                    Timber.d("UseCase Result : ${it.toUiModel()}")
+                    _state.value = Event(MainState.Init.Success)
+                }
         }
     }
 
