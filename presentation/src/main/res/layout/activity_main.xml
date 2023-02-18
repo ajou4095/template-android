@@ -16,6 +16,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/body"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:text="@{vm.sampleInformation.lyricsBody, default=`default value`}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <com.ray.rds.view.button.ConfirmButton
             android:layout_width="0dp"
             android:layout_height="wrap_content"

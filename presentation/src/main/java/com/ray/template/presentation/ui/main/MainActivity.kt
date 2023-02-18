@@ -2,13 +2,12 @@ package com.ray.template.presentation.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.lifecycleScope
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
-import com.ray.template.common.eventObserve
 import com.ray.template.presentation.databinding.ActivityMainBinding
 import com.ray.template.presentation.ui.common.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
@@ -47,25 +46,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
 
-        viewModel.state.eventObserve(this@MainActivity) { state ->
+        fun someAction(state: MainState.SomeAction) {
             when (state) {
-                is MainState.Init -> {
-                    initialize(state)
+                MainState.SomeAction.Loading -> {
+                    showLoading()
+                }
+                MainState.SomeAction.Success -> {
+                    hideLoading()
+                    AlertDialogFragmentProvider.makeAlertDialog(
+                        title = "Dialog Title",
+                        message = "Dialog Message"
+                    ).show()
+                }
+                is MainState.SomeAction.Fail -> {
+                    hideLoading()
+                    AlertDialogFragmentProvider.makeAlertDialog(
+                        title = "Dialog Title",
+                        message = "Dialog Message"
+                    ).show()
                 }
             }
         }
 
-        viewModel.event.eventObserve(this@MainActivity) { event ->
-            when (event) {
-                MainViewEvent.Confirm -> {
-                    viewModel.viewModelScope.launch {
-                        showLoading()
-                        delay(1000L)
-                        hideLoading()
-                        AlertDialogFragmentProvider.makeAlertDialog(
-                            title = "Dialog Title",
-                            message = "Dialog Message"
-                        ).show()
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.state.collect { state ->
+                when (state) {
+                    is MainState.Init -> {
+                        initialize(state)
+                    }
+                    is MainState.SomeAction -> {
+                        someAction(state)
+                    }
+                }
+            }
+        }
+
+        lifecycleScope.launch(Dispatchers.Main) {
+            viewModel.event.collect { event ->
+                when (event) {
+                    MainViewEvent.Confirm -> {
+                        viewModel.doSomeAction()
                     }
                 }
             }
