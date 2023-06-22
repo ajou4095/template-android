@@ -7,4 +7,10 @@ sealed interface MainState {
         object Success : Init
         data class Fail(val error: Throwable) : Init
     }
+
+    sealed interface SomeAction : MainState {
+        object Loading : SomeAction
+        object Success : SomeAction
+        data class Fail(val error: Throwable) : SomeAction
+    }
 }

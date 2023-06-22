@@ -1,52 +1,65 @@
 package com.ray.template.presentation.ui.main
 
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ray.template.common.event.Event
 import com.ray.template.domain.usecase.GetSampleInformationUseCase
+import com.ray.template.presentation.model.SampleInformationModel
 import com.ray.template.presentation.model.toUiModel
+import com.ray.template.presentation.util.coroutine.event.EventFlow
+import com.ray.template.presentation.util.coroutine.event.MutableEventFlow
+import com.ray.template.presentation.util.coroutine.event.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import timber.log.Timber
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getSampleInformationUseCase: GetSampleInformationUseCase
 ) : ViewModel() {
 
-    private val _state = MutableLiveData<Event<MainState>>()
-    val state: LiveData<Event<MainState>>
-        get() = _state
+    private val _state: MutableEventFlow<MainState> = MutableEventFlow()
+    val state: EventFlow<MainState> = _state.asEventFlow()
 
-    private val _event = MutableLiveData<Event<MainViewEvent>>()
-    val event: LiveData<Event<MainViewEvent>>
-        get() = _event
+    private val _event: MutableEventFlow<MainViewEvent> = MutableEventFlow()
+    val event: EventFlow<MainViewEvent> = _event.asEventFlow()
+
+    private val _sampleInformation: MutableStateFlow<SampleInformationModel> = MutableStateFlow(SampleInformationModel())
+    val sampleInformation: StateFlow<SampleInformationModel> = _sampleInformation.asStateFlow()
 
     init {
-        _state.value = Event(MainState.Init.Request)
+        viewModelScope.launch {
+            _state.emit(MainState.Init.Request)
+        }
     }
 
     fun initialize() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
+            _state.emit(MainState.Init.Loading)
             getSampleInformationUseCase()
-                .onStart {
-                    _state.value = Event(MainState.Init.Loading)
-                }.catch {
-                    _state.value = Event(MainState.Init.Fail(it))
-                }.collect {
-                    Timber.d("UseCase Result : ${it.toUiModel()}")
-                    _state.value = Event(MainState.Init.Success)
+                .onSuccess {
+                    _sampleInformation.value = it.toUiModel()
+                    _state.emit(MainState.Init.Success)
+                }.onFailure {
+                    _state.emit(MainState.Init.Fail(it))
                 }
         }
     }
 
+    fun doSomeAction() {
+        viewModelScope.launch {
+            _state.emit(MainState.SomeAction.Loading)
+            delay(1000L)
+            _state.emit(MainState.SomeAction.Success)
+        }
+    }
+
     fun onConfirm() {
-        _event.value = Event(MainViewEvent.Confirm)
+        viewModelScope.launch {
+            _event.emit(MainViewEvent.Confirm)
+        }
     }
 }

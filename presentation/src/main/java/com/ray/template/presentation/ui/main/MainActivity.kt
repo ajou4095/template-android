@@ -2,14 +2,12 @@ package com.ray.template.presentation.ui.main
 
 import android.os.Bundle
 import androidx.activity.viewModels
-import androidx.lifecycle.viewModelScope
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
-import com.ray.template.common.eventObserve
 import com.ray.template.presentation.databinding.ActivityMainBinding
 import com.ray.template.presentation.ui.common.base.BaseActivity
+import com.ray.template.presentation.util.coroutine.event.eventObserve
+import com.ray.template.presentation.util.coroutine.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
@@ -47,25 +45,46 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
             }
         }
 
-        viewModel.state.eventObserve(this@MainActivity) { state ->
+        fun someAction(state: MainState.SomeAction) {
             when (state) {
-                is MainState.Init -> {
-                    initialize(state)
+                MainState.SomeAction.Loading -> {
+                    showLoading()
+                }
+                MainState.SomeAction.Success -> {
+                    hideLoading()
+                    AlertDialogFragmentProvider.makeAlertDialog(
+                        title = "Dialog Title",
+                        message = "Dialog Message"
+                    ).show()
+                }
+                is MainState.SomeAction.Fail -> {
+                    hideLoading()
+                    AlertDialogFragmentProvider.makeAlertDialog(
+                        title = "Dialog Title",
+                        message = "Dialog Message"
+                    ).show()
                 }
             }
         }
 
-        viewModel.event.eventObserve(this@MainActivity) { event ->
-            when (event) {
-                MainViewEvent.Confirm -> {
-                    viewModel.viewModelScope.launch {
-                        showLoading()
-                        delay(1000L)
-                        hideLoading()
-                        AlertDialogFragmentProvider.makeAlertDialog(
-                            title = "Dialog Title",
-                            message = "Dialog Message"
-                        ).show()
+        repeatOnStarted {
+            viewModel.state.eventObserve { state ->
+                when (state) {
+                    is MainState.Init -> {
+                        initialize(state)
+                    }
+                    is MainState.SomeAction -> {
+                        someAction(state)
+                    }
+                }
+            }
+        }
+
+        repeatOnStarted {
+            viewModel.event.eventObserve { event ->
+                when (event) {
+                    MainViewEvent.Confirm -> {
+                        viewModel.doSomeAction()
                     }
                 }
             }
