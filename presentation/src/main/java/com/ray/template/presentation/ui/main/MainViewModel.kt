@@ -5,14 +5,16 @@ import androidx.lifecycle.viewModelScope
 import com.ray.template.domain.usecase.GetSampleInformationUseCase
 import com.ray.template.presentation.model.SampleInformationModel
 import com.ray.template.presentation.model.toUiModel
+import com.ray.template.presentation.util.coroutine.event.EventFlow
+import com.ray.template.presentation.util.coroutine.event.MutableEventFlow
+import com.ray.template.presentation.util.coroutine.event.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -21,17 +23,14 @@ class MainViewModel @Inject constructor(
     private val getSampleInformationUseCase: GetSampleInformationUseCase
 ) : ViewModel() {
 
-    private val _state = MutableSharedFlow<MainState>()
-    val state: SharedFlow<MainState>
-        get() = _state
+    private val _state = MutableEventFlow<MainState>()
+    val state: EventFlow<MainState> = _state.asEventFlow()
 
-    private val _event = MutableSharedFlow<MainViewEvent>()
-    val event: SharedFlow<MainViewEvent>
-        get() = _event
+    private val _event = MutableEventFlow<MainViewEvent>()
+    val event: EventFlow<MainViewEvent> = _event.asEventFlow()
 
     private val _sampleInformation = MutableStateFlow(SampleInformationModel())
-    val sampleInformation: StateFlow<SampleInformationModel>
-        get() = _sampleInformation
+    val sampleInformation: StateFlow<SampleInformationModel> = _sampleInformation.asStateFlow()
 
     init {
         viewModelScope.launch {

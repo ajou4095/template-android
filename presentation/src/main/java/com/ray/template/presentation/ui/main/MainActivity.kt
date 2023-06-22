@@ -6,6 +6,7 @@ import com.ray.rds.window.alert.AlertDialogFragmentProvider
 import com.ray.template.common.repeatOnStarted
 import com.ray.template.presentation.databinding.ActivityMainBinding
 import com.ray.template.presentation.ui.common.base.BaseActivity
+import com.ray.template.presentation.util.coroutine.event.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -67,7 +68,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
         repeatOnStarted {
-            viewModel.state.collect { state ->
+            viewModel.state.eventObserve { state ->
                 when (state) {
                     is MainState.Init -> {
                         initialize(state)
@@ -80,7 +81,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::infl
         }
 
         repeatOnStarted {
-            viewModel.event.collect { event ->
+            viewModel.event.eventObserve { event ->
                 when (event) {
                     MainViewEvent.Confirm -> {
                         viewModel.doSomeAction()
