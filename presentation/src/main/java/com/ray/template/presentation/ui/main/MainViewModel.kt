@@ -10,26 +10,24 @@ import com.ray.template.presentation.util.coroutine.event.MutableEventFlow
 import com.ray.template.presentation.util.coroutine.event.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getSampleInformationUseCase: GetSampleInformationUseCase
 ) : ViewModel() {
 
-    private val _state = MutableEventFlow<MainState>()
+    private val _state: MutableEventFlow<MainState> = MutableEventFlow()
     val state: EventFlow<MainState> = _state.asEventFlow()
 
-    private val _event = MutableEventFlow<MainViewEvent>()
+    private val _event: MutableEventFlow<MainViewEvent> = MutableEventFlow()
     val event: EventFlow<MainViewEvent> = _event.asEventFlow()
 
-    private val _sampleInformation = MutableStateFlow(SampleInformationModel())
+    private val _sampleInformation: MutableStateFlow<SampleInformationModel> = MutableStateFlow(SampleInformationModel())
     val sampleInformation: StateFlow<SampleInformationModel> = _sampleInformation.asStateFlow()
 
     init {
@@ -39,7 +37,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun initialize() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             _state.emit(MainState.Init.Loading)
             getSampleInformationUseCase()
                 .onSuccess {
@@ -52,11 +50,9 @@ class MainViewModel @Inject constructor(
     }
 
     fun doSomeAction() {
-        viewModelScope.launch(Dispatchers.Main) {
+        viewModelScope.launch {
             _state.emit(MainState.SomeAction.Loading)
-            withContext(Dispatchers.IO) {
-                delay(1000L)
-            }
+            delay(1000L)
             _state.emit(MainState.SomeAction.Success)
         }
     }

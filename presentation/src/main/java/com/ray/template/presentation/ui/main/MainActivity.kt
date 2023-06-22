@@ -3,10 +3,10 @@ package com.ray.template.presentation.ui.main
 import android.os.Bundle
 import androidx.activity.viewModels
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
-import com.ray.template.common.repeatOnStarted
 import com.ray.template.presentation.databinding.ActivityMainBinding
 import com.ray.template.presentation.ui.common.base.BaseActivity
 import com.ray.template.presentation.util.coroutine.event.eventObserve
+import com.ray.template.presentation.util.coroutine.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
