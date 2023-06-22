@@ -34,16 +34,17 @@ android {
             applicationIdSuffix = ".debug"
         }
     }
+
     /**
-     * Gradle 7.0.0 이상에서는 JDK 11 을 기본으로 사용한다.
-     * url : https://cliearl.github.io/posts/android/android-gradle-java-11/
+     * Android 14 JDK 17 지원
+     * url : https://developer.android.com/about/versions/14/behavior-changes-14?hl=ko#core-libraries
      */
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
     buildFeatures {
         dataBinding = true

@@ -25,20 +25,15 @@ android {
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
         }
     }
-    /**
-     * Gradle 7.0.0 이상에서는 JDK 11 을 기본으로 사용한다.
-     * url : https://cliearl.github.io/posts/android/android-gradle-java-11/
-     */
+
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_11
-        targetCompatibility = JavaVersion.VERSION_11
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
     kotlinOptions {
-        jvmTarget = JavaVersion.VERSION_11.toString()
+        jvmTarget = JavaVersion.VERSION_17.toString()
     }
-    sourceSets.getByName("main") {
-        res.srcDirs("src/main/res", "src/main/design-system")
-    }
+
     buildFeatures {
         dataBinding = true
     }
