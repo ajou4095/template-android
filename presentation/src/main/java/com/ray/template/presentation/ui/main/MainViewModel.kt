@@ -13,8 +13,6 @@ import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharedFlow
 import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.catch
-import kotlinx.coroutines.flow.onStart
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -43,21 +41,20 @@ class MainViewModel @Inject constructor(
 
     fun initialize() {
         viewModelScope.launch(Dispatchers.Main) {
+            _state.emit(MainState.Init.Loading)
             getSampleInformationUseCase()
-                .onStart {
-                    _state.emit(MainState.Init.Loading)
-                }.catch {
-                    _state.emit(MainState.Init.Fail(it))
-                }.collect {
+                .onSuccess {
                     _sampleInformation.value = it.toUiModel()
                     _state.emit(MainState.Init.Success)
+                }.onFailure {
+                    _state.emit(MainState.Init.Fail(it))
                 }
         }
     }
 
     fun doSomeAction() {
         viewModelScope.launch(Dispatchers.Main) {
-            _state.tryEmit(MainState.SomeAction.Loading)
+            _state.emit(MainState.SomeAction.Loading)
             withContext(Dispatchers.IO) {
                 delay(1000L)
             }
