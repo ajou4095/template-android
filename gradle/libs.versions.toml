@@ -4,30 +4,30 @@
 app-versioncode = "1"
 app-versionname = "1.0.0"
 # SDK Version
-sdk-min = "23"
+sdk-min = "24"
 sdk-target = "33"
 sdk-compile = "33"
 # Plugin Version
-plugin-gradle = "7.4.0"
+plugin-gradle = "8.1.0"
 # Kotlin
-kotlin = "1.8.0"
-coroutines = "1.6.4"
+kotlin = "1.9.0"
+coroutines = "1.7.3"
 # Hilt
-hilt = "2.44.2"
+hilt = "2.47"
 # AndroidX
-androidx-core = "1.7.0"
-androidx-navigation = "2.5.3"
-androidx-appcompat = "1.4.1"
-androidx-constraintlayout = "2.1.3"
-androidx-fragment = "1.5.4"
-androidx-lifecycle = "2.4.1"
-androidx-room = "2.5.0"
+androidx-core = "1.10.1"
+androidx-navigation = "2.6.0"
+androidx-appcompat = "1.6.1"
+androidx-constraintlayout = "2.1.4"
+androidx-fragment = "1.6.1"
+androidx-lifecycle = "2.6.1"
+androidx-room = "2.5.2"
 # Google
-google-material = "1.7.0"
+google-material = "1.9.0"
 # Network
 retrofit = "2.9.0"
 retrofit-coroutines-adapter = "0.9.2"
-kotlinx-serialization = "1.4.0"
+kotlinx-serialization = "1.4.1"
 kotlinx-serialization-converter = "0.8.0"
 # UI
 glide = "4.14.2"
@@ -36,7 +36,7 @@ shimmer = "0.5.0"
 rds = "0.3.0"
 # Debug
 flipper = "0.177.0"
-flipper-soloader = "0.10.3"
+flipper-soloader = "0.10.4"
 leakcanary = "2.10"
 # Common
 timber = "5.0.1"
