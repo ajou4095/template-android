@@ -8,26 +8,58 @@ import androidx.annotation.DrawableRes
 import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.repeatOnLifecycle
+import androidx.lifecycle.viewModelScope
+import com.ray.rds.window.alert.AlertDialogFragmentProvider
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 import com.ray.rds.window.snackbar.MessageSnackBar
+import com.ray.template.presentation.util.coroutine.event.eventObserve
+import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
+import timber.log.Timber
 
 abstract class BaseActivity<B : ViewDataBinding>(
     private val inflater: (LayoutInflater) -> B
 ) : AppCompatActivity() {
+
+    protected abstract val viewModel: BaseViewModel
+
     protected lateinit var binding: B
         private set
 
     private var loadingDialog: DialogFragment? = null
 
+    protected val handler = CoroutineExceptionHandler { _, throwable ->
+        Timber.e(throwable)
+        AlertDialogFragmentProvider.makeAlertDialog(
+            title = throwable.javaClass.simpleName,
+            message = throwable.message
+        ).show()
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = inflater(layoutInflater)
         setContentView(binding.root)
+        initView()
+        initObserver()
+        observeViewModelError()
     }
 
     protected open fun initView() = Unit
 
     protected open fun initObserver() = Unit
+
+    private fun observeViewModelError() {
+        repeatOnStarted {
+            viewModel.errorEvent.eventObserve { event ->
+                handler.handleException(viewModel.viewModelScope.coroutineContext, event.throwable)
+            }
+        }
+    }
 
     fun DialogFragment.show() {
         if (
@@ -87,5 +119,13 @@ abstract class BaseActivity<B : ViewDataBinding>(
 
     protected fun bind(action: B.() -> Unit) {
         binding.action()
+    }
+
+    protected fun repeatOnStarted(
+        block: suspend CoroutineScope.() -> Unit
+    ) {
+        this.lifecycleScope.launch(handler) {
+            repeatOnLifecycle(Lifecycle.State.STARTED, block)
+        }
     }
 }

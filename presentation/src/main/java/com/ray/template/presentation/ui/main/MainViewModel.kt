@@ -1,10 +1,9 @@
 package com.ray.template.presentation.ui.main
 
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.ray.template.domain.usecase.GetSampleInformationUseCase
 import com.ray.template.presentation.model.SampleInformationModel
 import com.ray.template.presentation.model.toUiModel
+import com.ray.template.presentation.ui.common.base.BaseViewModel
 import com.ray.template.presentation.util.coroutine.event.EventFlow
 import com.ray.template.presentation.util.coroutine.event.MutableEventFlow
 import com.ray.template.presentation.util.coroutine.event.asEventFlow
@@ -14,12 +13,11 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.launch
 
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val getSampleInformationUseCase: GetSampleInformationUseCase
-) : ViewModel() {
+) : BaseViewModel() {
 
     private val _state: MutableEventFlow<MainState> = MutableEventFlow()
     val state: EventFlow<MainState> = _state.asEventFlow()
@@ -31,13 +29,13 @@ class MainViewModel @Inject constructor(
     val sampleInformation: StateFlow<SampleInformationModel> = _sampleInformation.asStateFlow()
 
     init {
-        viewModelScope.launch {
+        launch {
             _state.emit(MainState.Init.Request)
         }
     }
 
     fun initialize() {
-        viewModelScope.launch {
+        launch {
             _state.emit(MainState.Init.Loading)
             getSampleInformationUseCase()
                 .onSuccess {
@@ -50,7 +48,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun doSomeAction() {
-        viewModelScope.launch {
+        launch {
             _state.emit(MainState.SomeAction.Loading)
             delay(1000L)
             _state.emit(MainState.SomeAction.Success)
@@ -58,7 +56,7 @@ class MainViewModel @Inject constructor(
     }
 
     fun onConfirm() {
-        viewModelScope.launch {
+        launch {
             _event.emit(MainViewEvent.Confirm)
         }
     }

@@ -1,23 +1,15 @@
 package com.ray.template.presentation.ui.main
 
-import android.os.Bundle
 import androidx.activity.viewModels
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
 import com.ray.template.presentation.databinding.ActivityMainBinding
 import com.ray.template.presentation.ui.common.base.BaseActivity
 import com.ray.template.presentation.util.coroutine.event.eventObserve
-import com.ray.template.presentation.util.coroutine.repeatOnStarted
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : BaseActivity<ActivityMainBinding>(ActivityMainBinding::inflate) {
-    private val viewModel: MainViewModel by viewModels()
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initView()
-        initObserver()
-    }
+    override val viewModel: MainViewModel by viewModels()
 
     override fun initView() {
         bind {
