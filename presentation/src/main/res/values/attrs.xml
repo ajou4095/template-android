@@ -1,7 +1,2 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <declare-styleable name="SelectItem">
-        <attr name="android:text" />
-        <attr name="android:src" />
-    </declare-styleable>
-</resources>
+<resources />
