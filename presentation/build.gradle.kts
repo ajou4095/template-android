@@ -6,6 +6,7 @@ plugins {
     kotlin("plugin.parcelize")
     kotlin("android")
     kotlin("kapt")
+    id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -50,7 +51,7 @@ dependencies {
     implementation(libs.bundles.androidx.presentation)
     implementation(libs.google.material)
     implementation(libs.glide)
-    kapt(libs.glide.compiler)
+    ksp(libs.glide.ksp)
     implementation(libs.lottie)
     implementation(libs.shimmer)
     implementation(libs.rds)

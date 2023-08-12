@@ -26,7 +26,6 @@ dependencies {
     implementation(libs.bundles.androidx.presentation)
     implementation(libs.google.material)
     implementation(libs.glide)
-    kapt(libs.glide.compiler)
 
     implementation(libs.timber)
 }
