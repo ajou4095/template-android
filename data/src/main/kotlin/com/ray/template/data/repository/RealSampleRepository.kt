@@ -3,7 +3,7 @@ package com.ray.template.data.repository
 import com.ray.template.data.remote.network.api.SampleApi
 import com.ray.template.data.remote.network.util.toDomain
 import com.ray.template.domain.model.sample.SampleInformation
-import com.ray.template.domain.repository.SampleRepository
+import com.ray.template.domain.repository.sample.SampleRepository
 
 class RealSampleRepository(
     private val sampleApi: SampleApi

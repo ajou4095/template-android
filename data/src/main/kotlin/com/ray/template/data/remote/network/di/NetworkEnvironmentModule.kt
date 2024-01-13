@@ -1,7 +1,7 @@
-package com.ray.template.data.di
+package com.ray.template.data.remote.network.di
 
 import android.content.Context
-import com.ray.template.data.remote.local.ErrorMessageMapper
+import com.ray.template.data.remote.network.environment.ErrorMessageMapper
 import com.ray.template.data.remote.local.SharedPreferencesManager
 import com.ray.template.data.remote.network.environment.BaseUrlProvider
 import dagger.Module

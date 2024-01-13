@@ -1,4 +1,4 @@
-package com.ray.template.presentation.ui.common.base
+package com.ray.template.presentation.common.base
 
 data class ErrorEvent(
     val throwable: Throwable

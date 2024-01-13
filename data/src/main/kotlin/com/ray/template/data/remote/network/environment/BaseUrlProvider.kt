@@ -6,6 +6,7 @@ class BaseUrlProvider(
     private val sharedPreferencesManager: SharedPreferencesManager
 ) {
     fun get(): String {
+        // TODO : Add Dev Flag
         val isDev: Boolean = false
 
         if (isDev) {
@@ -16,7 +17,7 @@ class BaseUrlProvider(
     }
 
     companion object {
-        private const val DEV_BASE_URL = "https://api.musixmatch.com/"
+        private const val DEV_BASE_URL = "https://dev.api.musixmatch.com/"
         private const val RELEASE_BASE_URL = "https://api.musixmatch.com/"
     }
 }

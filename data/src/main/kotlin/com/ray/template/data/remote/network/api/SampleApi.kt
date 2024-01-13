@@ -1,6 +1,6 @@
 package com.ray.template.data.remote.network.api
 
-import com.ray.template.data.remote.local.ErrorMessageMapper
+import com.ray.template.data.remote.network.environment.ErrorMessageMapper
 import com.ray.template.data.remote.network.environment.BaseUrlProvider
 import com.ray.template.data.remote.network.model.sample.SampleInformationRes
 import com.ray.template.data.remote.network.util.convert

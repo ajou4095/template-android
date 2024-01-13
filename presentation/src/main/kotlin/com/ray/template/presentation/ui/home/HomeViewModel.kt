@@ -1,9 +1,9 @@
 package com.ray.template.presentation.ui.home
 
-import com.ray.template.presentation.ui.common.base.BaseViewModel
-import com.ray.template.presentation.util.coroutine.event.EventFlow
-import com.ray.template.presentation.util.coroutine.event.MutableEventFlow
-import com.ray.template.presentation.util.coroutine.event.asEventFlow
+import com.ray.template.presentation.common.base.BaseViewModel
+import com.ray.template.presentation.common.util.coroutine.event.EventFlow
+import com.ray.template.presentation.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.presentation.common.util.coroutine.event.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow

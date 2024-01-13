@@ -2,7 +2,7 @@ package com.ray.template.presentation.ui.main
 
 import androidx.activity.viewModels
 import com.ray.template.presentation.databinding.ActivityMainBinding
-import com.ray.template.presentation.ui.common.base.BaseActivity
+import com.ray.template.presentation.common.base.BaseActivity
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

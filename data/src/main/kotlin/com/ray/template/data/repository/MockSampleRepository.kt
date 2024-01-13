@@ -1,7 +1,7 @@
 package com.ray.template.data.repository
 
 import com.ray.template.domain.model.sample.SampleInformation
-import com.ray.template.domain.repository.SampleRepository
+import com.ray.template.domain.repository.sample.SampleRepository
 
 class MockSampleRepository : SampleRepository {
     override suspend fun getSampleInformation(

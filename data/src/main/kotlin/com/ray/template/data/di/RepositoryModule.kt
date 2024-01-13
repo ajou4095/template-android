@@ -2,7 +2,7 @@ package com.ray.template.data.di
 
 import com.ray.template.data.remote.network.api.SampleApi
 import com.ray.template.data.repository.MockSampleRepository
-import com.ray.template.domain.repository.SampleRepository
+import com.ray.template.domain.repository.sample.SampleRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

@@ -1,4 +1,4 @@
-package com.ray.template.presentation.ui.common.base
+package com.ray.template.presentation.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -7,23 +7,23 @@ import android.view.ViewGroup
 import androidx.annotation.DrawableRes
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.lifecycle.viewModelScope
+import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 import com.ray.rds.window.snackbar.MessageSnackBar
-import com.ray.template.presentation.util.coroutine.event.eventObserve
+import com.ray.template.presentation.common.util.coroutine.event.eventObserve
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-abstract class BaseFragment<B : ViewDataBinding>(
+abstract class BaseBottomSheet<B : ViewDataBinding>(
     private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
-) : Fragment() {
+) : BottomSheetDialogFragment() {
 
     protected abstract val viewModel: BaseViewModel
 
@@ -77,21 +77,21 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     fun DialogFragment.show() {
         if (
-            this@BaseFragment.activity?.isFinishing == false
-            && this@BaseFragment.activity?.isDestroyed == false
-            && !this@BaseFragment.childFragmentManager.isDestroyed
-            && !this@BaseFragment.childFragmentManager.isStateSaved
+            this@BaseBottomSheet.activity?.isFinishing == false
+            && this@BaseBottomSheet.activity?.isDestroyed == false
+            && !this@BaseBottomSheet.childFragmentManager.isDestroyed
+            && !this@BaseBottomSheet.childFragmentManager.isStateSaved
         ) {
-            show(this@BaseFragment.childFragmentManager, javaClass.simpleName)
+            show(this@BaseBottomSheet.childFragmentManager, javaClass.simpleName)
         }
     }
 
     protected fun showLoading() {
         if (
-            this@BaseFragment.activity?.isFinishing == false
-            && this@BaseFragment.activity?.isDestroyed == false
-            && !this@BaseFragment.parentFragmentManager.isDestroyed
-            && !this@BaseFragment.parentFragmentManager.isStateSaved
+            this@BaseBottomSheet.activity?.isFinishing == false
+            && this@BaseBottomSheet.activity?.isDestroyed == false
+            && !this@BaseBottomSheet.parentFragmentManager.isDestroyed
+            && !this@BaseBottomSheet.parentFragmentManager.isStateSaved
             && loadingDialog == null
         ) {
             loadingDialog = LoadingDialogFragmentProvider.makeLoadingDialog()
@@ -101,8 +101,8 @@ abstract class BaseFragment<B : ViewDataBinding>(
 
     protected fun hideLoading() {
         if (
-            this@BaseFragment.activity?.isFinishing == false
-            && this@BaseFragment.activity?.isDestroyed == false
+            this@BaseBottomSheet.activity?.isFinishing == false
+            && this@BaseBottomSheet.activity?.isDestroyed == false
             && loadingDialog?.parentFragmentManager?.isDestroyed == false
             && loadingDialog?.parentFragmentManager?.isStateSaved == false
             && loadingDialog != null
@@ -119,7 +119,7 @@ abstract class BaseFragment<B : ViewDataBinding>(
         buttonText: String? = null,
         listener: (() -> Unit)? = null
     ) {
-        (binding.root as? ViewGroup)?.let { parent ->
+        (dialog?.window?.decorView as? ViewGroup)?.let { parent ->
             MessageSnackBar.make(
                 parent = parent,
                 anchorView = anchorView,

@@ -2,8 +2,8 @@ package com.ray.template.presentation.ui.home
 
 import androidx.fragment.app.viewModels
 import com.ray.template.presentation.databinding.FragmentHomeBinding
-import com.ray.template.presentation.ui.common.base.BaseFragment
-import com.ray.template.presentation.util.coroutine.event.eventObserve
+import com.ray.template.presentation.common.base.BaseFragment
+import com.ray.template.presentation.common.util.coroutine.event.eventObserve
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

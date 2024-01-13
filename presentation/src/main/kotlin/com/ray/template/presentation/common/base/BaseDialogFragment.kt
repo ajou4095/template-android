@@ -1,4 +1,4 @@
-package com.ray.template.presentation.ui.common.base
+package com.ray.template.presentation.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +16,7 @@ import com.ray.rds.util.getDisplayWidth
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 import com.ray.rds.window.snackbar.MessageSnackBar
-import com.ray.template.presentation.util.coroutine.event.eventObserve
+import com.ray.template.presentation.common.util.coroutine.event.eventObserve
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch

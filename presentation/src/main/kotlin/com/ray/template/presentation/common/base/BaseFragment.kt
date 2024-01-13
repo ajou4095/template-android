@@ -1,13 +1,13 @@
-package com.ray.template.presentation.ui.common.base
+package com.ray.template.presentation.common.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.annotation.DrawableRes
-import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.ViewDataBinding
 import androidx.fragment.app.DialogFragment
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
@@ -15,20 +15,22 @@ import androidx.lifecycle.viewModelScope
 import com.ray.rds.window.alert.AlertDialogFragmentProvider
 import com.ray.rds.window.loading.LoadingDialogFragmentProvider
 import com.ray.rds.window.snackbar.MessageSnackBar
-import com.ray.template.presentation.util.coroutine.event.eventObserve
+import com.ray.template.presentation.common.util.coroutine.event.eventObserve
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-abstract class BaseActivity<B : ViewDataBinding>(
-    private val inflater: (LayoutInflater) -> B
-) : AppCompatActivity() {
+abstract class BaseFragment<B : ViewDataBinding>(
+    private val inflater: (LayoutInflater, ViewGroup?, Boolean) -> B
+) : Fragment() {
 
     protected abstract val viewModel: BaseViewModel
 
-    protected lateinit var binding: B
-        private set
+    private var _binding: B? = null
+
+    protected val binding
+        get() = _binding!!
 
     private var loadingDialog: DialogFragment? = null
 
@@ -40,10 +42,17 @@ abstract class BaseActivity<B : ViewDataBinding>(
         ).show()
     }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        binding = inflater(layoutInflater)
-        setContentView(binding.root)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = inflater(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         initView()
         initObserver()
         observeViewModelError()
@@ -61,23 +70,28 @@ abstract class BaseActivity<B : ViewDataBinding>(
         }
     }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
+    }
+
     fun DialogFragment.show() {
         if (
-            !this@BaseActivity.isFinishing
-            && !this@BaseActivity.isDestroyed
-            && !this@BaseActivity.supportFragmentManager.isDestroyed
-            && !this@BaseActivity.supportFragmentManager.isStateSaved
+            this@BaseFragment.activity?.isFinishing == false
+            && this@BaseFragment.activity?.isDestroyed == false
+            && !this@BaseFragment.childFragmentManager.isDestroyed
+            && !this@BaseFragment.childFragmentManager.isStateSaved
         ) {
-            show(this@BaseActivity.supportFragmentManager, javaClass.simpleName)
+            show(this@BaseFragment.childFragmentManager, javaClass.simpleName)
         }
     }
 
     protected fun showLoading() {
         if (
-            !this@BaseActivity.isFinishing
-            && !this@BaseActivity.isDestroyed
-            && !this@BaseActivity.supportFragmentManager.isDestroyed
-            && !this@BaseActivity.supportFragmentManager.isStateSaved
+            this@BaseFragment.activity?.isFinishing == false
+            && this@BaseFragment.activity?.isDestroyed == false
+            && !this@BaseFragment.parentFragmentManager.isDestroyed
+            && !this@BaseFragment.parentFragmentManager.isStateSaved
             && loadingDialog == null
         ) {
             loadingDialog = LoadingDialogFragmentProvider.makeLoadingDialog()
@@ -87,8 +101,8 @@ abstract class BaseActivity<B : ViewDataBinding>(
 
     protected fun hideLoading() {
         if (
-            !this@BaseActivity.isFinishing
-            && !this@BaseActivity.isDestroyed
+            this@BaseFragment.activity?.isFinishing == false
+            && this@BaseFragment.activity?.isDestroyed == false
             && loadingDialog?.parentFragmentManager?.isDestroyed == false
             && loadingDialog?.parentFragmentManager?.isStateSaved == false
             && loadingDialog != null
@@ -124,7 +138,7 @@ abstract class BaseActivity<B : ViewDataBinding>(
     protected fun repeatOnStarted(
         block: suspend CoroutineScope.() -> Unit
     ) {
-        this.lifecycleScope.launch(handler) {
+        viewLifecycleOwner.lifecycleScope.launch(handler) {
             repeatOnLifecycle(Lifecycle.State.STARTED, block)
         }
     }

@@ -1,6 +1,6 @@
-package com.ray.template.data.di
+package com.ray.template.data.remote.network.di
 
-import com.ray.template.data.remote.local.ErrorMessageMapper
+import com.ray.template.data.remote.network.environment.ErrorMessageMapper
 import com.ray.template.data.remote.network.api.SampleApi
 import com.ray.template.data.remote.network.environment.BaseUrlProvider
 import dagger.Module

@@ -1,7 +1,7 @@
 package com.ray.template.data.remote.network.util
 
-import com.ray.template.data.mapper.DataMapper
-import com.ray.template.data.remote.local.ErrorMessageMapper
+import com.ray.template.data.remote.mapper.DataMapper
+import com.ray.template.data.remote.network.environment.ErrorMessageMapper
 import com.ray.template.data.remote.network.model.error.ErrorRes
 import com.ray.template.domain.model.error.BadRequestServerException
 import com.ray.template.domain.model.error.InternalServerException

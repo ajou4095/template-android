@@ -1,4 +1,4 @@
-package com.ray.template.data.di
+package com.ray.template.data.remote.network.di
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
@@ -18,7 +18,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object NetworkModule {
+internal object KtorModule {
 
     private val jsonConfiguration = Json { ignoreUnknownKeys = true }
 

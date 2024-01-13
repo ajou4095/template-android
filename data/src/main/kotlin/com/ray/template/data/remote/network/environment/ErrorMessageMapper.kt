@@ -1,4 +1,4 @@
-package com.ray.template.data.remote.local
+package com.ray.template.data.remote.network.environment
 
 import android.content.Context
 import com.ray.template.data.R

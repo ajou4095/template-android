@@ -1,4 +1,4 @@
-package com.ray.template.presentation.util.coroutine.event
+package com.ray.template.presentation.common.util.coroutine.event
 
 import java.util.concurrent.atomic.AtomicBoolean
 

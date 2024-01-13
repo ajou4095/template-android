@@ -10,7 +10,6 @@ data class SampleInformationModel(
     val lyricsBody: String = ""
 ) : Parcelable
 
-// TODO : 개선 방법 찾기
 fun SampleInformation.toUiModel(): SampleInformationModel {
     return SampleInformationModel(lyricsId, lyricsBody)
 }

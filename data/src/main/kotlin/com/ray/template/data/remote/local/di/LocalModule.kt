@@ -1,4 +1,4 @@
-package com.ray.template.data.di
+package com.ray.template.data.remote.local.di
 
 import android.content.Context
 import com.ray.template.data.remote.local.SharedPreferencesManager
@@ -13,7 +13,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 internal object LocalModule {
 
-    // TODO : Local 과 Network 분리
     @Provides
     @Singleton
     fun provideSharedPreferencesManager(
