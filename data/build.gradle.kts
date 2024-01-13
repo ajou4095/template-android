@@ -46,8 +46,7 @@ dependencies {
     implementation(libs.bundles.network)
     kapt(libs.androidx.room.compiler)
 
-    implementation(libs.timber)
-    implementation(libs.leakcanary)
+    implementation(libs.bundles.debug)
     debugImplementation(libs.bundles.flipper)
 }
 

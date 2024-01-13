@@ -58,8 +58,7 @@ dependencies {
 
     implementation(libs.ted.permission)
 
-    implementation(libs.timber)
-    implementation(libs.leakcanary)
+    implementation(libs.bundles.debug)
     debugImplementation(libs.bundles.flipper)
 }
 
