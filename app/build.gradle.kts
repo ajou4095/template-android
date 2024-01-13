@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     id("dagger.hilt.android.plugin")
     id("io.sentry.android.gradle")
+    id("com.google.devtools.ksp")
     kotlin("android")
     kotlin("kapt")
 }
@@ -62,7 +63,7 @@ dependencies {
 
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.androidx.data)
     implementation(libs.bundles.network)

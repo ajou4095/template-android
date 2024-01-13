@@ -3,7 +3,7 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("com.android.library")
     id("dagger.hilt.android.plugin")
-    id("kotlin-parcelize")
+    id("com.google.devtools.ksp")
     kotlin("android")
     kotlin("kapt")
 }
@@ -40,7 +40,7 @@ dependencies {
 
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.logging)
 }

@@ -1,7 +1,7 @@
 package com.ray.template.domain.usecase.sample
 
 import com.ray.template.domain.model.sample.SampleInformation
-import com.ray.template.domain.repository.sample.SampleRepository
+import com.ray.template.domain.repository.SampleRepository
 import javax.inject.Inject
 
 class GetSampleInformationUseCase @Inject constructor(

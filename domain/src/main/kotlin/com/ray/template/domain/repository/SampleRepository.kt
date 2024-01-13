@@ -1,4 +1,4 @@
-package com.ray.template.domain.repository.sample
+package com.ray.template.domain.repository
 
 import com.ray.template.domain.model.sample.SampleInformation
 

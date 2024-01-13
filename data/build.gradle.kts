@@ -3,6 +3,7 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 plugins {
     id("com.android.library")
     id("dagger.hilt.android.plugin")
+    id("com.google.devtools.ksp")
     kotlin("android")
     kotlin("kapt")
     kotlin("plugin.serialization")
@@ -40,11 +41,11 @@ dependencies {
 
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.androidx.data)
     implementation(libs.bundles.network)
-    kapt(libs.androidx.room.compiler)
+    ksp(libs.androidx.room.compiler)
 
     implementation(libs.bundles.logging)
     debugImplementation(libs.okhttp3.logging.interceptor)

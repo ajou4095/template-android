@@ -2,11 +2,11 @@ import com.android.build.gradle.internal.cxx.configure.gradleLocalProperties
 
 plugins {
     id("com.android.library")
+    id("com.google.devtools.ksp")
     id("dagger.hilt.android.plugin")
     kotlin("plugin.parcelize")
     kotlin("android")
     kotlin("kapt")
-    id("com.google.devtools.ksp")
     id("androidx.navigation.safeargs.kotlin")
 }
 
@@ -46,7 +46,7 @@ dependencies {
 
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
-    kapt(libs.hilt.android.compiler)
+    ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.androidx.presentation)
     implementation(libs.google.material)
