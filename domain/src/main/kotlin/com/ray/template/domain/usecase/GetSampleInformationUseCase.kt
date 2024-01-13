@@ -1,6 +1,6 @@
 package com.ray.template.domain.usecase
 
-import com.ray.template.domain.model.SampleInformation
+import com.ray.template.domain.model.sample.SampleInformation
 import com.ray.template.domain.repository.SampleRepository
 import javax.inject.Inject
 

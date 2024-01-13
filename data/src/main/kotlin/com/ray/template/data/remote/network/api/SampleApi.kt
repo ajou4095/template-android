@@ -1,7 +1,8 @@
 package com.ray.template.data.remote.network.api
 
+import com.ray.template.data.remote.local.ErrorMessageMapper
 import com.ray.template.data.remote.network.environment.BaseUrlProvider
-import com.ray.template.data.remote.network.model.SampleInformationRes
+import com.ray.template.data.remote.network.model.sample.SampleInformationRes
 import com.ray.template.data.remote.network.util.convert
 import io.ktor.client.HttpClient
 import io.ktor.client.request.get
@@ -9,7 +10,8 @@ import io.ktor.client.request.parameter
 
 class SampleApi(
     private val client: HttpClient,
-    private val baseUrlProvider: BaseUrlProvider
+    private val baseUrlProvider: BaseUrlProvider,
+    private val errorMessageMapper: ErrorMessageMapper
 ) {
     private val baseUrl: String
         get() = baseUrlProvider.get()
@@ -23,6 +25,6 @@ class SampleApi(
             parameter("api_key", apiKey)
             parameter("q_track", title)
             parameter("q_artist", artist)
-        }.convert()
+        }.convert(errorMessageMapper::map)
     }
 }

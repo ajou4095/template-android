@@ -1,6 +1,6 @@
 package com.ray.template.data.repository
 
-import com.ray.template.domain.model.SampleInformation
+import com.ray.template.domain.model.sample.SampleInformation
 import com.ray.template.domain.repository.SampleRepository
 
 class MockSampleRepository : SampleRepository {

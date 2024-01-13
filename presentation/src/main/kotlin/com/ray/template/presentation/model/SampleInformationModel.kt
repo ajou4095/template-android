@@ -1,7 +1,7 @@
 package com.ray.template.presentation.model
 
 import android.os.Parcelable
-import com.ray.template.domain.model.SampleInformation
+import com.ray.template.domain.model.sample.SampleInformation
 import kotlinx.parcelize.Parcelize
 
 @Parcelize

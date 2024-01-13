@@ -1,5 +1,6 @@
 package com.ray.template.data.di
 
+import com.ray.template.data.remote.local.ErrorMessageMapper
 import com.ray.template.data.remote.network.api.SampleApi
 import com.ray.template.data.remote.network.environment.BaseUrlProvider
 import dagger.Module
@@ -17,11 +18,13 @@ internal object ApiModule {
     @Singleton
     fun provideSampleApi(
         client: HttpClient,
-        baseUrlProvider: BaseUrlProvider
+        baseUrlProvider: BaseUrlProvider,
+        errorMessageMapper: ErrorMessageMapper
     ): SampleApi {
         return SampleApi(
             client,
-            baseUrlProvider
+            baseUrlProvider,
+            errorMessageMapper
         )
     }
 }

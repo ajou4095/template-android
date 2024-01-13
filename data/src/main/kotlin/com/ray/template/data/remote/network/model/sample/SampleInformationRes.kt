@@ -1,7 +1,7 @@
-package com.ray.template.data.remote.network.model
+package com.ray.template.data.remote.network.model.sample
 
 import com.ray.template.data.mapper.DataMapper
-import com.ray.template.domain.model.SampleInformation
+import com.ray.template.domain.model.sample.SampleInformation
 import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
