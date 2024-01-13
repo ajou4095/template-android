@@ -30,3 +30,13 @@ jobs:
 
       - name: Build Release
         run: ./gradlew assembleRelease
+
+      - name: Update GitHub Deployment Status
+        if: always()
+        uses: bobheadxi/deployments@v1.4.0
+        with:
+          step: finish
+          token: ${{ github.token }}
+          status: ${{ job.status }}
+          deployment_id: ${{ steps.deployment.outputs.deployment_id }}
+          env: production

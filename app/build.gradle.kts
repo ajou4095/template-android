@@ -19,7 +19,7 @@ android {
         versionCode = libs.versions.app.versioncode.get().toInt()
         versionName = libs.versions.app.versionname.get()
 
-        manifestPlaceholders["sentryDsnToken"] = getLocalProperty("dsn.sentry")
+        manifestPlaceholders["sentryDsnToken"] = getLocalProperty("DSN_SENTRY")
     }
 
     buildTypes {
