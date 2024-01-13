@@ -1,6 +1,6 @@
 # Android-Template
 
-[![Android CI](https://github.com/ajou4095/Android-Template/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/ajou4095/Android-Template/actions/workflows/android.yml)
+[![Android CI](https://github.com/ajou4095/template-android/actions/workflows/android.yml/badge.svg?branch=main)](https://github.com/ajou4095/template-android/actions/workflows/android.yml)
 
 ## Description
 
