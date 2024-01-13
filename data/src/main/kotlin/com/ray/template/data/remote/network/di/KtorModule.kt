@@ -17,7 +17,8 @@ import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.resources.Resources
 import io.ktor.serialization.kotlinx.json.json
 import kotlinx.serialization.json.Json
-import okhttp3.logging.HttpLoggingInterceptor
+import okhttp3.Interceptor
+import java.util.Optional
 import javax.inject.Qualifier
 import javax.inject.Singleton
 
@@ -34,21 +35,16 @@ internal object KtorModule {
     @Singleton
     @NoAuthHttpClient
     fun provideNoAuthHttpClient(
-        @ApplicationContext context: Context
+        @ApplicationContext context: Context,
+        @DebugInterceptor debugInterceptor: Optional<Interceptor>
     ): HttpClient {
-        val isDebug: Boolean = (0 != context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
-
         return HttpClient(OkHttp) {
             // default validation to throw exceptions for non-2xx responses
             expectSuccess = true
 
             engine {
-                if (isDebug) {
-                    addInterceptor(
-                        HttpLoggingInterceptor().apply {
-                            level = HttpLoggingInterceptor.Level.BODY
-                        }
-                    )
+                if (debugInterceptor.isPresent) {
+                    addInterceptor(debugInterceptor.get())
                 }
             }
 
@@ -64,6 +60,7 @@ internal object KtorModule {
     @AuthHttpClient
     fun provideAuthHttpClient(
         @ApplicationContext context: Context,
+        @DebugInterceptor debugInterceptor: Optional<Interceptor>,
         authenticationRepository: AuthenticationRepository
     ): HttpClient {
         val isDebug: Boolean = (0 != context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
@@ -74,12 +71,8 @@ internal object KtorModule {
             expectSuccess = false
 
             engine {
-                if (isDebug) {
-                    addInterceptor(
-                        HttpLoggingInterceptor().apply {
-                            level = HttpLoggingInterceptor.Level.BODY
-                        }
-                    )
+                if (debugInterceptor.isPresent) {
+                    addInterceptor(debugInterceptor.get())
                 }
             }
 
