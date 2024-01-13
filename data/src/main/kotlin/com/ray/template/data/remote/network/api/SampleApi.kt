@@ -1,16 +1,15 @@
 package com.ray.template.data.remote.network.api
 
-import com.ray.template.data.remote.network.model.SampleInformationRes
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
+import io.ktor.resources.Resource
+import kotlinx.serialization.SerialName
 
-interface SampleApi {
-    // TODO : Network Interceptor 로 apiKey 집어넣기
-    @GET("/ws/1.1/matcher.lyrics.get")
-    suspend fun getSampleInformation(
-        @Query("apikey") apiKey: String,
-        @Query("q_track") title: String,
-        @Query("q_artist") artist: String
-    ): Response<SampleInformationRes>
+@Resource("/ws/1.1")
+class SampleApi {
+    @Resource("/matcher.lyrics.get")
+    class GetLyrics(
+        val parent: SampleApi = SampleApi(),
+        @SerialName("apikey") val apiKey: String,
+        @SerialName("q_track") val title: String,
+        @SerialName("q_artist") val artist: String
+    )
 }
