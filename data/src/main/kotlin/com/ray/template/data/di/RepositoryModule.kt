@@ -1,12 +1,12 @@
 package com.ray.template.data.di
 
+import com.ray.template.data.remote.network.api.SampleApi
 import com.ray.template.data.repository.MockSampleRepository
 import com.ray.template.domain.repository.SampleRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import io.ktor.client.HttpClient
 import javax.inject.Singleton
 
 @Module
@@ -15,9 +15,9 @@ internal object RepositoryModule {
     @Provides
     @Singleton
     fun bindsSampleRepository(
-        client: HttpClient
+        sampleApi: SampleApi
     ): SampleRepository {
-        // return RealSampleRepository()
+        // return RealSampleRepository(sampleApi)
         return MockSampleRepository()
     }
 }
