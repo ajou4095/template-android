@@ -1,16 +1,28 @@
 package com.ray.template.data.remote.network.api
 
+import com.ray.template.data.remote.network.environment.BaseUrlProvider
 import com.ray.template.data.remote.network.model.SampleInformationRes
-import retrofit2.Response
-import retrofit2.http.GET
-import retrofit2.http.Query
+import com.ray.template.data.remote.network.util.convert
+import io.ktor.client.HttpClient
+import io.ktor.client.request.get
+import io.ktor.client.request.parameter
 
-interface SampleApi {
-    // TODO : Network Interceptor 로 apiKey 집어넣기
-    @GET("/ws/1.1/matcher.lyrics.get")
-    suspend fun getSampleInformation(
-        @Query("apikey") apiKey: String,
-        @Query("q_track") title: String,
-        @Query("q_artist") artist: String
-    ): Response<SampleInformationRes>
+class SampleApi(
+    private val client: HttpClient,
+    private val baseUrlProvider: BaseUrlProvider
+) {
+    private val baseUrl: String
+        get() = baseUrlProvider.get()
+
+    suspend fun getLyrics(
+        apiKey: String,
+        title: String,
+        artist: String
+    ): Result<SampleInformationRes> {
+        return client.get("$baseUrl/ws/1.1") {
+            parameter("api_key", apiKey)
+            parameter("q_track", title)
+            parameter("q_artist", artist)
+        }.convert()
+    }
 }

@@ -67,8 +67,8 @@ dependencies {
     implementation(libs.bundles.androidx.data)
     implementation(libs.bundles.network)
 
-    implementation(libs.bundles.debug)
-    debugImplementation(libs.bundles.flipper)
+    implementation(libs.bundles.logging)
+    debugImplementation(libs.leakcanary)
 }
 
 fun getLocalProperty(propertyKey: String): String {

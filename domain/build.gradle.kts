@@ -42,8 +42,7 @@ dependencies {
     implementation(libs.hilt.android)
     kapt(libs.hilt.android.compiler)
 
-    implementation(libs.bundles.debug)
-    debugImplementation(libs.bundles.flipper)
+    implementation(libs.bundles.logging)
 }
 
 fun getLocalProperty(propertyKey: String): String {

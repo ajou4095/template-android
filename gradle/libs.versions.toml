@@ -28,24 +28,21 @@ androidx-room = "2.6.1"
 # Google
 google-material = "1.11.0"
 # Network
-retrofit = "2.9.0"
-retrofit-coroutines-adapter = "0.9.2"
-okhttp3-logging-interceptor = "4.9.1"
+ktor = "2.3.7"
 kotlinx-serialization = "1.6.1"
-kotlinx-serialization-converter = "0.8.0"
 # UI
 glide = "4.14.2"
 lottie = "5.2.0"
 shimmer = "0.5.0"
 rds = "0.3.0"
-# Debug
-flipper = "0.177.0"
-flipper-soloader = "0.10.4"
-leakcanary = "2.12"
-# Common
+# Logging
 timber = "5.0.1"
-ted-permission = "3.3.0"
 sentry = "7.1.0"
+# Debug
+leakcanary = "2.12"
+okhttp3-logging-interceptor = "4.9.1"
+# Common
+ted-permission = "3.3.0"
 
 [libraries]
 # Kotlin
@@ -72,12 +69,12 @@ androidx-room-coroutine = { module = "androidx.room:room-ktx", version.ref = "an
 # Google
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
 # Network
-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }
-retrofit-coroutines-adapter = { module = "com.jakewharton.retrofit:retrofit2-kotlin-coroutines-adapter", version.ref = "retrofit-coroutines-adapter" }
-retrofit-scalars-converter = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-resources = { module = "io.ktor:ktor-client-resources", version.ref = "ktor" }
+ktor-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-kotlinx-serialization = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
-kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinx-serialization-converter" }
-okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3-logging-interceptor" }
 # UI
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "glide" }
@@ -85,15 +82,12 @@ ted-permission = { module = "io.github.ParkSangGwon:tedpermission-coroutine", ve
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 shimmer = { module = "com.facebook.shimmer:shimmer", version.ref = "shimmer" }
 rds = { module = "com.github.ajou4095:Ray-Design-System", version.ref = "rds" }
-# Flipper
-flipper = { module = "com.facebook.flipper:flipper", version.ref = "flipper" }
-flipper-network = { module = "com.facebook.flipper:flipper-network-plugin", version.ref = "flipper" }
-flipper-leakcanary = { module = "com.facebook.flipper:flipper-leakcanary2-plugin", version.ref = "flipper" }
-flipper-soloader = { module = "com.facebook.soloader:soloader", version.ref = "flipper-soloader" }
-# Common
+# Logging
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
-leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
 sentry = { module = "io.sentry:sentry-android", version.ref = "sentry" }
+# Debug
+leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
+okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3-logging-interceptor" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "plugin-gradle" }
@@ -111,6 +105,6 @@ kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "ko
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-constraintlayout", "androidx-fragment",
     "androidx-viewmodel", "androidx-livedata", "androidx-navigation-fragment", "androidx-navigation-ui"]
 androidx-data = ["androidx-room-runtime", "androidx-room-coroutine"]
-network = ["retrofit", "retrofit-coroutines-adapter", "retrofit-scalars-converter", "kotlinx-serialization", "kotlinx-serialization-converter", "okhttp3-logging-interceptor"]
-flipper = ["flipper", "flipper-network", "flipper-leakcanary", "flipper-soloader"]
-debug = ["timber", "leakcanary", "sentry"]
+network = ["ktor-core", "ktor-okhttp", "ktor-resources", "ktor-content-negotiation", "ktor-kotlinx-serialization",
+    "kotlinx-serialization", "okhttp3-logging-interceptor"]
+logging = ["timber", "sentry"]

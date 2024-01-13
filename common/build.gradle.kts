@@ -27,5 +27,5 @@ dependencies {
     implementation(libs.google.material)
     implementation(libs.glide)
 
-    implementation(libs.bundles.debug)
+    implementation(libs.bundles.logging)
 }

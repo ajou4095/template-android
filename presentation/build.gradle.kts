@@ -58,8 +58,7 @@ dependencies {
 
     implementation(libs.ted.permission)
 
-    implementation(libs.bundles.debug)
-    debugImplementation(libs.bundles.flipper)
+    implementation(libs.bundles.logging)
 }
 
 fun getLocalProperty(propertyKey: String): String {

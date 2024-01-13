@@ -46,8 +46,8 @@ dependencies {
     implementation(libs.bundles.network)
     kapt(libs.androidx.room.compiler)
 
-    implementation(libs.bundles.debug)
-    debugImplementation(libs.bundles.flipper)
+    implementation(libs.bundles.logging)
+    debugImplementation(libs.okhttp3.logging.interceptor)
 }
 
 fun getLocalProperty(propertyKey: String): String {
