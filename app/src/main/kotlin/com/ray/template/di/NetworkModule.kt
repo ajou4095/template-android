@@ -1,22 +1,20 @@
 package com.ray.template.di
 
 import android.content.Context
-import com.facebook.flipper.android.AndroidFlipperClient
-import com.facebook.flipper.plugins.network.FlipperOkhttpInterceptor
-import com.facebook.flipper.plugins.network.NetworkFlipperPlugin
+import android.content.pm.ApplicationInfo
 import com.jakewharton.retrofit2.adapter.kotlin.coroutines.CoroutineCallAdapterFactory
 import com.jakewharton.retrofit2.converter.kotlinx.serialization.asConverterFactory
-import com.ray.template.BuildConfig
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import javax.inject.Singleton
 import kotlinx.serialization.json.Json
 import okhttp3.MediaType.Companion.toMediaType
 import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
+import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -28,16 +26,21 @@ class NetworkModule {
 
     @Provides
     @Singleton
-    fun provideFlipperClient(
+    fun provideOkHttpClient(
         @ApplicationContext context: Context
     ): OkHttpClient {
+        val isDebug: Boolean = (0 != context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
+
         return OkHttpClient.Builder()
-            .addNetworkInterceptor(
-                FlipperOkhttpInterceptor(
-                    AndroidFlipperClient.getInstance(context).getPlugin(NetworkFlipperPlugin.ID)
-                )
-            )
-            .build()
+            .apply {
+                if (isDebug) {
+                    addInterceptor(
+                        HttpLoggingInterceptor().apply {
+                            level = HttpLoggingInterceptor.Level.BODY
+                        }
+                    )
+                }
+            }.build()
     }
 
     @Provides
@@ -48,9 +51,9 @@ class NetworkModule {
         return Retrofit.Builder()
             .addConverterFactory(json.asConverterFactory(contentType))
             .addCallAdapterFactory(CoroutineCallAdapterFactory())
-            .baseUrl(MUSIC_MATCH_BASE_URL).apply {
-                if (BuildConfig.DEBUG) client(client)
-            }.build()
+            .baseUrl(MUSIC_MATCH_BASE_URL)
+            .client(client)
+            .build()
     }
 
     companion object {

@@ -5,8 +5,8 @@ app-versioncode = "1"
 app-versionname = "0.0.1"
 # SDK Version
 sdk-min = "24"
-sdk-target = "33"
-sdk-compile = "33"
+sdk-target = "34"
+sdk-compile = "34"
 # Plugin Version
 plugin-gradle = "8.2.1"
 plugin-sentry = "4.1.1"
@@ -30,6 +30,7 @@ google-material = "1.11.0"
 # Network
 retrofit = "2.9.0"
 retrofit-coroutines-adapter = "0.9.2"
+okhttp3-logging-interceptor = "4.9.1"
 kotlinx-serialization = "1.6.1"
 kotlinx-serialization-converter = "0.8.0"
 # UI
@@ -76,6 +77,7 @@ retrofit-coroutines-adapter = { module = "com.jakewharton.retrofit:retrofit2-kot
 retrofit-scalars-converter = { module = "com.squareup.retrofit2:converter-scalars", version.ref = "retrofit" }
 kotlinx-serialization = { module = "org.jetbrains.kotlinx:kotlinx-serialization-json", version.ref = "kotlinx-serialization" }
 kotlinx-serialization-converter = { module = "com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter", version.ref = "kotlinx-serialization-converter" }
+okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3-logging-interceptor" }
 # UI
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 glide-ksp = { module = "com.github.bumptech.glide:ksp", version.ref = "glide" }
@@ -109,6 +111,6 @@ kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "ko
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-constraintlayout", "androidx-fragment",
     "androidx-viewmodel", "androidx-livedata", "androidx-navigation-fragment", "androidx-navigation-ui"]
 androidx-data = ["androidx-room-runtime", "androidx-room-coroutine"]
-network = ["retrofit", "retrofit-coroutines-adapter", "retrofit-scalars-converter", "kotlinx-serialization", "kotlinx-serialization-converter"]
+network = ["retrofit", "retrofit-coroutines-adapter", "retrofit-scalars-converter", "kotlinx-serialization", "kotlinx-serialization-converter", "okhttp3-logging-interceptor"]
 flipper = ["flipper", "flipper-network", "flipper-leakcanary", "flipper-soloader"]
 debug = ["timber", "leakcanary", "sentry"]
