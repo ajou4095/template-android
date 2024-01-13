@@ -52,5 +52,5 @@ dependencies {
 }
 
 fun getLocalProperty(propertyKey: String): String {
-    return gradleLocalProperties(rootDir).getProperty(propertyKey)
+    return gradleLocalProperties(rootDir).getProperty(propertyKey) ?: System.getenv(propertyKey)
 }
