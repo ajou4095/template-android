@@ -25,6 +25,7 @@ androidx-constraintlayout = "2.1.4"
 androidx-fragment = "1.6.2"
 androidx-lifecycle = "2.6.2"
 androidx-room = "2.6.1"
+androidx-paging = "3.1.1"
 # Google
 google-material = "1.11.0"
 # Network
@@ -66,6 +67,8 @@ androidx-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", vers
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
 androidx-room-coroutine = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
+androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "androidx-paging" }
+androidx-paging-common = { module = "androidx.paging:paging-common-ktx", version.ref = "androidx-paging" }
 # Google
 google-material = { module = "com.google.android.material:material", version.ref = "google-material" }
 # Network
@@ -105,7 +108,7 @@ sentry = { id = "io.sentry.android.gradle", version.ref = "plugin-sentry" }
 kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "kotlinx-datetime"]
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-constraintlayout", "androidx-fragment",
     "androidx-viewmodel", "androidx-livedata", "androidx-navigation-fragment", "androidx-navigation-ui"]
-androidx-data = ["androidx-room-runtime", "androidx-room-coroutine"]
+androidx-data = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-paging-runtime"]
 network = ["ktor-core", "ktor-okhttp", "ktor-resources", "ktor-content-negotiation", "ktor-kotlinx-serialization",
     "ktor-auth", "kotlinx-serialization"]
 logging = ["timber", "sentry"]
