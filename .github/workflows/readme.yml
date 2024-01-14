@@ -1,0 +1,44 @@
+name: Update README
+
+on:
+  push:
+    branches: [ "main" ]
+
+jobs:
+  update-readme:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Get versions
+        id: versions
+        run: |
+          echo "GRADLE_VERSION=$(grep distributionUrl gradle/wrapper/gradle-wrapper.properties | sed -E 's/.*\/gradle-([0-9]+\.[0-9]+(\.[0-9]+)?)-bin.*/\1/;s/.*-([0-9]+\.[0-9]+\.[0-9]+)\.zip/\1/')" >> $GITHUB_ENV
+          echo "KOTLIN_VERSION=$(grep 'kotlin = ' gradle/libs.versions.toml | grep -oP 'kotlin = "\K[^"]+')" >> $GITHUB_ENV
+          echo "PLUGIN_GRADLE_VERSION=$(grep 'plugin-gradle = ' gradle/libs.versions.toml | grep -oP 'plugin-gradle = "\K[^"]+')" >> $GITHUB_ENV
+        shell: bash
+
+      - name: Update README
+        run: |
+          cat README_TEMPLATE.md | envsubst > README.md
+
+      - name: Commit changes
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          
+          if [[ -n "$(git diff --exit-code README.md)" ]]; then
+            git add README.md
+            git commit -m "Update README with latest versions [skip ci]"
+          else
+            echo "No changes in README.md. Skipping commit."
+            exit 0
+          fi
+
+      - name: Push changes
+        uses: ad-m/github-push-action@v0.8.0
+        with:
+          branch: main
+          github_token: ${{ secrets.GITHUB_TOKEN }}

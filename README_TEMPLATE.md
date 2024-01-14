@@ -9,9 +9,9 @@ Android 개발 시 사용하는 template repository 입니다.
 
 ### Build
 
-- Gradle 8.5
-- AGP 8.2.1
-- Kotlin 1.9.21
+- Gradle ${GRADLE_VERSION}
+- AGP ${PLUGIN_GRADLE_VERSION}
+- Kotlin ${KOTLIN_VERSION}
 - JDK 17
 - Kotlin DSL
 - Version Catalog
