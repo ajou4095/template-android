@@ -20,7 +20,7 @@ android {
         versionCode = libs.versions.app.versioncode.get().toInt()
         versionName = libs.versions.app.versionname.get()
 
-        manifestPlaceholders["sentryDsnToken"] = getLocalProperty("DSN_SENTRY")
+        manifestPlaceholders["sentryDsnToken"] = getLocalProperty("SENTRY_DSN_TOKEN")
     }
 
     buildTypes {
@@ -53,6 +53,46 @@ android {
     buildFeatures {
         dataBinding = true
     }
+}
+
+
+sentry {
+    // Disables or enables debug log output, e.g. for for sentry-cli.
+    // Default is disabled.
+    debug = false
+
+    // The slug of the Sentry organization to use for uploading proguard mappings/source contexts.
+    org = "ray-sample"
+
+    // The slug of the Sentry project to use for uploading proguard mappings/source contexts.
+    projectName = "ray-sample-android"
+
+    // The authentication token to use for uploading proguard mappings/source contexts.
+    // WARNING: Do not expose this token in your build.gradle files, but rather set an environment
+    // variable and read it into this property.
+    authToken = getLocalProperty("SENTRY_AUTH_TOKEN")
+
+    // The url of your Sentry instance. If you're using SAAS (not self hosting) you do not have to
+    // set this. If you are self hosting you can set your URL here
+    url = "https://sentry.io"
+
+    // Disables or enables the handling of Proguard mapping for Sentry.
+    // If enabled the plugin will generate a UUID and will take care of
+    // uploading the mapping to Sentry. If disabled, all the logic
+    // related to proguard mapping will be excluded.
+    // Default is enabled.
+    includeProguardMapping = true
+
+    // Whether the plugin should attempt to auto-upload the mapping file to Sentry or not.
+    // If disabled the plugin will run a dry-run and just generate a UUID.
+    // The mapping file has to be uploaded manually via sentry-cli in this case.
+    // Default is enabled.
+    autoUploadProguardMapping = true
+
+    // Experimental flag to turn on support for GuardSquare's tools integration (Dexguard and External Proguard).
+    // If enabled, the plugin will try to consume and upload the mapping file produced by Dexguard and External Proguard.
+    // Default is disabled.
+    dexguardEnabled = false
 }
 
 dependencies {

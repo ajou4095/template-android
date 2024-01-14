@@ -28,9 +28,11 @@ jobs:
       - name: Build Debug
         run: ./gradlew assembleDebug
         env:
-          DSN_SENTRY: ${{ env.DSN_SENTRY }}
+          SENTRY_DSN_TOKEN: ${{ secrets.SENTRY_DSN_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
 
       - name: Build Release
         run: ./gradlew assembleRelease
         env:
-          DSN_SENTRY: ${{ env.DSN_SENTRY }}
+          SENTRY_DSN_TOKEN: ${{ secrets.SENTRY_DSN_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
