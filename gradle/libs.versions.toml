@@ -26,6 +26,7 @@ androidx-fragment = "1.6.2"
 androidx-lifecycle = "2.6.2"
 androidx-room = "2.6.1"
 androidx-paging = "3.1.1"
+androidx-camera = "1.4.0-alpha03"
 # Google
 google-material = "1.11.0"
 # Network
@@ -44,6 +45,10 @@ leakcanary = "2.12"
 okhttp3-logging-interceptor = "4.9.1"
 # Common
 ted-permission = "3.3.0"
+play-services-mlkit-barcode-scanning = "18.3.0"
+play-services-mlkit-text-recognition-common = "19.0.0"
+play-services-mlkit-text-recognition-korean = "16.0.0"
+play-services-mlkit-text-recognition = "19.0.0"
 
 [libraries]
 # Kotlin
@@ -63,6 +68,12 @@ androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayo
 androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "androidx-fragment" }
 androidx-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
+# AndroidX Camera
+androidx-camera-camera2 = { module = "androidx.camera:camera-camera2", version.ref = "androidx-camera" }
+androidx-camera-lifecycle = { module = "androidx.camera:camera-lifecycle", version.ref = "androidx-camera" }
+androidx-camera-view = { module = "androidx.camera:camera-view", version.ref = "androidx-camera" }
+androidx-camera-extensions = { module = "androidx.camera:camera-camera2", version.ref = "androidx-camera" }
+androidx-camera-mlkit = { module = "androidx.camera:camera-mlkit-vision", version.ref = "androidx-camera" }
 # AndroidX Data
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
@@ -92,6 +103,10 @@ sentry = { module = "io.sentry:sentry-android", version.ref = "sentry" }
 # Debug
 leakcanary = { module = "com.squareup.leakcanary:leakcanary-android", version.ref = "leakcanary" }
 okhttp3-logging-interceptor = { module = "com.squareup.okhttp3:logging-interceptor", version.ref = "okhttp3-logging-interceptor" }
+play-services-mlkit-barcode-scanning = { group = "com.google.android.gms", name = "play-services-mlkit-barcode-scanning", version.ref = "play-services-mlkit-barcode-scanning" }
+play-services-mlkit-text-recognition-common = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition-common", version.ref = "play-services-mlkit-text-recognition-common" }
+play-services-mlkit-text-recognition-korean = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition-korean", version.ref = "play-services-mlkit-text-recognition-korean" }
+play-services-mlkit-text-recognition = { group = "com.google.android.gms", name = "play-services-mlkit-text-recognition", version.ref = "play-services-mlkit-text-recognition" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "plugin-gradle" }
@@ -109,6 +124,8 @@ kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "ko
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-constraintlayout", "androidx-fragment",
     "androidx-viewmodel", "androidx-livedata", "androidx-navigation-fragment", "androidx-navigation-ui"]
 androidx-data = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-paging-runtime"]
+androidx-camera = ["androidx-camera-camera2", "androidx-camera-lifecycle", "androidx-camera-view", "androidx-camera-extensions",
+    "androidx-camera-mlkit"]
 network = ["ktor-core", "ktor-okhttp", "ktor-resources", "ktor-content-negotiation", "ktor-kotlinx-serialization",
     "ktor-auth", "kotlinx-serialization"]
 logging = ["timber", "sentry"]

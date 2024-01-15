@@ -46,6 +46,10 @@ dependencies {
 
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
+    implementation(libs.play.services.mlkit.barcode.scanning)
+    implementation(libs.play.services.mlkit.text.recognition.common)
+    implementation(libs.play.services.mlkit.text.recognition.korean)
+    implementation(libs.play.services.mlkit.text.recognition)
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.androidx.presentation)
@@ -59,6 +63,7 @@ dependencies {
     implementation(libs.ted.permission)
 
     implementation(libs.bundles.logging)
+    implementation(libs.bundles.androidx.camera)
 }
 
 fun getLocalProperty(propertyKey: String): String {
