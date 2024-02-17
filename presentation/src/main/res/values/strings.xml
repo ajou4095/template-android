@@ -9,4 +9,6 @@
     <string name="error_dialog_invalid_request_title">요청 에러</string>
     <string name="error_dialog_unavailable_server_title">서버 에러</string>
     <string name="error_dialog_unavailable_server_content">현재 서버와의 접속이 원활하지 않습니다.\n잠시 후 다시 진행해주세요.</string>
+
+    <string name="onboarding_confirm">다음</string>
 </resources>

@@ -22,14 +22,15 @@ import com.ray.template.presentation.common.util.LaunchedEffectWithLifecycle
 import com.ray.template.presentation.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.presentation.common.util.coroutine.event.eventObserve
 import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlinx.coroutines.plus
 
 @Composable
 fun SplashScreen(
     navController: NavController,
     argument: SplashArgument,
 ) {
-    val scope = rememberCoroutineScope()
     val (state, event, intent, handler) = argument
+    val scope = rememberCoroutineScope() + handler
 
     fun navigateToHome() {
 //        navController.navigate(HomeConstant.ROUTE) {
