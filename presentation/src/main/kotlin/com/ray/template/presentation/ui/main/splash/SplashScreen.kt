@@ -18,7 +18,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ray.template.presentation.R
 import com.ray.template.presentation.common.theme.Headline1
-import com.ray.template.presentation.common.util.LaunchedEffectWithLifecycle
+import com.ray.template.presentation.common.util.compose.LaunchedEffectWithLifecycle
 import com.ray.template.presentation.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.presentation.common.util.coroutine.event.eventObserve
 import kotlinx.coroutines.CoroutineExceptionHandler

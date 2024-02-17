@@ -1,4 +1,4 @@
-package com.ray.template.presentation.common.util
+package com.ray.template.presentation.common.util.compose
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect

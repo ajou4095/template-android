@@ -6,7 +6,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.compose.composable
-import com.ray.template.presentation.common.util.ErrorObserver
+import com.ray.template.presentation.common.util.compose.ErrorObserver
 
 fun NavGraphBuilder.splashDestination(
     navController: NavController

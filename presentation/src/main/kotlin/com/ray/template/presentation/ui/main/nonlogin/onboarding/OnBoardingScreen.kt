@@ -41,7 +41,7 @@ import com.ray.template.presentation.common.theme.Space20
 import com.ray.template.presentation.common.theme.Space32
 import com.ray.template.presentation.common.theme.Space4
 import com.ray.template.presentation.common.theme.Space8
-import com.ray.template.presentation.common.util.LaunchedEffectWithLifecycle
+import com.ray.template.presentation.common.util.compose.LaunchedEffectWithLifecycle
 import com.ray.template.presentation.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.presentation.common.util.coroutine.event.eventObserve
 import com.ray.template.presentation.common.view.confirm.ConfirmButton

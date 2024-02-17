@@ -6,6 +6,7 @@ import com.ray.template.presentation.common.util.coroutine.event.EventFlow
 import com.ray.template.presentation.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.presentation.common.util.coroutine.event.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -34,6 +35,7 @@ class SplashViewModel @Inject constructor(
 
     private suspend fun login() {
         _state.value = SplashState.Loading
+        delay(1000L)
         _event.emit(SplashEvent.Login.Success)
         _state.value = SplashState.Init
     }

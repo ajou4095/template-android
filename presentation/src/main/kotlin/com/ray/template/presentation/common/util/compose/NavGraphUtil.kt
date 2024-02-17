@@ -1,4 +1,4 @@
-package com.ray.template.presentation.common.util
+package com.ray.template.presentation.common.util.compose
 
 fun makeRoute(
     route: String,
