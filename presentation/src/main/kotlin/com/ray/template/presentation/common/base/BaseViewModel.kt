@@ -16,7 +16,7 @@ import kotlinx.coroutines.launch
 abstract class BaseViewModel : ViewModel() {
     val handler = CoroutineExceptionHandler { _, throwable ->
         viewModelScope.launch {
-            _errorEvent.emit(ErrorEvent(throwable))
+            _errorEvent.emit(ErrorEvent.Client(throwable))
         }
     }
 
