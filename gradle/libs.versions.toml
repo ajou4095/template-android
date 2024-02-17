@@ -73,7 +73,7 @@ androidx-fragment = { module = "androidx.fragment:fragment-ktx", version.ref = "
 androidx-viewmodel = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "androidx-lifecycle" }
 androidx-livedata = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "androidx-lifecycle" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-compose-material3" }
-androidx-compose-ui-preview = { module = "androidx.compose.ui:ui-tooling-preview", version.ref = "androidx-compose" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose" }
 androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-compose-navigation" }
 androidx-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-compose-lifecycle" }
 # AndroidX Data
@@ -123,7 +123,7 @@ sentry = { id = "io.sentry.android.gradle", version.ref = "plugin-sentry" }
 kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "kotlinx-datetime"]
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-constraintlayout", "androidx-fragment",
     "androidx-viewmodel", "androidx-livedata", "androidx-navigation-fragment", "androidx-navigation-ui",
-    "androidx-compose-material3", "androidx-compose-ui-preview", "androidx-compose-navigation",
+    "androidx-compose-material3", "androidx-compose-navigation",
     "androidx-compose-lifecycle"]
 androidx-data = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-paging-runtime"]
 network = ["ktor-core", "ktor-okhttp", "ktor-resources", "ktor-content-negotiation", "ktor-kotlinx-serialization",
