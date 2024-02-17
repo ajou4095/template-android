@@ -41,7 +41,6 @@ android {
     }
 
     buildFeatures {
-        dataBinding = true
         compose = true
     }
     composeOptions {
@@ -65,7 +64,7 @@ dependencies {
     implementation(libs.ted.permission)
 
     implementation(libs.bundles.logging)
-    debugImplementation(libs.androidx.compose.ui.tooling)
+    implementation(libs.androidx.compose.ui.tooling)
 }
 
 fun getLocalProperty(propertyKey: String): String {
