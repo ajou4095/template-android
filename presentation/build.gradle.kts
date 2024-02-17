@@ -7,7 +7,6 @@ plugins {
     kotlin("plugin.parcelize")
     kotlin("android")
     kotlin("kapt")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -60,13 +59,8 @@ dependencies {
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.androidx.presentation)
-    implementation(libs.google.material)
-    implementation(libs.glide)
-    ksp(libs.glide.ksp)
     implementation(libs.coil.compose)
     implementation(libs.lottie)
-    implementation(libs.shimmer)
-    implementation(libs.rds)
 
     implementation(libs.ted.permission)
 

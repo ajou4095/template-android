@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <style name="Template" parent="Typography">
-        <item name="confirmButtonStyle">@style/Template.ConfirmButton</item>
-    </style>
-
-    <style name="Template.ConfirmButton" parent="Typography.ConfirmButton">
-        <item name="mainColorType">blue</item>
+    <style name="Theme.Template" parent="Theme.MaterialComponents.Light.NoActionBar">
+        <item name="android:statusBarColor">#FFFFFF</item>
+        <item name="android:windowLightStatusBar">true</item>
+        <item name="android:includeFontPadding">false</item>
     </style>
 </resources>
