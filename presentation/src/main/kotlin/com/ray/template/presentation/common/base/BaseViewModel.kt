@@ -14,9 +14,9 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
-    protected val handler = CoroutineExceptionHandler { _, throwable ->
+    val handler = CoroutineExceptionHandler { _, throwable ->
         viewModelScope.launch {
-            _errorEvent.emit(ErrorEvent(throwable))
+            _errorEvent.emit(ErrorEvent.Client(throwable))
         }
     }
 

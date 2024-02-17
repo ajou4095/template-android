@@ -7,7 +7,6 @@ plugins {
     kotlin("plugin.parcelize")
     kotlin("android")
     kotlin("kapt")
-    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -20,10 +19,16 @@ android {
 
     buildTypes {
         debug {
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
         release {
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"),
+                "proguard-rules.pro"
+            )
         }
     }
 
@@ -37,6 +42,10 @@ android {
 
     buildFeatures {
         dataBinding = true
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
 }
 
@@ -46,19 +55,17 @@ dependencies {
 
     implementation(libs.bundles.kotlin)
     implementation(libs.hilt.android)
+    implementation(libs.hilt.compose)
     ksp(libs.hilt.android.compiler)
 
     implementation(libs.bundles.androidx.presentation)
-    implementation(libs.google.material)
-    implementation(libs.glide)
-    ksp(libs.glide.ksp)
+    implementation(libs.coil.compose)
     implementation(libs.lottie)
-    implementation(libs.shimmer)
-    implementation(libs.rds)
 
     implementation(libs.ted.permission)
 
     implementation(libs.bundles.logging)
+    debugImplementation(libs.androidx.compose.ui.tooling)
 }
 
 fun getLocalProperty(propertyKey: String): String {
