@@ -9,9 +9,9 @@ Android 개발 시 사용하는 template repository 입니다.
 
 ### Build
 
-- Gradle 8.5
-- AGP 8.2.1
-- Kotlin 1.9.21
+- Gradle 8.6
+- AGP 8.2.2
+- Kotlin 1.9.22
 - JDK 17
 - Kotlin DSL
 - Version Catalog
@@ -25,10 +25,10 @@ Android 개발 시 사용하는 template repository 입니다.
 - AndroidX
   - Room
   - Paging
-  - NavigationUI
+  - Compose + NavigationUI
 - Dagger Hilt
 - Ktor
-- Glide
+- Coil
 - Lottie
 - Debug & Log
   - OkHttp3 Logging Interceptor (App Inspection)

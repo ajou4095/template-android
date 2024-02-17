@@ -25,10 +25,10 @@ Android 개발 시 사용하는 template repository 입니다.
 - AndroidX
   - Room
   - Paging
-  - NavigationUI
+  - Compose + NavigationUI
 - Dagger Hilt
 - Ktor
-- Glide
+- Coil
 - Lottie
 - Debug & Log
   - OkHttp3 Logging Interceptor (App Inspection)
