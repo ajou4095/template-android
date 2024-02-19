@@ -1,4 +1,4 @@
-package com.ray.template.android.presentation.ui.main.splash
+package com.ray.template.android.presentation.ui.main.home.mypage
 
 import androidx.lifecycle.SavedStateHandle
 import com.ray.template.android.presentation.common.base.BaseViewModel
@@ -7,34 +7,22 @@ import com.ray.template.android.presentation.common.util.coroutine.event.Mutable
 import com.ray.template.android.presentation.common.util.coroutine.event.asEventFlow
 import dagger.hilt.android.lifecycle.HiltViewModel
 import javax.inject.Inject
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 
 @HiltViewModel
-class SplashViewModel @Inject constructor(
+class MyPageViewModel @Inject constructor(
     private val savedStateHandle: SavedStateHandle
 ) : BaseViewModel() {
 
-    private val _state: MutableStateFlow<SplashState> = MutableStateFlow(SplashState.Init)
-    val state: StateFlow<SplashState> = _state.asStateFlow()
+    private val _state: MutableStateFlow<MyPageState> = MutableStateFlow(MyPageState.Init)
+    val state: StateFlow<MyPageState> = _state.asStateFlow()
 
-    private val _event: MutableEventFlow<SplashEvent> = MutableEventFlow()
-    val event: EventFlow<SplashEvent> = _event.asEventFlow()
+    private val _event: MutableEventFlow<MyPageEvent> = MutableEventFlow()
+    val event: EventFlow<MyPageEvent> = _event.asEventFlow()
 
-    init {
-        launch {
-            login()
-        }
-    }
+    fun onIntent(intent: MyPageIntent) {
 
-    fun onIntent(intent: SplashIntent) {
-
-    }
-
-    private suspend fun login() {
-        delay(1000L)
-        _event.emit(SplashEvent.Login.Success)
     }
 }

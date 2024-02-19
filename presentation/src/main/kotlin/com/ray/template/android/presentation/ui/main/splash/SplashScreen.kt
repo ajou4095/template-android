@@ -21,6 +21,8 @@ import com.ray.template.android.presentation.common.theme.Headline1
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
 import com.ray.template.android.presentation.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.android.presentation.common.util.coroutine.event.eventObserve
+import com.ray.template.android.presentation.ui.main.home.HomeConstant
+import com.ray.template.android.presentation.ui.main.nonlogin.NonLoginConstant
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.plus
 
@@ -33,15 +35,25 @@ fun SplashScreen(
     val scope = rememberCoroutineScope() + handler
 
     fun navigateToHome() {
-//        navController.navigate(HomeConstant.ROUTE) {
-//            popUpTo(HomeConstant.ROUTE)
-//        }
+        navController.navigate(HomeConstant.ROUTE) {
+            popUpTo(HomeConstant.ROUTE)
+        }
+    }
+
+    fun navigateToNonLogin() {
+        navController.navigate(NonLoginConstant.ROUTE) {
+            popUpTo(NonLoginConstant.ROUTE)
+        }
     }
 
     fun login(event: SplashEvent.Login) {
         when (event) {
             is SplashEvent.Login.Success -> {
                 navigateToHome()
+            }
+
+            is SplashEvent.Login.Fail -> {
+                navigateToNonLogin()
             }
         }
     }

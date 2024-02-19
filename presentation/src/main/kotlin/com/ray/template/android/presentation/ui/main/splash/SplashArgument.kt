@@ -14,13 +14,13 @@ data class SplashArgument(
 
 sealed interface SplashState {
     data object Init : SplashState
-    data object Loading : SplashState
 }
 
 
 sealed interface SplashEvent {
     sealed interface Login : SplashEvent {
         data object Success : Login
+        data object Fail : Login
     }
 }
 

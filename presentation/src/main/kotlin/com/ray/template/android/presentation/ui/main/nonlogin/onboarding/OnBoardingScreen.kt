@@ -25,7 +25,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -41,6 +40,7 @@ import com.ray.template.android.presentation.common.theme.Space20
 import com.ray.template.android.presentation.common.theme.Space32
 import com.ray.template.android.presentation.common.theme.Space4
 import com.ray.template.android.presentation.common.theme.Space8
+import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
 import com.ray.template.android.presentation.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.android.presentation.common.util.coroutine.event.eventObserve
@@ -48,6 +48,7 @@ import com.ray.template.android.presentation.common.view.confirm.ConfirmButton
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonProperties
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonSize
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonType
+import com.ray.template.android.presentation.ui.main.home.HomeConstant
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.plus
 
@@ -55,7 +56,7 @@ import kotlinx.coroutines.plus
 @Composable
 fun OnBoardingScreen(
     navController: NavController,
-    argument: OnBoardingArgument,
+    argument: OnBoardingArgument
 ) {
     val (state, event, intent, handler) = argument
     val scope = rememberCoroutineScope() + handler
@@ -64,13 +65,21 @@ fun OnBoardingScreen(
     )
 
     fun navigateToHome() {
-//        navController.navigate(HomeConstant.ROUTE) {
+        navController.navigate(HomeConstant.ROUTE) {
+            popUpTo(HomeConstant.ROUTE)
+        }
+    }
+
+    fun navigateToLogin() {
+//        navController.navigate(LoginConstant.ROUTE) {
+//            popUpTo(LoginConstant.ROUTE)
+//        }
     }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .background(Color.White)
+            .background(White)
     ) {
         Column(
             modifier = Modifier

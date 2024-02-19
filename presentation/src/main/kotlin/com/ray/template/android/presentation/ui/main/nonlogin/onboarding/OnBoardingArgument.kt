@@ -14,7 +14,6 @@ data class OnBoardingArgument(
 
 sealed interface OnBoardingState {
     data object Init : OnBoardingState
-    data object Loading : OnBoardingState
 }
 
 
