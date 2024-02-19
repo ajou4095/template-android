@@ -22,6 +22,11 @@ class HomeViewModel @Inject constructor(
     private val _event: MutableEventFlow<HomeEvent> = MutableEventFlow()
     val event: EventFlow<HomeEvent> = _event.asEventFlow()
 
+    val initialHomeType: HomeType by lazy {
+        val route = savedStateHandle.get<String>(HomeConstant.ROUTE_ARGUMENT_SCREEN)
+        HomeType.values().firstOrNull { it.route == route } ?: HomeType.values().first()
+    }
+
     fun onIntent(intent: HomeIntent) {
 
     }

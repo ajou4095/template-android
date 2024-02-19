@@ -31,7 +31,6 @@ import com.ray.template.android.presentation.common.util.compose.LaunchedEffectW
 import com.ray.template.android.presentation.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.android.presentation.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.ui.main.home.mypage.MyPageScreen
-import com.ray.template.android.presentation.ui.main.nonlogin.NonLoginConstant
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.plus
 
@@ -50,18 +49,6 @@ fun HomeScreen(
         pageCount = { 3 }
     )
     var selectedHomeType: HomeType by remember { mutableStateOf(initialHomeType) }
-
-    fun navigateToHome() {
-        navController.navigate(HomeConstant.ROUTE) {
-            popUpTo(HomeConstant.ROUTE)
-        }
-    }
-
-    fun navigateToNonLogin() {
-        navController.navigate(NonLoginConstant.ROUTE) {
-            popUpTo(NonLoginConstant.ROUTE)
-        }
-    }
 
     Column(
         modifier = Modifier
