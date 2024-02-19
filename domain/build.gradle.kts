@@ -6,6 +6,7 @@ plugins {
     id("com.google.devtools.ksp")
     kotlin("android")
     kotlin("kapt")
+    alias(libs.plugins.gms)
 }
 
 // TODO : Android 종속성 제거
@@ -44,6 +45,7 @@ dependencies {
 
     implementation(libs.androidx.paging.common)
 
+    implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.logging)
 }
 

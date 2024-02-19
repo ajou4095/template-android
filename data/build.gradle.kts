@@ -7,6 +7,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     kotlin("plugin.serialization")
+    alias(libs.plugins.gms)
 }
 
 android {
@@ -47,6 +48,7 @@ dependencies {
     implementation(libs.bundles.network)
     ksp(libs.androidx.room.compiler)
 
+    implementation(platform(libs.firebase.bom))
     implementation(libs.bundles.logging)
     debugImplementation(libs.okhttp3.logging.interceptor)
 }
