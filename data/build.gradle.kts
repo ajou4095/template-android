@@ -45,6 +45,7 @@ dependencies {
 
     implementation(libs.bundles.androidx.data)
     implementation(libs.bundles.network)
+    implementation(libs.bundles.database)
     ksp(libs.androidx.room.compiler)
 
     implementation(libs.bundles.logging)
