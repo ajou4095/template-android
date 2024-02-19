@@ -89,7 +89,10 @@ internal object KtorModule {
                             return@loadTokens null
                         }
 
-                        BearerTokens(accessToken, refreshToken)
+                        BearerTokens(
+                            accessToken = accessToken,
+                            refreshToken = refreshToken
+                        )
                     }
 
                     refreshTokens {
@@ -98,12 +101,13 @@ internal object KtorModule {
                             return@refreshTokens null
                         }
 
-                        authenticationRepository.getAccessToken(
+                        authenticationRepository.refreshToken(
                             refreshToken
-                        ).getOrNull()?.let { accessToken ->
-                            authenticationRepository.accessToken = accessToken
-
-                            BearerTokens(accessToken, refreshToken)
+                        ).getOrNull()?.let { token ->
+                            BearerTokens(
+                                accessToken = token.accessToken,
+                                refreshToken = token.refreshToken
+                            )
                         }
                     }
                 }

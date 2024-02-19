@@ -4,9 +4,9 @@ import kotlinx.serialization.SerialName
 import kotlinx.serialization.Serializable
 
 @Serializable
-data class GetAccessTokenRes(
-    @SerialName("access_token")
-    val accessToken: String,
-    @SerialName("refresh_token")
-    val refreshToken: String
+data class RegisterReq(
+    @SerialName("username")
+    val username: String,
+    @SerialName("password")
+    val password: String
 )
