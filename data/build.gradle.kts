@@ -11,7 +11,7 @@ plugins {
 }
 
 android {
-    namespace = "com.ray.template.data"
+    namespace = "com.ray.template.android.data"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {

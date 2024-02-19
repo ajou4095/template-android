@@ -11,11 +11,11 @@ plugins {
 }
 
 android {
-    namespace = "com.ray.template"
+    namespace = "com.ray.template.android"
     compileSdk = libs.versions.sdk.compile.get().toInt()
 
     defaultConfig {
-        applicationId = "com.ray.template"
+        applicationId = "com.ray.template.android"
         minSdk = libs.versions.sdk.min.get().toInt()
         targetSdk = libs.versions.sdk.target.get().toInt()
         versionCode = libs.versions.app.versioncode.get().toInt()
