@@ -9,7 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
-import com.ray.template.android.domain.repository.AuthenticationRepository
+import com.ray.template.android.domain.repository.TokenRepository
 import com.ray.template.android.presentation.ui.invalid.InvalidJwtTokenActivity
 import dagger.hilt.android.HiltAndroidApp
 import io.sentry.Sentry
@@ -22,7 +22,7 @@ import timber.log.Timber
 open class TemplateApplication : Application() {
 
     @Inject
-    lateinit var authenticationRepository: AuthenticationRepository
+    lateinit var tokenRepository: TokenRepository
 
     private val handler = CoroutineExceptionHandler { _, exception ->
         Timber.d(exception)
@@ -44,7 +44,7 @@ open class TemplateApplication : Application() {
         with(ProcessLifecycleOwner.get()) {
             lifecycleScope.launch(handler) {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    authenticationRepository.isRefreshTokenInvalid.collect { isRefreshTokenInvalid ->
+                    tokenRepository.isRefreshTokenInvalid.collect { isRefreshTokenInvalid ->
                         if (isRefreshTokenInvalid) {
                             val intent = Intent(
                                 this@TemplateApplication,

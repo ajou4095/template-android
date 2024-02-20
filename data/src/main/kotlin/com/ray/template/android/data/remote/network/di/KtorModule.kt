@@ -2,7 +2,7 @@ package com.ray.template.android.data.remote.network.di
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import com.ray.template.android.domain.repository.AuthenticationRepository
+import com.ray.template.android.domain.repository.TokenRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -16,11 +16,11 @@ import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
 import io.ktor.client.plugins.resources.Resources
 import io.ktor.serialization.kotlinx.json.json
-import kotlinx.serialization.json.Json
-import okhttp3.Interceptor
 import java.util.Optional
 import javax.inject.Qualifier
 import javax.inject.Singleton
+import kotlinx.serialization.json.Json
+import okhttp3.Interceptor
 
 @Module
 @InstallIn(SingletonComponent::class)
@@ -61,9 +61,10 @@ internal object KtorModule {
     fun provideAuthHttpClient(
         @ApplicationContext context: Context,
         @DebugInterceptor debugInterceptor: Optional<Interceptor>,
-        authenticationRepository: AuthenticationRepository
+        tokenRepository: TokenRepository
     ): HttpClient {
-        val isDebug: Boolean = (0 != context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
+        val isDebug: Boolean =
+            (0 != context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
 
         return HttpClient(OkHttp) {
             // default validation to throw exceptions for non-2xx responses
@@ -83,8 +84,8 @@ internal object KtorModule {
             install(Auth) {
                 bearer {
                     loadTokens {
-                        val accessToken = authenticationRepository.accessToken
-                        val refreshToken = authenticationRepository.refreshToken
+                        val accessToken = tokenRepository.accessToken
+                        val refreshToken = tokenRepository.refreshToken
                         if (accessToken.isEmpty() || refreshToken.isEmpty()) {
                             return@loadTokens null
                         }
@@ -96,12 +97,12 @@ internal object KtorModule {
                     }
 
                     refreshTokens {
-                        val refreshToken = authenticationRepository.refreshToken
+                        val refreshToken = tokenRepository.refreshToken
                         if (refreshToken.isEmpty()) {
                             return@refreshTokens null
                         }
 
-                        authenticationRepository.refreshToken(
+                        tokenRepository.refreshToken(
                             refreshToken
                         ).getOrNull()?.let { token ->
                             BearerTokens(
