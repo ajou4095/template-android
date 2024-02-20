@@ -40,6 +40,7 @@ open class TemplateApplication : Application() {
         Firebase.analytics
     }
 
+    // TODO : MainActivity 로 로직 이동
     private fun observeRefreshTokenValidation() {
         with(ProcessLifecycleOwner.get()) {
             lifecycleScope.launch(handler) {

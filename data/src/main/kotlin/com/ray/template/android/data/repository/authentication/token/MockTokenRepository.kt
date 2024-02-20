@@ -54,6 +54,10 @@ class MockTokenRepository @Inject constructor(
         }
     }
 
+    override suspend fun resetRefreshTokenInvalidFlag() {
+        _isRefreshTokenInvalid.value = false
+    }
+
     private suspend fun randomShortDelay() {
         delay(LongRange(100, 500).random())
     }

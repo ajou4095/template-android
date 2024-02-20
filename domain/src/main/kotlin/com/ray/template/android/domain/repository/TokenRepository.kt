@@ -14,4 +14,6 @@ interface TokenRepository {
     suspend fun refreshToken(
         refreshToken: String
     ): Result<JwtToken>
+
+    suspend fun resetRefreshTokenInvalidFlag()
 }

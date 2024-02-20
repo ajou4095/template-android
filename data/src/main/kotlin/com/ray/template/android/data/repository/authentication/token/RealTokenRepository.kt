@@ -3,6 +3,7 @@ package com.ray.template.android.data.repository.authentication.token
 import com.ray.template.android.data.remote.local.SharedPreferencesManager
 import com.ray.template.android.data.remote.network.api.TokenApi
 import com.ray.template.android.domain.model.authentication.JwtToken
+import com.ray.template.android.domain.model.error.ServerException
 import com.ray.template.android.domain.repository.TokenRepository
 import javax.inject.Inject
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,21 +28,31 @@ class RealTokenRepository @Inject constructor(
     override suspend fun refreshToken(
         refreshToken: String
     ): Result<JwtToken> {
-        return tokenApi.getAccessToken(
-            refreshToken = refreshToken
-        ).onSuccess { token ->
-            this.refreshToken = token.refreshToken
-            this.accessToken = token.accessToken
-            _isRefreshTokenInvalid.value = false
-        }.onFailure { exception ->
-            // TODO : ID 체크
-            _isRefreshTokenInvalid.value = true
-        }.map { token ->
-            JwtToken(
-                accessToken = token.accessToken,
-                refreshToken = token.refreshToken
-            )
+        return if (refreshToken.isEmpty()) {
+            // TODO : 적절한 Exception 이름
+            Result.failure(ServerException("Client Error", "refreshToken is empty."))
+        } else {
+            tokenApi.getAccessToken(
+                refreshToken = refreshToken
+            ).onSuccess { token ->
+                this.refreshToken = token.refreshToken
+                this.accessToken = token.accessToken
+                _isRefreshTokenInvalid.value = false
+            }.onFailure { exception ->
+                this.refreshToken = ""
+                this.accessToken = ""
+                _isRefreshTokenInvalid.value = true
+            }.map { token ->
+                JwtToken(
+                    accessToken = token.accessToken,
+                    refreshToken = token.refreshToken
+                )
+            }
         }
+    }
+
+    override suspend fun resetRefreshTokenInvalidFlag() {
+        _isRefreshTokenInvalid.value = false
     }
 
     companion object {
