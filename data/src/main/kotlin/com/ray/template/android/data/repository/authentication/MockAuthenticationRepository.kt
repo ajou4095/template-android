@@ -6,6 +6,9 @@ import com.ray.template.android.domain.model.error.ServerException
 import com.ray.template.android.domain.repository.AuthenticationRepository
 import javax.inject.Inject
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.asStateFlow
 
 class MockAuthenticationRepository @Inject constructor(
     private val sharedPreferencesManager: SharedPreferencesManager
@@ -23,18 +26,30 @@ class MockAuthenticationRepository @Inject constructor(
         set(value) = sharedPreferencesManager.setBoolean(IS_REGISTERED, value)
         get() = sharedPreferencesManager.getBoolean(IS_REGISTERED, false)
 
+    private val _isRefreshTokenInvalid: MutableStateFlow<Boolean> = MutableStateFlow(false)
+    override val isRefreshTokenInvalid: StateFlow<Boolean> = _isRefreshTokenInvalid.asStateFlow()
+
     override suspend fun refreshToken(
         refreshToken: String
     ): Result<JwtToken> {
         randomShortDelay()
-        return Result.success(
-            JwtToken(
-                accessToken = "mock_access_token",
-                refreshToken = "mock_refresh_token"
+        return if (refreshToken.isEmpty()) {
+            Result.failure(
+                ServerException("MOCK_ERROR", "refreshToken 이 만료되었습니다.")
             )
-        ).onSuccess { token ->
+        } else {
+            Result.success(
+                JwtToken(
+                    accessToken = "mock_access_token",
+                    refreshToken = "mock_refresh_token"
+                )
+            )
+        }.onSuccess { token ->
             this.refreshToken = token.refreshToken
             this.accessToken = token.accessToken
+            _isRefreshTokenInvalid.value = false
+        }.onFailure { exception ->
+            _isRefreshTokenInvalid.value = true
         }.map { token ->
             JwtToken(
                 accessToken = token.accessToken,
@@ -86,6 +101,7 @@ class MockAuthenticationRepository @Inject constructor(
         }.onSuccess {
             this.refreshToken = "mock_access_token"
             this.accessToken = "mock_refresh_token"
+            isRegistered = true
         }
     }
 
@@ -106,6 +122,7 @@ class MockAuthenticationRepository @Inject constructor(
         }.onSuccess {
             this.refreshToken = ""
             this.accessToken = ""
+            isRegistered = false
         }
     }
 

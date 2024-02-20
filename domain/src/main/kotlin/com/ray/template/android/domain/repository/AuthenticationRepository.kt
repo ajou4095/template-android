@@ -1,12 +1,15 @@
 package com.ray.template.android.domain.repository
 
 import com.ray.template.android.domain.model.authentication.JwtToken
+import kotlinx.coroutines.flow.StateFlow
 
 interface AuthenticationRepository {
 
     var refreshToken: String
 
     var accessToken: String
+
+    val isRefreshTokenInvalid: StateFlow<Boolean>
 
     suspend fun refreshToken(
         refreshToken: String

@@ -11,4 +11,6 @@
     <string name="error_dialog_unavailable_server_content">현재 서버와의 접속이 원활하지 않습니다.\n잠시 후 다시 진행해주세요.</string>
 
     <string name="onboarding_confirm">다음</string>
+    <string name="invalid_jwt_token_dialog_title">회원 오류</string>
+    <string name="invalid_jwt_token_dialog_content">로그인이 만료되었습니다.\n다시 로그인해주세요.</string>
 </resources>
