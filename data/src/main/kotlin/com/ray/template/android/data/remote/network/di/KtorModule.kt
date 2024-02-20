@@ -40,7 +40,7 @@ internal object KtorModule {
     ): HttpClient {
         return HttpClient(OkHttp) {
             // default validation to throw exceptions for non-2xx responses
-            expectSuccess = true
+            expectSuccess = false
 
             engine {
                 if (debugInterceptor.isPresent) {
@@ -68,7 +68,6 @@ internal object KtorModule {
 
         return HttpClient(OkHttp) {
             // default validation to throw exceptions for non-2xx responses
-            // TODO
             expectSuccess = false
 
             engine {
