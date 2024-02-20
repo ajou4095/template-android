@@ -7,7 +7,6 @@ plugins {
     kotlin("plugin.parcelize")
     kotlin("android")
     kotlin("kapt")
-    alias(libs.plugins.gms)
 }
 
 android {

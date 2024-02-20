@@ -11,6 +11,7 @@ sdk-compile = "34"
 plugin-gradle = "8.2.2"
 plugin-sentry = "4.1.1"
 plugin-gms = "4.4.1"
+plugin-firebase-crashlytics = "2.9.9"
 # Kotlin
 # TODO : Kotlin 2.0.0
 kotlin = "1.9.22"
@@ -107,6 +108,7 @@ ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 sentry = { id = "io.sentry.android.gradle", version.ref = "plugin-sentry" }
 gms = { id = "com.google.gms.google-services", version.ref = "plugin-gms" }
+firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "plugin-firebase-crashlytics" }
 
 [bundles]
 kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "kotlinx-datetime"]

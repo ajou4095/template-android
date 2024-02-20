@@ -6,7 +6,6 @@ plugins {
     id("com.google.devtools.ksp")
     kotlin("android")
     kotlin("kapt")
-    alias(libs.plugins.gms)
 }
 
 // TODO : Android 종속성 제거

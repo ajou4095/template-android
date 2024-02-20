@@ -8,6 +8,7 @@ plugins {
     kotlin("android")
     kotlin("kapt")
     alias(libs.plugins.gms)
+    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
