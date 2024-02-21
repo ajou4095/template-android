@@ -11,6 +11,8 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.ray.template.android.presentation.R
 import com.ray.template.android.presentation.common.base.BaseViewModel
 import com.ray.template.android.presentation.common.base.ErrorEvent
@@ -69,6 +71,7 @@ fun ErrorObserver(
             _error = event
             Timber.d(event.exception)
             Sentry.captureException(event.exception)
+            Firebase.crashlytics.recordException(event.exception)
         }
     }
 }

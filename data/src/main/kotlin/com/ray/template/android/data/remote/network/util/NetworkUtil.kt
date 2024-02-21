@@ -1,5 +1,7 @@
 package com.ray.template.android.data.remote.network.util
 
+import com.google.firebase.crashlytics.ktx.crashlytics
+import com.google.firebase.ktx.Firebase
 import com.ray.template.android.data.remote.mapper.DataMapper
 import com.ray.template.android.data.remote.network.environment.ErrorMessageMapper
 import com.ray.template.android.data.remote.network.model.nonfeature.error.ErrorRes
@@ -41,6 +43,7 @@ suspend inline fun <reified T : Any> HttpResponse.convert(
             it.level = SentryLevel.INFO
             Sentry.captureException(exception)
         }
+        Firebase.crashlytics.recordException(exception)
     }
 }
 
