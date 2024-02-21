@@ -22,7 +22,7 @@ abstract class BaseViewModel : ViewModel() {
         }
     }
 
-    private val _errorEvent: MutableEventFlow<ErrorEvent> = MutableEventFlow()
+    protected val _errorEvent: MutableEventFlow<ErrorEvent> = MutableEventFlow()
     val errorEvent: EventFlow<ErrorEvent> = _errorEvent.asEventFlow()
 
     @Inject

@@ -1,33 +1,25 @@
-package com.ray.template.android.presentation.ui.main.home
+package com.ray.template.android.presentation.ui.main.nonlogin.login
 
 import androidx.compose.runtime.getValue
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavGraphBuilder
-import androidx.navigation.NavType
 import androidx.navigation.compose.composable
-import androidx.navigation.navArgument
 import com.ray.template.android.presentation.common.util.compose.ErrorObserver
 
-fun NavGraphBuilder.homeDestination(
+fun NavGraphBuilder.loginDestination(
     navController: NavController
 ) {
     composable(
-        route = HomeConstant.ROUTE_STRUCTURE,
-        arguments = listOf(
-            navArgument(HomeConstant.ROUTE_ARGUMENT_SCREEN) {
-                type = NavType.StringType
-                defaultValue = HomeType.values().first().route
-            }
-        )
+        route = LoginConstant.ROUTE
     ) {
-        val viewModel: HomeViewModel = hiltViewModel()
+        val viewModel: LoginViewModel = hiltViewModel()
 
-        val argument: HomeArgument = let {
+        val argument: LoginArgument = let {
             val state by viewModel.state.collectAsStateWithLifecycle()
 
-            HomeArgument(
+            LoginArgument(
                 state = state,
                 event = viewModel.event,
                 intent = viewModel::onIntent,
@@ -36,19 +28,10 @@ fun NavGraphBuilder.homeDestination(
             )
         }
 
-        val data: HomeData = let {
-            val initialHomeType = viewModel.initialHomeType
-
-            HomeData(
-                initialHomeType = initialHomeType
-            )
-        }
-
         ErrorObserver(viewModel)
-        HomeScreen(
+        LoginScreen(
             navController = navController,
-            argument = argument,
-            data = data
+            argument = argument
         )
     }
 }

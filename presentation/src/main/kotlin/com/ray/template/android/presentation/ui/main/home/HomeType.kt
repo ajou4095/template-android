@@ -20,7 +20,7 @@ sealed class HomeType(
 
     companion object {
         fun values(): List<HomeType> {
-            return listOf()
+            return listOf(MyPage)
         }
     }
 }

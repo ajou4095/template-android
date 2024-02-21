@@ -48,7 +48,7 @@ import com.ray.template.android.presentation.common.view.confirm.ConfirmButton
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonProperties
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonSize
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonType
-import com.ray.template.android.presentation.ui.main.home.HomeConstant
+import com.ray.template.android.presentation.ui.main.nonlogin.login.LoginConstant
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.plus
 
@@ -64,16 +64,10 @@ fun OnBoardingScreen(
         pageCount = { 3 }
     )
 
-    fun navigateToHome() {
-        navController.navigate(HomeConstant.ROUTE) {
-            popUpTo(HomeConstant.ROUTE)
-        }
-    }
-
     fun navigateToLogin() {
-//        navController.navigate(LoginConstant.ROUTE) {
-//            popUpTo(LoginConstant.ROUTE)
-//        }
+        navController.navigate(LoginConstant.ROUTE) {
+            popUpTo(LoginConstant.ROUTE)
+        }
     }
 
     Box(
@@ -139,7 +133,7 @@ fun OnBoardingScreen(
                 .align(Alignment.BottomCenter)
                 .padding(horizontal = Space20, vertical = Space12),
             onClick = {
-                navigateToHome()
+                navigateToLogin()
             }
         ) { style ->
             Text(

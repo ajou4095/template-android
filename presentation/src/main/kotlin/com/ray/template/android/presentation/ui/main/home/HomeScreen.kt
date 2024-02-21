@@ -12,6 +12,7 @@ import androidx.compose.foundation.pager.rememberPagerState
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -22,13 +23,15 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.android.common.util.coroutine.event.eventObserve
+import com.ray.template.android.presentation.common.theme.BlueGray300
+import com.ray.template.android.presentation.common.theme.Gray200
 import com.ray.template.android.presentation.common.theme.Space24
 import com.ray.template.android.presentation.common.theme.Space56
-import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
 import com.ray.template.android.presentation.ui.main.home.mypage.MyPageScreen
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -96,11 +99,15 @@ private fun HomeBottomBarScreen(
         modifier = Modifier
             .fillMaxWidth()
             .height(Space56),
-        containerColor = White
+        containerColor = Gray200,
+        tonalElevation = 10.dp
     ) {
         itemList.forEach { item ->
             NavigationBarItem(
                 selected = item == selectedHomeType,
+                colors = NavigationBarItemDefaults.colors(
+                    selectedIconColor = BlueGray300
+                ),
                 icon = {
                     Icon(
                         modifier = Modifier.size(Space24),

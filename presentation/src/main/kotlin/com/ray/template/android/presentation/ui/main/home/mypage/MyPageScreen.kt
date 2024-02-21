@@ -14,6 +14,7 @@ import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
 import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.android.common.util.coroutine.event.eventObserve
+import com.ray.template.android.domain.model.nonfeature.user.Profile
 import com.ray.template.android.presentation.common.theme.Body0
 import com.ray.template.android.presentation.common.util.compose.ErrorObserver
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
@@ -37,10 +38,19 @@ fun MyPageScreen(
         )
     }
 
+    val data: MyPageData = Unit.let {
+        val profile by viewModel.profile.collectAsStateWithLifecycle()
+
+        MyPageData(
+            profile = profile
+        )
+    }
+
     ErrorObserver(viewModel)
     MyPageScreen(
         navController = navController,
-        argument = argument
+        argument = argument,
+        data = data
     )
 }
 
@@ -48,6 +58,7 @@ fun MyPageScreen(
 private fun MyPageScreen(
     navController: NavController,
     argument: MyPageArgument,
+    data: MyPageData
 ) {
     val (state, event, intent, logEvent, handler) = argument
     val scope = rememberCoroutineScope() + handler
@@ -79,6 +90,9 @@ private fun MyPageScreenPreview() {
             intent = {},
             logEvent = { _, _ -> },
             handler = CoroutineExceptionHandler { _, _ -> }
+        ),
+        data = MyPageData(
+            profile = Profile.empty
         )
     )
 }
