@@ -103,8 +103,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
 
-    implementation(libs.androidx.compose.lifecycle)
-    implementation(libs.androidx.lifecycle.process)
     implementation(libs.bundles.network)
 
     implementation(platform(libs.firebase.bom))
