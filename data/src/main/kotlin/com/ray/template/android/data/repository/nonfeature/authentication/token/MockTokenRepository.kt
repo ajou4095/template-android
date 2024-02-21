@@ -39,17 +39,17 @@ class MockTokenRepository @Inject constructor(
                     accessToken = "mock_access_token",
                     refreshToken = "mock_refresh_token"
                 )
-            )
-        }.onSuccess { token ->
-            this.refreshToken = token.refreshToken
-            this.accessToken = token.accessToken
-        }.onFailure { exception ->
-            _refreshFailEvent.emit(Unit)
-        }.map { token ->
-            JwtToken(
-                accessToken = token.accessToken,
-                refreshToken = token.refreshToken
-            )
+            ).onSuccess { token ->
+                this.refreshToken = token.refreshToken
+                this.accessToken = token.accessToken
+            }.onFailure { exception ->
+                _refreshFailEvent.emit(Unit)
+            }.map { token ->
+                JwtToken(
+                    accessToken = token.accessToken,
+                    refreshToken = token.refreshToken
+                )
+            }
         }
     }
 
