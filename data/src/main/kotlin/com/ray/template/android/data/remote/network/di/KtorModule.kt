@@ -2,7 +2,7 @@ package com.ray.template.android.data.remote.network.di
 
 import android.content.Context
 import android.content.pm.ApplicationInfo
-import com.ray.template.android.domain.repository.TokenRepository
+import com.ray.template.android.domain.repository.nonfeature.TokenRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

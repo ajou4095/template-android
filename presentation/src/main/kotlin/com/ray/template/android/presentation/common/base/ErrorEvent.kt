@@ -1,6 +1,6 @@
 package com.ray.template.android.presentation.common.base
 
-import com.ray.template.android.domain.model.error.ServerException
+import com.ray.template.android.domain.model.nonfeature.error.ServerException
 
 sealed class ErrorEvent(
     open val exception: Throwable

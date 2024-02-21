@@ -1,11 +1,11 @@
 package com.ray.template.android.data.di
 
-import com.ray.template.android.data.repository.authentication.MockAuthenticationRepository
-import com.ray.template.android.data.repository.authentication.token.MockTokenRepository
-import com.ray.template.android.data.repository.user.MockUserRepository
-import com.ray.template.android.domain.repository.AuthenticationRepository
-import com.ray.template.android.domain.repository.TokenRepository
-import com.ray.template.android.domain.repository.UserRepository
+import com.ray.template.android.data.repository.nonfeature.authentication.MockAuthenticationRepository
+import com.ray.template.android.data.repository.nonfeature.authentication.token.MockTokenRepository
+import com.ray.template.android.data.repository.nonfeature.user.MockUserRepository
+import com.ray.template.android.domain.repository.nonfeature.AuthenticationRepository
+import com.ray.template.android.domain.repository.nonfeature.TokenRepository
+import com.ray.template.android.domain.repository.nonfeature.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

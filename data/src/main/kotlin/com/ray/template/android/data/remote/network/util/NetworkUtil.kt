@@ -2,10 +2,10 @@ package com.ray.template.android.data.remote.network.util
 
 import com.ray.template.android.data.remote.mapper.DataMapper
 import com.ray.template.android.data.remote.network.environment.ErrorMessageMapper
-import com.ray.template.android.data.remote.network.model.error.ErrorRes
-import com.ray.template.android.domain.model.error.BadRequestServerException
-import com.ray.template.android.domain.model.error.InternalServerException
-import com.ray.template.android.domain.model.error.InvalidStandardResponseException
+import com.ray.template.android.data.remote.network.model.nonfeature.error.ErrorRes
+import com.ray.template.android.domain.model.nonfeature.error.BadRequestServerException
+import com.ray.template.android.domain.model.nonfeature.error.InternalServerException
+import com.ray.template.android.domain.model.nonfeature.error.InvalidStandardResponseException
 import io.ktor.client.call.body
 import io.ktor.client.statement.HttpResponse
 import io.sentry.Sentry

@@ -2,7 +2,7 @@ package com.ray.template.android.data.remote.network.environment
 
 import android.content.Context
 import com.ray.template.android.data.R
-import com.ray.template.android.domain.model.error.UndefinedKeyException
+import com.ray.template.android.domain.model.nonfeature.error.UndefinedKeyException
 import timber.log.Timber
 
 class ErrorMessageMapper(
