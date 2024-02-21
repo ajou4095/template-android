@@ -28,8 +28,8 @@ import com.ray.template.android.presentation.common.theme.Space24
 import com.ray.template.android.presentation.common.theme.Space56
 import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
-import com.ray.template.android.presentation.common.util.coroutine.event.MutableEventFlow
-import com.ray.template.android.presentation.common.util.coroutine.event.eventObserve
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.ui.main.home.mypage.MyPageScreen
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.plus

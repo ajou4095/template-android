@@ -14,7 +14,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.ray.template.android.presentation.R
 import com.ray.template.android.presentation.common.base.BaseViewModel
 import com.ray.template.android.presentation.common.base.ErrorEvent
-import com.ray.template.android.presentation.common.util.coroutine.event.eventObserve
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.common.view.DialogScreen
 import io.sentry.Sentry
 import kotlinx.coroutines.CoroutineScope

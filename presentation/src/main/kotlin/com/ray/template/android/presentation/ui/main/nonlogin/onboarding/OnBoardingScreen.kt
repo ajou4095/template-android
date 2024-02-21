@@ -42,8 +42,8 @@ import com.ray.template.android.presentation.common.theme.Space4
 import com.ray.template.android.presentation.common.theme.Space8
 import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
-import com.ray.template.android.presentation.common.util.coroutine.event.MutableEventFlow
-import com.ray.template.android.presentation.common.util.coroutine.event.eventObserve
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButton
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonProperties
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonSize

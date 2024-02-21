@@ -1,4 +1,4 @@
-package com.ray.template.android.presentation.common.util.coroutine.event
+package com.ray.template.android.common.util.coroutine.event
 
 import kotlinx.coroutines.flow.Flow
 

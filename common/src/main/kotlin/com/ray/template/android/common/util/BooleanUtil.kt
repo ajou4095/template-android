@@ -1,4 +1,4 @@
-package com.ray.template.android.common
+package com.ray.template.android.common.util
 
 fun Boolean?.orFalse(): Boolean {
     return this ?: false

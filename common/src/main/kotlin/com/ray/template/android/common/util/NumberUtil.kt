@@ -1,4 +1,4 @@
-package com.ray.template.android.common
+package com.ray.template.android.common.util
 
 fun Double?.orZero(): Double {
     return this ?: 0.0

@@ -1,7 +1,7 @@
 package com.ray.template.android.presentation.ui.main.nonlogin.onboarding
 
 import androidx.compose.runtime.Immutable
-import com.ray.template.android.presentation.common.util.coroutine.event.EventFlow
+import com.ray.template.android.common.util.coroutine.event.EventFlow
 import kotlinx.coroutines.CoroutineExceptionHandler
 
 @Immutable

@@ -1,4 +1,4 @@
-package com.ray.template.android.presentation.common.util.coroutine
+package com.ray.template.android.common.util.coroutine
 
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async

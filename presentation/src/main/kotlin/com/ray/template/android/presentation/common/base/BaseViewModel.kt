@@ -2,9 +2,9 @@ package com.ray.template.android.presentation.common.base
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.ray.template.android.presentation.common.util.coroutine.event.EventFlow
-import com.ray.template.android.presentation.common.util.coroutine.event.MutableEventFlow
-import com.ray.template.android.presentation.common.util.coroutine.event.asEventFlow
+import com.ray.template.android.common.util.coroutine.event.EventFlow
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.asEventFlow
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
