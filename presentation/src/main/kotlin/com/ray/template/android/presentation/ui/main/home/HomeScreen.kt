@@ -24,12 +24,12 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.common.theme.Space24
 import com.ray.template.android.presentation.common.theme.Space56
 import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
-import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
-import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.ui.main.home.mypage.MyPageScreen
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.plus
@@ -39,8 +39,9 @@ import kotlinx.coroutines.plus
 fun HomeScreen(
     navController: NavController,
     argument: HomeArgument,
+    data: HomeData
 ) {
-    val (state, initialHomeType, event, intent, logEvent, handler) = argument
+    val (state, event, intent, logEvent, handler) = argument
     val scope = rememberCoroutineScope() + handler
 
     val homeTypeList = HomeType.values()
@@ -48,7 +49,7 @@ fun HomeScreen(
     val pagerState = rememberPagerState(
         pageCount = { 3 }
     )
-    var selectedHomeType: HomeType by remember { mutableStateOf(initialHomeType) }
+    var selectedHomeType: HomeType by remember { mutableStateOf(data.initialHomeType) }
 
     Column(
         modifier = Modifier
@@ -122,11 +123,13 @@ private fun HomeScreenPreview() {
         navController = rememberNavController(),
         argument = HomeArgument(
             state = HomeState.Init,
-            initialHomeType = HomeType.MyPage,
             event = MutableEventFlow(),
             intent = {},
             logEvent = { _, _ -> },
             handler = CoroutineExceptionHandler { _, _ -> }
+        ),
+        data = HomeData(
+            initialHomeType = HomeType.MyPage
         )
     )
 }

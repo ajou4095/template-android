@@ -26,11 +26,9 @@ fun NavGraphBuilder.homeDestination(
 
         val argument: HomeArgument = let {
             val state by viewModel.state.collectAsStateWithLifecycle()
-            val initialHomeType = viewModel.initialHomeType
 
             HomeArgument(
                 state = state,
-                initialHomeType = initialHomeType,
                 event = viewModel.event,
                 intent = viewModel::onIntent,
                 logEvent = viewModel::logEvent,
@@ -38,10 +36,19 @@ fun NavGraphBuilder.homeDestination(
             )
         }
 
+        val data: HomeData = let {
+            val initialHomeType = viewModel.initialHomeType
+
+            HomeData(
+                initialHomeType = initialHomeType
+            )
+        }
+
         ErrorObserver(viewModel)
         HomeScreen(
             navController = navController,
-            argument = argument
+            argument = argument,
+            data = data
         )
     }
 }

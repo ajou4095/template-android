@@ -7,7 +7,6 @@ import kotlinx.coroutines.CoroutineExceptionHandler
 @Immutable
 data class HomeArgument(
     val state: HomeState,
-    val initialHomeType: HomeType,
     val event: EventFlow<HomeEvent>,
     val intent: (HomeIntent) -> Unit,
     val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
