@@ -66,7 +66,9 @@ fun OnBoardingScreen(
 
     fun navigateToLogin() {
         navController.navigate(LoginConstant.ROUTE) {
-            popUpTo(LoginConstant.ROUTE)
+            popUpTo(OnBoardingConstant.ROUTE) {
+                inclusive = true
+            }
         }
     }
 

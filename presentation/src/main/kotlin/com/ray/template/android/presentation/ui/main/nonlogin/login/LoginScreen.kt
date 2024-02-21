@@ -47,7 +47,9 @@ fun LoginScreen(
 
     fun navigateToHome() {
         navController.navigate(HomeConstant.ROUTE) {
-            popUpTo(HomeConstant.ROUTE)
+            popUpTo(LoginConstant.ROUTE) {
+                inclusive = true
+            }
         }
     }
 

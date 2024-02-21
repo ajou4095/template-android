@@ -36,13 +36,17 @@ fun SplashScreen(
 
     fun navigateToHome() {
         navController.navigate(HomeConstant.ROUTE) {
-            popUpTo(HomeConstant.ROUTE)
+            popUpTo(SplashConstant.ROUTE) {
+                inclusive = true
+            }
         }
     }
 
     fun navigateToNonLogin() {
         navController.navigate(NonLoginConstant.ROUTE) {
-            popUpTo(NonLoginConstant.ROUTE)
+            popUpTo(SplashConstant.ROUTE) {
+                inclusive = true
+            }
         }
     }
 
