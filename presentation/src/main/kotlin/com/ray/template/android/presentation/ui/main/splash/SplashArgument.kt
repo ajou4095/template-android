@@ -9,6 +9,7 @@ data class SplashArgument(
     val state: SplashState,
     val event: EventFlow<SplashEvent>,
     val intent: (SplashIntent) -> Unit,
+    val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
     val handler: CoroutineExceptionHandler
 )
 

@@ -30,6 +30,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.R
 import com.ray.template.android.presentation.common.theme.Body0
 import com.ray.template.android.presentation.common.theme.Gray400
@@ -42,8 +44,6 @@ import com.ray.template.android.presentation.common.theme.Space4
 import com.ray.template.android.presentation.common.theme.Space8
 import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
-import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
-import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButton
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonProperties
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonSize
@@ -58,7 +58,7 @@ fun OnBoardingScreen(
     navController: NavController,
     argument: OnBoardingArgument
 ) {
-    val (state, event, intent, handler) = argument
+    val (state, event, intent, logEvent, handler) = argument
     val scope = rememberCoroutineScope() + handler
     val pagerState = rememberPagerState(
         pageCount = { 3 }
@@ -165,6 +165,7 @@ private fun OnBoardingScreenPreview() {
             state = OnBoardingState.Init,
             event = MutableEventFlow(),
             intent = {},
+            logEvent = { _, _ -> },
             handler = CoroutineExceptionHandler { _, _ -> }
         )
     )

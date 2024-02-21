@@ -23,6 +23,7 @@ fun NavGraphBuilder.onBoardingDestination(
                 state = state,
                 event = viewModel.event,
                 intent = viewModel::onIntent,
+                logEvent = viewModel::logEvent,
                 handler = viewModel.handler
             )
         }

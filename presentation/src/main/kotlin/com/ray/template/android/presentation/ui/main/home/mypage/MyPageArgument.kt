@@ -9,6 +9,7 @@ data class MyPageArgument(
     val state: MyPageState,
     val event: EventFlow<MyPageEvent>,
     val intent: (MyPageIntent) -> Unit,
+    val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
     val handler: CoroutineExceptionHandler
 )
 

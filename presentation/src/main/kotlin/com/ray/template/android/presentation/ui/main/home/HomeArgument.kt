@@ -10,6 +10,7 @@ data class HomeArgument(
     val initialHomeType: HomeType,
     val event: EventFlow<HomeEvent>,
     val intent: (HomeIntent) -> Unit,
+    val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
     val handler: CoroutineExceptionHandler
 )
 

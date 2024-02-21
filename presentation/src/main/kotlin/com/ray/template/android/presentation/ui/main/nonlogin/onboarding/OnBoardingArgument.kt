@@ -9,6 +9,7 @@ data class OnBoardingArgument(
     val state: OnBoardingState,
     val event: EventFlow<OnBoardingEvent>,
     val intent: (OnBoardingIntent) -> Unit,
+    val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
     val handler: CoroutineExceptionHandler
 )
 

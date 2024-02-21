@@ -16,11 +16,11 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.R
 import com.ray.template.android.presentation.common.theme.Headline1
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
-import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
-import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.ui.main.home.HomeConstant
 import com.ray.template.android.presentation.ui.main.nonlogin.NonLoginConstant
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -31,7 +31,7 @@ fun SplashScreen(
     navController: NavController,
     argument: SplashArgument,
 ) {
-    val (state, event, intent, handler) = argument
+    val (state, event, intent, logEvent, handler) = argument
     val scope = rememberCoroutineScope() + handler
 
     fun navigateToHome() {
@@ -92,6 +92,7 @@ private fun SplashScreenPreview() {
             state = SplashState.Init,
             event = MutableEventFlow(),
             intent = {},
+            logEvent = { _, _ -> },
             handler = CoroutineExceptionHandler { _, _ -> }
         )
     )

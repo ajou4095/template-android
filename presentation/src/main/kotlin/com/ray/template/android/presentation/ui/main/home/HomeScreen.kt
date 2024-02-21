@@ -40,7 +40,7 @@ fun HomeScreen(
     navController: NavController,
     argument: HomeArgument,
 ) {
-    val (state, initialHomeType, event, intent, handler) = argument
+    val (state, initialHomeType, event, intent, logEvent, handler) = argument
     val scope = rememberCoroutineScope() + handler
 
     val homeTypeList = HomeType.values()
@@ -125,6 +125,7 @@ private fun HomeScreenPreview() {
             initialHomeType = HomeType.MyPage,
             event = MutableEventFlow(),
             intent = {},
+            logEvent = { _, _ -> },
             handler = CoroutineExceptionHandler { _, _ -> }
         )
     )

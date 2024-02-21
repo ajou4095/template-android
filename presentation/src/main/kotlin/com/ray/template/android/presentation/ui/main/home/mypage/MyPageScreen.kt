@@ -12,11 +12,11 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.presentation.common.theme.Body0
 import com.ray.template.android.presentation.common.util.compose.ErrorObserver
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
-import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
-import com.ray.template.android.common.util.coroutine.event.eventObserve
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.plus
 
@@ -32,6 +32,7 @@ fun MyPageScreen(
             state = state,
             event = viewModel.event,
             intent = viewModel::onIntent,
+            logEvent = viewModel::logEvent,
             handler = viewModel.handler
         )
     }
@@ -48,7 +49,7 @@ private fun MyPageScreen(
     navController: NavController,
     argument: MyPageArgument,
 ) {
-    val (state, event, intent, handler) = argument
+    val (state, event, intent, logEvent, handler) = argument
     val scope = rememberCoroutineScope() + handler
 
     Box(
@@ -76,6 +77,7 @@ private fun MyPageScreenPreview() {
             state = MyPageState.Init,
             event = MutableEventFlow(),
             intent = {},
+            logEvent = { _, _ -> },
             handler = CoroutineExceptionHandler { _, _ -> }
         )
     )
