@@ -1,7 +1,7 @@
 package com.ray.template.android.domain.repository
 
+import com.ray.template.android.common.util.coroutine.event.EventFlow
 import com.ray.template.android.domain.model.authentication.JwtToken
-import kotlinx.coroutines.flow.StateFlow
 
 interface TokenRepository {
 
@@ -9,11 +9,9 @@ interface TokenRepository {
 
     var accessToken: String
 
-    val isRefreshTokenInvalid: StateFlow<Boolean>
+    val refreshFailEvent: EventFlow<Unit>
 
     suspend fun refreshToken(
         refreshToken: String
     ): Result<JwtToken>
-
-    suspend fun resetRefreshTokenInvalidFlag()
 }

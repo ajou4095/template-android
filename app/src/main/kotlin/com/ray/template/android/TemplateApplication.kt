@@ -9,6 +9,7 @@ import androidx.lifecycle.repeatOnLifecycle
 import com.google.firebase.analytics.ktx.analytics
 import com.google.firebase.crashlytics.ktx.crashlytics
 import com.google.firebase.ktx.Firebase
+import com.ray.template.android.common.util.coroutine.event.eventObserve
 import com.ray.template.android.domain.repository.TokenRepository
 import com.ray.template.android.presentation.ui.invalid.InvalidJwtTokenActivity
 import dagger.hilt.android.HiltAndroidApp
@@ -45,17 +46,14 @@ open class TemplateApplication : Application() {
         with(ProcessLifecycleOwner.get()) {
             lifecycleScope.launch(handler) {
                 repeatOnLifecycle(Lifecycle.State.STARTED) {
-                    tokenRepository.isRefreshTokenInvalid.collect { isRefreshTokenInvalid ->
-                        if (isRefreshTokenInvalid) {
-                            val intent = Intent(
-                                this@TemplateApplication,
-                                InvalidJwtTokenActivity::class.java
-                            ).apply {
-                                flags =
-                                    Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
-                            }
-                            startActivity(intent)
+                    tokenRepository.refreshFailEvent.eventObserve {
+                        val intent = Intent(
+                            this@TemplateApplication,
+                            InvalidJwtTokenActivity::class.java
+                        ).apply {
+                            flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK
                         }
+                        startActivity(intent)
                     }
                 }
             }

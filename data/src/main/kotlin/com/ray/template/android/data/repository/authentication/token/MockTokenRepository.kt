@@ -1,14 +1,14 @@
 package com.ray.template.android.data.repository.authentication.token
 
+import com.ray.template.android.common.util.coroutine.event.EventFlow
+import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
+import com.ray.template.android.common.util.coroutine.event.asEventFlow
 import com.ray.template.android.data.remote.local.SharedPreferencesManager
 import com.ray.template.android.domain.model.authentication.JwtToken
 import com.ray.template.android.domain.model.error.ServerException
 import com.ray.template.android.domain.repository.TokenRepository
 import javax.inject.Inject
 import kotlinx.coroutines.delay
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.StateFlow
-import kotlinx.coroutines.flow.asStateFlow
 
 class MockTokenRepository @Inject constructor(
     private val sharedPreferencesManager: SharedPreferencesManager
@@ -22,8 +22,8 @@ class MockTokenRepository @Inject constructor(
         set(value) = sharedPreferencesManager.setString(ACCESS_TOKEN, value)
         get() = sharedPreferencesManager.getString(ACCESS_TOKEN, "")
 
-    private val _isRefreshTokenInvalid: MutableStateFlow<Boolean> = MutableStateFlow(false)
-    override val isRefreshTokenInvalid: StateFlow<Boolean> = _isRefreshTokenInvalid.asStateFlow()
+    private val _refreshFailEvent: MutableEventFlow<Unit> = MutableEventFlow()
+    override val refreshFailEvent: EventFlow<Unit> = _refreshFailEvent.asEventFlow()
 
     override suspend fun refreshToken(
         refreshToken: String
@@ -43,19 +43,14 @@ class MockTokenRepository @Inject constructor(
         }.onSuccess { token ->
             this.refreshToken = token.refreshToken
             this.accessToken = token.accessToken
-            _isRefreshTokenInvalid.value = false
         }.onFailure { exception ->
-            _isRefreshTokenInvalid.value = true
+            _refreshFailEvent.emit(Unit)
         }.map { token ->
             JwtToken(
                 accessToken = token.accessToken,
                 refreshToken = token.refreshToken
             )
         }
-    }
-
-    override suspend fun resetRefreshTokenInvalidFlag() {
-        _isRefreshTokenInvalid.value = false
     }
 
     private suspend fun randomShortDelay() {
