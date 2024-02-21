@@ -2,8 +2,10 @@ package com.ray.template.android.data.di
 
 import com.ray.template.android.data.repository.authentication.MockAuthenticationRepository
 import com.ray.template.android.data.repository.authentication.token.MockTokenRepository
+import com.ray.template.android.data.repository.user.MockUserRepository
 import com.ray.template.android.domain.repository.AuthenticationRepository
 import com.ray.template.android.domain.repository.TokenRepository
+import com.ray.template.android.domain.repository.UserRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -25,4 +27,10 @@ internal abstract class RepositoryModule {
     abstract fun bindsTokenRepository(
         tokenRepository: MockTokenRepository
     ): TokenRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindsUserRepository(
+        userRepository: MockUserRepository
+    ): UserRepository
 }
