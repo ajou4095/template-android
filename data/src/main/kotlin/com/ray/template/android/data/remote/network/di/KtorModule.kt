@@ -1,7 +1,6 @@
 package com.ray.template.android.data.remote.network.di
 
 import android.content.Context
-import android.content.pm.ApplicationInfo
 import com.ray.template.android.domain.repository.nonfeature.TokenRepository
 import dagger.Module
 import dagger.Provides
@@ -14,7 +13,8 @@ import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
 import io.ktor.client.plugins.auth.providers.bearer
 import io.ktor.client.plugins.contentnegotiation.ContentNegotiation
-import io.ktor.client.plugins.resources.Resources
+import io.ktor.client.plugins.defaultRequest
+import io.ktor.client.request.header
 import io.ktor.serialization.kotlinx.json.json
 import java.util.Optional
 import javax.inject.Qualifier
@@ -39,7 +39,6 @@ internal object KtorModule {
         @DebugInterceptor debugInterceptor: Optional<Interceptor>
     ): HttpClient {
         return HttpClient(OkHttp) {
-            // default validation to throw exceptions for non-2xx responses
             expectSuccess = false
 
             engine {
@@ -51,7 +50,11 @@ internal object KtorModule {
             install(ContentNegotiation) {
                 json(jsonConfiguration)
             }
-            install(Resources)
+
+            // TODO : 이거 왜 안 들어가고 있는지 확인
+            defaultRequest {
+                header("Content-Type", "application/json")
+            }
         }
     }
 
@@ -63,11 +66,7 @@ internal object KtorModule {
         @DebugInterceptor debugInterceptor: Optional<Interceptor>,
         tokenRepository: TokenRepository
     ): HttpClient {
-        val isDebug: Boolean =
-            (0 != context.applicationInfo.flags and ApplicationInfo.FLAG_DEBUGGABLE)
-
         return HttpClient(OkHttp) {
-            // default validation to throw exceptions for non-2xx responses
             expectSuccess = false
 
             engine {
@@ -111,6 +110,11 @@ internal object KtorModule {
                         }
                     }
                 }
+            }
+
+            // TODO : 이거 왜 안 들어가고 있는지 확인
+            defaultRequest {
+                header("Content-Type", "application/json")
             }
         }
     }
