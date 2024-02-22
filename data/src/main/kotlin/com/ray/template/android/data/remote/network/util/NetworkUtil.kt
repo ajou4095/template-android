@@ -9,6 +9,7 @@ import com.ray.template.android.domain.model.nonfeature.error.BadRequestServerEx
 import com.ray.template.android.domain.model.nonfeature.error.InternalServerException
 import com.ray.template.android.domain.model.nonfeature.error.InvalidStandardResponseException
 import io.ktor.client.call.body
+import io.ktor.client.request.HttpRequestBuilder
 import io.ktor.client.statement.HttpResponse
 import io.sentry.Sentry
 import io.sentry.SentryLevel
@@ -63,5 +64,11 @@ suspend inline fun HttpResponse.toThrowable(
         } ?: InvalidStandardResponseException("Response Empty Body")
     }.getOrElse { exception ->
         exception
+    }
+}
+
+fun HttpRequestBuilder.parameterFiltered(key: String, value: Any?) {
+    value?.toString()?.ifEmpty { null }?.let {
+        url.parameters.append(key, it)
     }
 }
