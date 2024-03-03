@@ -38,9 +38,11 @@ fun NavGraphBuilder.homeDestination(
 
         val data: HomeData = let {
             val initialHomeType = viewModel.initialHomeType
+            val homeTypeList = HomeType.values()
 
             HomeData(
-                initialHomeType = initialHomeType
+                initialHomeType = initialHomeType,
+                homeTypeList = homeTypeList
             )
         }
 

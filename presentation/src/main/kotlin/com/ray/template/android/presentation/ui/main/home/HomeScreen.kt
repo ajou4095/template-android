@@ -47,10 +47,8 @@ fun HomeScreen(
     val (state, event, intent, logEvent, handler) = argument
     val scope = rememberCoroutineScope() + handler
 
-    val homeTypeList = HomeType.values()
-
     val pagerState = rememberPagerState(
-        pageCount = { 3 }
+        pageCount = { data.homeTypeList.size }
     )
     var selectedHomeType: HomeType by remember { mutableStateOf(data.initialHomeType) }
 
@@ -65,15 +63,17 @@ fun HomeScreen(
                 .weight(1f),
             state = pagerState,
         ) { page ->
-            when (homeTypeList[page]) {
+            when (data.homeTypeList.getOrNull(page)) {
                 HomeType.MyPage -> {
                     MyPageScreen(navController = navController)
                 }
+
+                null -> Unit
             }
         }
 
         HomeBottomBarScreen(
-            itemList = homeTypeList,
+            itemList = data.homeTypeList,
             selectedHomeType = selectedHomeType,
             onClick = {
                 selectedHomeType = it
@@ -136,7 +136,8 @@ private fun HomeScreenPreview() {
             handler = CoroutineExceptionHandler { _, _ -> }
         ),
         data = HomeData(
-            initialHomeType = HomeType.MyPage
+            initialHomeType = HomeType.MyPage,
+            homeTypeList = emptyList()
         )
     )
 }
