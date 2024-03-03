@@ -35,9 +35,11 @@ jobs:
         env:
           SENTRY_DSN_TOKEN: ${{ secrets.SENTRY_DSN_TOKEN }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          KAKAO_APP_KEY: ${{ secrets.KAKAO_APP_KEY }}
 
       - name: Build Release
         run: ./gradlew assembleRelease
         env:
           SENTRY_DSN_TOKEN: ${{ secrets.SENTRY_DSN_TOKEN }}
           SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          KAKAO_APP_KEY: ${{ secrets.KAKAO_APP_KEY }}

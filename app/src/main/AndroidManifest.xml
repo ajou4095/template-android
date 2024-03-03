@@ -27,4 +27,23 @@
         <!-- enable profiling when starting transactions, adjust in production env -->
         <meta-data android:name="io.sentry.traces.profiling.sample-rate" android:value="1.0" />
     </application>
+
+    <meta-data
+        android:name="com.kakao.sdk.AppKey"
+        android:value="${kakaoAppKey}" />
+
+    <activity
+        android:name="com.kakao.sdk.auth.AuthCodeHandlerActivity"
+        android:exported="true">
+        <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+            <category android:name="android.intent.category.BROWSABLE" />
+
+            <data
+                android:host="oauth"
+                android:scheme="kakao${kakaoAppKey}" />
+        </intent-filter>
+    </activity>
 </manifest>

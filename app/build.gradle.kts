@@ -23,6 +23,7 @@ android {
         versionName = libs.versions.app.versionname.get()
 
         manifestPlaceholders["sentryDsnToken"] = getLocalProperty("SENTRY_DSN_TOKEN")
+        manifestPlaceholders["kakaoAppKey"] = getLocalProperty("KAKAO_APP_KEY")
     }
 
     buildTypes {
@@ -31,12 +32,14 @@ android {
             isShrinkResources = true
             isDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            resValue ("string", "key_kakao_app", getLocalProperty("KAKAO_APP_KEY"))
         }
         debug {
             isMinifyEnabled = false
             isShrinkResources = false
             isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            resValue ("string", "key_kakao_app", getLocalProperty("KAKAO_APP_KEY"))
         }
     }
 
@@ -106,6 +109,7 @@ dependencies {
     implementation(libs.bundles.network)
 
     implementation(platform(libs.firebase.bom))
+    implementation(libs.bundles.kakao)
     implementation(libs.bundles.logging)
     debugImplementation(libs.leakcanary)
 }
