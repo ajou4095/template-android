@@ -56,7 +56,7 @@ fun BottomSheetScreen(
     }
 }
 
-@Preview(apiLevel = 33)
+@Preview(apiLevel = 34)
 @Composable
 private fun BottomSheetScreenPreview() {
     var isShowing by remember { mutableStateOf(true) }
