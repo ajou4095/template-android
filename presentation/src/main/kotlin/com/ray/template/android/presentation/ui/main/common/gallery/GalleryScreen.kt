@@ -5,8 +5,6 @@ import android.os.Build
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
-import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -22,7 +20,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
-import androidx.compose.material.ripple.rememberRipple
 import androidx.compose.material3.DropdownMenu
 import androidx.compose.material3.DropdownMenuItem
 import androidx.compose.material3.Icon
@@ -64,6 +61,7 @@ import com.ray.template.android.presentation.common.theme.Space80
 import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
 import com.ray.template.android.presentation.common.view.BottomSheetScreen
+import com.ray.template.android.presentation.common.view.RippleBox
 import com.ray.template.android.presentation.model.gallery.GalleryFolder
 import com.ray.template.android.presentation.model.gallery.GalleryImage
 import kotlinx.coroutines.CoroutineExceptionHandler
@@ -154,15 +152,10 @@ private fun GalleryScreen(
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Spacer(modifier = Modifier.width(Space20))
-                Box(
-                    modifier = Modifier
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = false),
-                            onClick = {
-                                onDismissRequest()
-                            }
-                        )
+                RippleBox(
+                    onClick = {
+                        onDismissRequest()
+                    }
                 ) {
                     Icon(
                         modifier = Modifier.size(Space24),
@@ -172,15 +165,10 @@ private fun GalleryScreen(
                     )
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                Box(
-                    modifier = Modifier
-                        .clickable(
-                            interactionSource = remember { MutableInteractionSource() },
-                            indication = rememberRipple(bounded = false),
-                            onClick = {
-                                isDropDownMenuExpanded = !isDropDownMenuExpanded
-                            }
-                        )
+                RippleBox(
+                    onClick = {
+                        isDropDownMenuExpanded = !isDropDownMenuExpanded
+                    }
                 ) {
                     Row(
                         verticalAlignment = Alignment.CenterVertically,
@@ -245,24 +233,19 @@ private fun GalleryScreen(
                 }
                 Spacer(modifier = Modifier.weight(1f))
                 if (currentSelectedId > 0) {
-                    Box(
-                        modifier = Modifier
-                            .clickable(
-                                interactionSource = remember { MutableInteractionSource() },
-                                indication = rememberRipple(bounded = false),
-                                onClick = {
-                                    if (currentSelectedId > 0) {
-                                        data.galleryImageList.itemSnapshotList
-                                            .find { image ->
-                                                image?.id == currentSelectedId
-                                            }
-                                            ?.let { currentImage ->
-                                                onDismissRequest()
-                                                onResult(currentImage)
-                                            }
+                    RippleBox(
+                        onClick = {
+                            if (currentSelectedId > 0) {
+                                data.galleryImageList.itemSnapshotList
+                                    .find { image ->
+                                        image?.id == currentSelectedId
                                     }
-                                }
-                            )
+                                    ?.let { currentImage ->
+                                        onDismissRequest()
+                                        onResult(currentImage)
+                                    }
+                            }
+                        }
                     ) {
                         Text(
                             text = "확인",
