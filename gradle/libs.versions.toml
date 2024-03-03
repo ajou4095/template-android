@@ -70,6 +70,7 @@ androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", versi
 androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-compose-navigation" }
 androidx-compose-lifecycle = { module = "androidx.lifecycle:lifecycle-runtime-compose", version.ref = "androidx-compose-lifecycle" }
 androidx-compose-constraintlayout = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "androidx-compose-constraintlayout" }
+androidx-paging-compose = { module = "androidx.paging:paging-compose", version.ref = "androidx-paging" }
 # AndroidX Data
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "androidx-room" }
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "androidx-room" }
@@ -90,7 +91,7 @@ ted-permission = { module = "io.github.ParkSangGwon:tedpermission-coroutine", ve
 lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
 holix-bottomsheet = { module = "com.holix.android:bottomsheetdialog-compose", version.ref = "holix-bottomsheet" }
 # Kakao
-kakao-user = { module = "com.kakao.sdk:v2-user", version.ref = "kakao"}
+kakao-user = { module = "com.kakao.sdk:v2-user", version.ref = "kakao" }
 # Logging
 timber = { module = "com.jakewharton.timber:timber", version.ref = "timber" }
 sentry = { module = "io.sentry:sentry-android", version.ref = "sentry" }
@@ -118,7 +119,7 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "
 kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "kotlinx-datetime"]
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-compose-material3",
     "androidx-compose-navigation", "androidx-compose-constraintlayout",
-    "androidx-compose-lifecycle", "holix-bottomsheet"]
+    "androidx-compose-lifecycle", "holix-bottomsheet", "androidx-paging-compose"]
 androidx-data = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-paging-runtime"]
 network = ["ktor-core", "ktor-okhttp", "ktor-resources", "ktor-content-negotiation", "ktor-kotlinx-serialization",
     "ktor-auth", "kotlinx-serialization"]
