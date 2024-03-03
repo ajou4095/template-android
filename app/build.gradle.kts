@@ -5,10 +5,10 @@ plugins {
     id("dagger.hilt.android.plugin")
     id("io.sentry.android.gradle")
     id("com.google.devtools.ksp")
+    id("com.google.gms.google-services")
+    id("com.google.firebase.crashlytics")
     kotlin("android")
     kotlin("kapt")
-    alias(libs.plugins.gms)
-    alias(libs.plugins.firebase.crashlytics)
 }
 
 android {
