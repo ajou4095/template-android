@@ -16,6 +16,7 @@ import com.ray.template.android.presentation.R
 import com.ray.template.android.presentation.common.theme.TemplateTheme
 import com.ray.template.android.presentation.common.util.compose.ErrorObserver
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
+import com.ray.template.android.presentation.common.util.compose.safeNavigate
 import com.ray.template.android.presentation.common.view.DialogScreen
 import com.ray.template.android.presentation.ui.main.home.homeDestination
 import com.ray.template.android.presentation.ui.main.nonlogin.nonLoginNavGraphNavGraph
@@ -56,7 +57,7 @@ fun MainScreenRefreshFailDialog(
             title = stringResource(R.string.invalid_jwt_token_dialog_title),
             message = stringResource(R.string.invalid_jwt_token_dialog_content),
             onConfirm = {
-                navController.navigate(SplashConstant.ROUTE)
+                navController.safeNavigate(SplashConstant.ROUTE)
             },
             onDismissRequest = {
                 isInvalidTokenDialogShowing = false

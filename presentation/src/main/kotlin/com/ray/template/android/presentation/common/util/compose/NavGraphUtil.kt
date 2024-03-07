@@ -1,5 +1,12 @@
 package com.ray.template.android.presentation.common.util.compose
 
+import androidx.annotation.MainThread
+import androidx.lifecycle.Lifecycle
+import androidx.navigation.NavBackStackEntry
+import androidx.navigation.NavController
+import androidx.navigation.NavOptionsBuilder
+import androidx.navigation.navOptions
+
 fun makeRoute(
     route: String,
     pairs: List<Pair<String, Any>>
@@ -28,4 +35,31 @@ fun parseRoute(
     }.orEmpty()
 
     return routePath to routeArguments
+}
+
+@MainThread
+fun NavController.safeNavigate(
+    route: String,
+    builder: (NavOptionsBuilder.() -> Unit)? = null
+) : Boolean {
+    if (currentBackStackEntry?.lifecycleIsResumed() == true) {
+        builder?.let {
+            navigate(route, navOptions(it))
+        } ?: navigate(route)
+        return true
+    }
+    return false
+}
+
+@MainThread
+fun NavController.safeNavigateUp() : Boolean {
+    if (currentBackStackEntry?.lifecycleIsResumed() == true) {
+        navigateUp()
+        return true
+    }
+    return false
+}
+
+fun NavBackStackEntry.lifecycleIsResumed(): Boolean {
+    return this.lifecycle.currentState == Lifecycle.State.RESUMED
 }

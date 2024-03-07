@@ -44,6 +44,7 @@ import com.ray.template.android.presentation.common.theme.Space4
 import com.ray.template.android.presentation.common.theme.Space8
 import com.ray.template.android.presentation.common.theme.White
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
+import com.ray.template.android.presentation.common.util.compose.safeNavigate
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButton
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonProperties
 import com.ray.template.android.presentation.common.view.confirm.ConfirmButtonSize
@@ -65,7 +66,7 @@ fun OnBoardingScreen(
     )
 
     fun navigateToLogin() {
-        navController.navigate(LoginConstant.ROUTE) {
+        navController.safeNavigate(LoginConstant.ROUTE) {
             popUpTo(OnBoardingConstant.ROUTE) {
                 inclusive = true
             }
