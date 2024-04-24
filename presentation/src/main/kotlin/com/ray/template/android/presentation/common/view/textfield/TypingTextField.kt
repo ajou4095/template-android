@@ -4,13 +4,13 @@ import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.interaction.MutableInteractionSource
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
@@ -51,7 +51,7 @@ fun TypingTextField(
     hintText: String = "",
     isError: Boolean = false,
     isEnabled: Boolean = true,
-    minLines: Int = 1,
+    maxLines: Int = 1,
     maxTextLength: Int = 100,
     keyboardOptions: KeyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Text),
     keyboardActions: KeyboardActions = KeyboardActions.Default,
@@ -73,7 +73,7 @@ fun TypingTextField(
         label = "color state"
     )
 
-    Row(
+    Box(
         modifier = modifier
             .background(
                 color = White,
@@ -84,54 +84,56 @@ fun TypingTextField(
                 shape = Shapes.medium,
                 color = currentColorState.value
             )
-            .wrapContentHeight()
             .onFocusChanged {
                 isTextFieldFocused = it.isFocused
                 onTextFieldFocusChange(it.isFocused)
             }
-            .padding(horizontal = 15.dp)
-            .height(40.dp),
-        verticalAlignment = Alignment.CenterVertically
+            .padding(horizontal = 15.dp, vertical = 5.dp)
     ) {
-        leadingIconContent()
-        BasicTextField(
-            value = text,
-            onValueChange = {
-                if (maxTextLength >= it.length) {
-                    onValueChange(it)
-                }
-            },
-            enabled = isEnabled,
-            modifier = Modifier.weight(1f),
-            textStyle = Body1.merge(Gray900),
-            singleLine = minLines == 1,
-            minLines = minLines,
-            keyboardOptions = keyboardOptions,
-            keyboardActions = keyboardActions,
-            cursorBrush = SolidColor(value = currentColorState.value),
-            interactionSource = interactionSource,
-        ) { textField ->
-            TextFieldDefaults.DecorationBox(
+        Row(
+            modifier = Modifier.align(Alignment.TopCenter),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            leadingIconContent()
+            BasicTextField(
                 value = text,
-                innerTextField = textField,
-                enabled = isEnabled,
-                singleLine = minLines == 1,
-                visualTransformation = visualTransformation,
-                interactionSource = interactionSource,
-                placeholder = {
-                    Text(
-                        text = hintText,
-                        style = Body1.merge(Gray400)
-                    )
+                onValueChange = {
+                    if (maxTextLength >= it.length) {
+                        onValueChange(it)
+                    }
                 },
-                contentPadding = PaddingValues(0.dp),
-                colors = OutlinedTextFieldDefaults.colors().copy(
-                    focusedIndicatorColor = Transparent,
-                    unfocusedIndicatorColor = Transparent,
+                enabled = isEnabled,
+                modifier = Modifier.weight(1f),
+                textStyle = Body1.merge(Gray900),
+                singleLine = maxLines == 1,
+                maxLines = maxLines,
+                keyboardOptions = keyboardOptions,
+                keyboardActions = keyboardActions,
+                cursorBrush = SolidColor(value = currentColorState.value),
+                interactionSource = interactionSource,
+            ) { textField ->
+                TextFieldDefaults.DecorationBox(
+                    value = text,
+                    innerTextField = textField,
+                    enabled = isEnabled,
+                    singleLine = maxLines == 1,
+                    visualTransformation = visualTransformation,
+                    interactionSource = interactionSource,
+                    placeholder = {
+                        Text(
+                            text = hintText,
+                            style = Body1.merge(Gray900)
+                        )
+                    },
+                    contentPadding = PaddingValues(0.dp),
+                    colors = OutlinedTextFieldDefaults.colors().copy(
+                        focusedIndicatorColor = Transparent,
+                        unfocusedIndicatorColor = Transparent,
+                    )
                 )
-            )
+            }
+            trailingIconContent()
         }
-        trailingIconContent()
     }
 }
 
@@ -190,7 +192,9 @@ private fun TypingTextField3Preview() {
 private fun TypingTextField4Preview() {
     TypingTextField(
         text = "엄청나게 긴 텍스트입니다. 엄청나게 긴 텍스트입니다. 엄청나게 긴 텍스트입니다. 엄청나게 긴 텍스트입니다. 엄청나게 긴 텍스트입니다.",
+        modifier = Modifier.heightIn(min = 100.dp),
         hintText = "",
+        maxLines = Int.MAX_VALUE,
         onValueChange = {}
     )
 }
