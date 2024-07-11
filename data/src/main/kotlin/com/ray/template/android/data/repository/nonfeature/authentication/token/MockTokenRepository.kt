@@ -25,6 +25,28 @@ class MockTokenRepository @Inject constructor(
     private val _refreshFailEvent: MutableEventFlow<Unit> = MutableEventFlow()
     override val refreshFailEvent: EventFlow<Unit> = _refreshFailEvent.asEventFlow()
 
+    override suspend fun login(
+        username: String,
+        password: String
+    ): Result<Long> {
+        randomShortDelay()
+        return Result.success(0L).onSuccess { token ->
+            refreshToken = "mock_access_token"
+            accessToken = "mock_refresh_token"
+        }
+    }
+
+    override suspend fun register(
+        username: String,
+        password: String
+    ): Result<Long> {
+        randomLongDelay()
+        return Result.success(0L).onSuccess {
+            refreshToken = "mock_access_token"
+            accessToken = "mock_refresh_token"
+        }
+    }
+
     override suspend fun refreshToken(
         refreshToken: String
     ): Result<JwtToken> {

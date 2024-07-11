@@ -25,6 +25,36 @@ class RealTokenRepository @Inject constructor(
     private val _refreshFailEvent: MutableEventFlow<Unit> = MutableEventFlow()
     override val refreshFailEvent: EventFlow<Unit> = _refreshFailEvent.asEventFlow()
 
+    override suspend fun login(
+        username: String,
+        password: String
+    ): Result<Long> {
+        return tokenApi.login(
+            username = username,
+            password = password,
+        ).onSuccess { token ->
+            refreshToken = token.refreshToken
+            accessToken = token.accessToken
+        }.map { login ->
+            login.id
+        }
+    }
+
+    override suspend fun register(
+        username: String,
+        password: String
+    ): Result<Long> {
+        return tokenApi.register(
+            username = username,
+            password = password
+        ).onSuccess { register ->
+            refreshToken = register.refreshToken
+            accessToken = register.accessToken
+        }.map { register ->
+            register.id
+        }
+    }
+
     override suspend fun refreshToken(
         refreshToken: String
     ): Result<JwtToken> {
