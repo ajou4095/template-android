@@ -18,9 +18,10 @@ internal object NetworkEnvironmentModule {
     @Provides
     @Singleton
     fun provideBaseUrlProvider(
+        @ApplicationContext context: Context,
         sharedPreferencesManager: SharedPreferencesManager
     ): BaseUrlProvider {
-        return BaseUrlProvider(sharedPreferencesManager)
+        return BaseUrlProvider(context, sharedPreferencesManager)
     }
 
     @Provides

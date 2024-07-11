@@ -26,6 +26,18 @@ android {
         }
     }
 
+    flavorDimensions += "server"
+    productFlavors {
+        create("development") {
+            dimension = "server"
+            resValue("string", "server_flag", "development")
+        }
+        create("production") {
+            dimension = "server"
+            resValue("string", "server_flag", "production")
+        }
+    }
+
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
