@@ -6,7 +6,7 @@ import javax.inject.Inject
 class CheckRefreshTokenFilledUseCase @Inject constructor(
     private val tokenRepository: TokenRepository
 ) {
-    operator fun invoke(): Boolean {
-        return tokenRepository.refreshToken.isNotEmpty()
+    suspend operator fun invoke(): Boolean {
+        return tokenRepository.getRefreshToken().isNotEmpty()
     }
 }

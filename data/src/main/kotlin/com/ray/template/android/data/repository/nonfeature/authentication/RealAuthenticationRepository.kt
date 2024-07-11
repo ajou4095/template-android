@@ -13,16 +13,14 @@ class RealAuthenticationRepository @Inject constructor(
     override suspend fun logout(): Result<Unit> {
         return authenticationApi.logout()
             .onSuccess {
-                tokenRepository.refreshToken = ""
-                tokenRepository.accessToken = ""
+                tokenRepository.removeToken()
             }
     }
 
     override suspend fun withdraw(): Result<Unit> {
         return authenticationApi.withdraw()
             .onSuccess {
-                tokenRepository.refreshToken = ""
-                tokenRepository.accessToken = ""
+                tokenRepository.removeToken()
             }
     }
 }

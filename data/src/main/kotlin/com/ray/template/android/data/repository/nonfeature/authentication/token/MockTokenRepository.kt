@@ -1,26 +1,23 @@
 package com.ray.template.android.data.repository.nonfeature.authentication.token
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.ray.template.android.common.util.coroutine.event.EventFlow
 import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.android.common.util.coroutine.event.asEventFlow
-import com.ray.template.android.data.remote.local.SharedPreferencesManager
 import com.ray.template.android.domain.model.nonfeature.authentication.JwtToken
 import com.ray.template.android.domain.model.nonfeature.error.ServerException
 import com.ray.template.android.domain.repository.nonfeature.TokenRepository
 import javax.inject.Inject
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
 
 class MockTokenRepository @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager
+    private val dataStore: DataStore<Preferences>
 ) : TokenRepository {
-
-    override var refreshToken: String
-        set(value) = sharedPreferencesManager.setString(REFRESH_TOKEN, value)
-        get() = sharedPreferencesManager.getString(REFRESH_TOKEN, "")
-
-    override var accessToken: String
-        set(value) = sharedPreferencesManager.setString(ACCESS_TOKEN, value)
-        get() = sharedPreferencesManager.getString(ACCESS_TOKEN, "")
 
     private val _refreshFailEvent: MutableEventFlow<Unit> = MutableEventFlow()
     override val refreshFailEvent: EventFlow<Unit> = _refreshFailEvent.asEventFlow()
@@ -31,8 +28,10 @@ class MockTokenRepository @Inject constructor(
     ): Result<Long> {
         randomShortDelay()
         return Result.success(0L).onSuccess { token ->
-            refreshToken = "mock_access_token"
-            accessToken = "mock_refresh_token"
+            dataStore.edit { preferences ->
+                preferences[stringPreferencesKey(REFRESH_TOKEN)] = "mock_refresh_token"
+                preferences[stringPreferencesKey(ACCESS_TOKEN)] = "mock_access_token"
+            }
         }
     }
 
@@ -42,9 +41,24 @@ class MockTokenRepository @Inject constructor(
     ): Result<Long> {
         randomLongDelay()
         return Result.success(0L).onSuccess {
-            refreshToken = "mock_access_token"
-            accessToken = "mock_refresh_token"
+            dataStore.edit { preferences ->
+                preferences[stringPreferencesKey(REFRESH_TOKEN)] = "mock_refresh_token"
+                preferences[stringPreferencesKey(ACCESS_TOKEN)] = "mock_access_token"
+            }
         }
+    }
+
+    override suspend fun getRefreshToken(): String {
+        return dataStore.data.map { preferences ->
+            preferences[stringPreferencesKey(REFRESH_TOKEN)]
+        }.first().orEmpty()
+
+    }
+
+    override suspend fun getAccessToken(): String {
+        return dataStore.data.map { preferences ->
+            preferences[stringPreferencesKey(ACCESS_TOKEN)]
+        }.first().orEmpty()
     }
 
     override suspend fun refreshToken(
@@ -62,8 +76,10 @@ class MockTokenRepository @Inject constructor(
                     refreshToken = "mock_refresh_token"
                 )
             ).onSuccess { token ->
-                this.refreshToken = token.refreshToken
-                this.accessToken = token.accessToken
+                dataStore.edit { preferences ->
+                    preferences[stringPreferencesKey(REFRESH_TOKEN)] = token.refreshToken
+                    preferences[stringPreferencesKey(ACCESS_TOKEN)] = token.accessToken
+                }
             }.onFailure { exception ->
                 _refreshFailEvent.emit(Unit)
             }.map { token ->
@@ -73,6 +89,15 @@ class MockTokenRepository @Inject constructor(
                 )
             }
         }
+    }
+
+    override suspend fun removeToken(): Result<Unit> {
+        // TODO : KTOR-4759 BearerAuthProvider caches result of loadToken until process death
+        dataStore.edit { preferences ->
+            preferences.remove(stringPreferencesKey(REFRESH_TOKEN))
+            preferences.remove(stringPreferencesKey(ACCESS_TOKEN))
+        }
+        return Result.success(Unit)
     }
 
     private suspend fun randomShortDelay() {

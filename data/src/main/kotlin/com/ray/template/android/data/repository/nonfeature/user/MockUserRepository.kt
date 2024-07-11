@@ -1,6 +1,5 @@
 package com.ray.template.android.data.repository.nonfeature.user
 
-import com.ray.template.android.data.remote.local.SharedPreferencesManager
 import com.ray.template.android.domain.model.nonfeature.error.ServerException
 import com.ray.template.android.domain.model.nonfeature.user.Profile
 import com.ray.template.android.domain.repository.nonfeature.TokenRepository
@@ -9,13 +8,12 @@ import javax.inject.Inject
 import kotlinx.coroutines.delay
 
 class MockUserRepository @Inject constructor(
-    private val sharedPreferencesManager: SharedPreferencesManager,
     private val tokenRepository: TokenRepository
 ) : UserRepository {
 
     override suspend fun getProfile(): Result<Profile> {
         randomShortDelay()
-        val isLogined = tokenRepository.accessToken.isNotEmpty()
+        val isLogined = tokenRepository.getAccessToken().isNotEmpty()
         return if (isLogined) {
             Result.success(
                 Profile(
@@ -38,9 +36,5 @@ class MockUserRepository @Inject constructor(
 
     private suspend fun randomLongDelay() {
         delay(LongRange(500, 2000).random())
-    }
-
-    companion object {
-        private const val IS_REGISTERED = "mock_is_registered"
     }
 }

@@ -13,7 +13,8 @@ class MockAuthenticationRepository @Inject constructor(
     override suspend fun logout(): Result<Unit> {
         randomShortDelay()
         return when {
-            tokenRepository.accessToken.isEmpty() || tokenRepository.refreshToken.isEmpty() -> {
+            tokenRepository.getAccessToken().isEmpty()
+                    || tokenRepository.getRefreshToken().isEmpty() -> {
                 Result.failure(ServerException("MOCK_ERROR", "로그인 상태가 아닙니다."))
             }
 
@@ -21,15 +22,15 @@ class MockAuthenticationRepository @Inject constructor(
                 Result.success(Unit)
             }
         }.onSuccess {
-            tokenRepository.refreshToken = ""
-            tokenRepository.accessToken = ""
+            tokenRepository.removeToken()
         }
     }
 
     override suspend fun withdraw(): Result<Unit> {
         randomLongDelay()
         return when {
-            tokenRepository.accessToken.isEmpty() || tokenRepository.refreshToken.isEmpty() -> {
+            tokenRepository.getAccessToken().isEmpty()
+                    || tokenRepository.getRefreshToken().isEmpty() -> {
                 Result.failure(ServerException("MOCK_ERROR", "로그인 상태가 아닙니다."))
             }
 
@@ -37,8 +38,7 @@ class MockAuthenticationRepository @Inject constructor(
                 Result.success(Unit)
             }
         }.onSuccess {
-            tokenRepository.refreshToken = ""
-            tokenRepository.accessToken = ""
+            tokenRepository.removeToken()
         }
     }
 
@@ -48,9 +48,5 @@ class MockAuthenticationRepository @Inject constructor(
 
     private suspend fun randomLongDelay() {
         delay(LongRange(500, 2000).random())
-    }
-
-    companion object {
-        private const val IS_REGISTERED = "mock_is_registered"
     }
 }

@@ -5,10 +5,6 @@ import com.ray.template.android.domain.model.nonfeature.authentication.JwtToken
 
 interface TokenRepository {
 
-    var refreshToken: String
-
-    var accessToken: String
-
     val refreshFailEvent: EventFlow<Unit>
 
     // TODO : password encrypt
@@ -22,7 +18,13 @@ interface TokenRepository {
         password: String
     ): Result<Long>
 
+    suspend fun getRefreshToken(): String
+
+    suspend fun getAccessToken(): String
+
     suspend fun refreshToken(
         refreshToken: String
     ): Result<JwtToken>
+
+    suspend fun removeToken(): Result<Unit>
 }

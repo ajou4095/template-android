@@ -1,18 +1,34 @@
 package com.ray.template.android.data.remote.network.environment
 
 import android.content.Context
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
+import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.stringPreferencesKey
 import com.ray.template.android.data.R
-import com.ray.template.android.data.remote.local.SharedPreferencesManager
+import dagger.hilt.android.qualifiers.ApplicationContext
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.runBlocking
 
 class BaseUrlProvider(
-    private val context: Context,
-    private val sharedPreferencesManager: SharedPreferencesManager
+    @ApplicationContext private val context: Context,
+    private val dataStore: DataStore<Preferences>
 ) {
     fun get(): String {
-        val serverFlag = sharedPreferencesManager.getString(
-            SERVER_FLAG,
-            context.getString(R.string.server_flag)
-        )
+        val serverFlag: String = runBlocking {
+            val preferencesKey = stringPreferencesKey(KEY_SERVER_FLAG)
+            val defaultFlag = context.getString(R.string.server_flag)
+
+            dataStore.data.map { preferences ->
+                preferences[preferencesKey]
+            }.first() ?: let {
+                dataStore.edit { preferences ->
+                    preferences[preferencesKey] = defaultFlag
+                }
+                defaultFlag
+            }
+        }
 
         when (serverFlag) {
             SERVER_FLAG_DEVELOPMENT -> return DEVELOPMENT_BASE_URL
@@ -26,7 +42,7 @@ class BaseUrlProvider(
         private const val DEVELOPMENT_BASE_URL = "https://dev.api.musixmatch.com/"
         private const val PRODUCTION_BASE_URL = "https://api.musixmatch.com/"
 
-        private const val SERVER_FLAG = "server_flag"
+        private const val KEY_SERVER_FLAG = "server_flag"
         const val SERVER_FLAG_DEVELOPMENT = "development"
         const val SERVER_FLAG_PRODUCTION = "production"
     }

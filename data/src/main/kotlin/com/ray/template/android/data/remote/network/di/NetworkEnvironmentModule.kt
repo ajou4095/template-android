@@ -1,7 +1,8 @@
 package com.ray.template.android.data.remote.network.di
 
 import android.content.Context
-import com.ray.template.android.data.remote.local.SharedPreferencesManager
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.ray.template.android.data.remote.network.environment.BaseUrlProvider
 import com.ray.template.android.data.remote.network.environment.ErrorMessageMapper
 import dagger.Module
@@ -19,9 +20,9 @@ internal object NetworkEnvironmentModule {
     @Singleton
     fun provideBaseUrlProvider(
         @ApplicationContext context: Context,
-        sharedPreferencesManager: SharedPreferencesManager
+        dataStore: DataStore<Preferences>
     ): BaseUrlProvider {
-        return BaseUrlProvider(context, sharedPreferencesManager)
+        return BaseUrlProvider(context, dataStore)
     }
 
     @Provides

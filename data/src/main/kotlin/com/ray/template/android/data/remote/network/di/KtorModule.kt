@@ -82,8 +82,8 @@ internal object KtorModule {
             install(Auth) {
                 bearer {
                     loadTokens {
-                        val accessToken = tokenRepository.accessToken
-                        val refreshToken = tokenRepository.refreshToken
+                        val accessToken = tokenRepository.getAccessToken()
+                        val refreshToken = tokenRepository.getRefreshToken()
                         if (accessToken.isEmpty() || refreshToken.isEmpty()) {
                             return@loadTokens null
                         }
@@ -95,7 +95,7 @@ internal object KtorModule {
                     }
 
                     refreshTokens {
-                        val refreshToken = tokenRepository.refreshToken
+                        val refreshToken = tokenRepository.getRefreshToken()
                         if (refreshToken.isEmpty()) {
                             return@refreshTokens null
                         }

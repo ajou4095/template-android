@@ -1,16 +1,16 @@
 package com.ray.template.android.domain.usecase.nonfeature.authentication
 
-import com.ray.template.android.domain.repository.nonfeature.AuthenticationRepository
+import com.ray.template.android.domain.repository.nonfeature.TokenRepository
 import javax.inject.Inject
 
 class RegistrationUseCase @Inject constructor(
-    private val authenticationRepository: AuthenticationRepository
+    private val tokenRepository: TokenRepository
 ) {
     suspend operator fun invoke(
         username: String,
         password: String
     ): Result<Long> {
-        return authenticationRepository.register(
+        return tokenRepository.register(
             username = username,
             password = password
         )
