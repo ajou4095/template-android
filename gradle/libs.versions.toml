@@ -25,6 +25,7 @@ androidx-core = "1.13.1"
 androidx-appcompat = "1.6.1"
 androidx-room = "2.6.1"
 androidx-paging = "3.2.1"
+androidx-datastore = "1.1.1"
 androidx-compose = "1.6.7"
 androidx-compose-navigation = "2.7.7"
 androidx-compose-lifecycle = "2.7.0"
@@ -75,6 +76,7 @@ androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "
 androidx-room-coroutine = { module = "androidx.room:room-ktx", version.ref = "androidx-room" }
 androidx-paging-runtime = { module = "androidx.paging:paging-runtime-ktx", version.ref = "androidx-paging" }
 androidx-paging-common = { module = "androidx.paging:paging-common-ktx", version.ref = "androidx-paging" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "androidx-datastore" }
 # Network
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
@@ -118,8 +120,9 @@ kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "ko
 androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-compose-material3",
     "androidx-compose-navigation", "androidx-compose-constraintlayout",
     "androidx-compose-lifecycle", "holix-bottomsheet", "androidx-paging-compose"]
-androidx-data = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-paging-runtime"]
-network = ["ktor-core", "ktor-okhttp", "ktor-resources", "ktor-content-negotiation", "ktor-kotlinx-serialization",
-    "ktor-auth", "kotlinx-serialization"]
+androidx-data = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-paging-runtime",
+    "androidx-datastore-preferences"]
+network = ["ktor-core", "ktor-okhttp", "ktor-resources", "ktor-content-negotiation",
+    "ktor-kotlinx-serialization", "ktor-auth", "kotlinx-serialization"]
 kakao = ["kakao-user"]
 logging = ["timber", "sentry", "firebase-analytics", "firebase-crashlytics"]
