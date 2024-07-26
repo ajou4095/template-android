@@ -1,0 +1,83 @@
+name: android-cd
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: JDK 17
+        uses: actions/setup-java@v3
+        with:
+          java-version: '17'
+          distribution: 'adopt'
+
+      - name: Android SDK
+        uses: android-actions/setup-android@v2
+
+      - name: Grant Build Permission
+        run: chmod +x ./gradlew
+
+      - name: Get versions
+        run: |
+          echo "APP_VERSION_CODE=$(grep 'app-versioncode = ' gradle/libs.versions.toml | grep -oP 'app-versioncode = "\K[^"]+')" >> $GITHUB_ENV
+          echo "APP_VERSION_NAME=$(grep 'app-versionname = ' gradle/libs.versions.toml | grep -oP 'app-versionname = "\K[^"]+')" >> $GITHUB_ENV
+          TAG_EXISTS=$(git ls-remote --tags origin | grep -o "refs/tags/v${APP_VERSION_NAME}$" || true)
+          if [ "$TAG_EXISTS" ]; then
+            echo "TAG_EXISTS=true" >> $GITHUB_ENV
+          else
+            echo "TAG_EXISTS=false" >> $GITHUB_ENV
+          fi
+
+        shell: bash
+
+      - name: Create Google Services JSON File
+        env:
+          GOOGLE_SERVICES_JSON: ${{ secrets.GOOGLE_SERVICES_JSON }}
+          SERVICE_ACCOUNT_FILE_JSON: ${{ secrets.SERVICE_ACCOUNT_FILE_JSON }}
+        run: |
+          echo $GOOGLE_SERVICES_JSON | base64 -di > app/google-services.json
+          echo $SERVICE_ACCOUNT_FILE_JSON | base64 -di > service_account_file.json
+          echo "FIREBASE_APP_ID=$(grep '        "mobilesdk_app_id": "' app/google-services.json | grep -oP '        "mobilesdk_app_id": "\K[^"]+')" >> $GITHUB_ENV
+
+      - name: Stop if tag exists
+        if: env.TAG_EXISTS == 'true'
+        run: |
+          echo "Tag v${APP_VERSION_NAME} already exists. Stopping the workflow."
+          exit 0
+        shell: bash
+
+      - name: Create tag
+        run: |
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+          git tag -a "v${{ env.APP_VERSION_NAME }}" -m "Release version ${{ env.APP_VERSION_NAME }}"
+          git push origin tag "v${{ env.APP_VERSION_NAME }}"
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        shell: bash
+
+      # ./gradlew :app:bundleDevelopmentDebug
+      - name: Build AAB
+        run: |
+          ./gradlew assembleDevelopmentDebug
+        env:
+          SENTRY_DSN_TOKEN: ${{ secrets.SENTRY_DSN_TOKEN }}
+          SENTRY_AUTH_TOKEN: ${{ secrets.SENTRY_AUTH_TOKEN }}
+          KAKAO_APP_KEY: ${{ secrets.KAKAO_APP_KEY }}
+
+      - name: Deploy to Firebase
+        run: |
+          curl -sL https://firebase.tools | bash
+          firebase appdistribution:distribute \
+              --app '${{ env.FIREBASE_APP_ID }}' \
+              app/build/outputs/apk/development/debug/app-development-debug.apk
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: "service_account_file.json"
