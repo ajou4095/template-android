@@ -18,10 +18,7 @@ import com.ray.template.android.presentation.common.util.compose.ErrorObserver
 import com.ray.template.android.presentation.common.util.compose.LaunchedEffectWithLifecycle
 import com.ray.template.android.presentation.common.util.compose.safeNavigate
 import com.ray.template.android.presentation.common.view.DialogScreen
-import com.ray.template.android.presentation.ui.main.home.homeDestination
-import com.ray.template.android.presentation.ui.main.nonlogin.nonLoginNavGraphNavGraph
 import com.ray.template.android.presentation.ui.main.splash.SplashConstant
-import com.ray.template.android.presentation.ui.main.splash.splashDestination
 
 @Composable
 fun MainScreen(
@@ -30,17 +27,15 @@ fun MainScreen(
     TemplateTheme {
         val navController = rememberNavController()
 
-        ErrorObserver(viewModel)
-        MainScreenRefreshFailDialog(navController, viewModel.refreshFailEvent)
-
         NavHost(
             navController = navController,
             startDestination = SplashConstant.ROUTE
         ) {
-            splashDestination(navController = navController)
-            nonLoginNavGraphNavGraph(navController = navController)
-            homeDestination(navController = navController)
+            mainDestination(navController)
         }
+
+        ErrorObserver(viewModel)
+        MainScreenRefreshFailDialog(navController, viewModel.refreshFailEvent)
     }
 }
 
