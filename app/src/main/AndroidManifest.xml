@@ -45,6 +45,10 @@
             android:value="1.0" />
 
         <meta-data
+            android:name="io.sentry.environment"
+            android:value="${sentryEnvironment}" />
+
+        <meta-data
             android:name="com.kakao.sdk.AppKey"
             android:value="${kakaoAppKey}" />
 

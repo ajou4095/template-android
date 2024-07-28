@@ -33,6 +33,7 @@ android {
             isDebuggable = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             resValue ("string", "key_kakao_app", getLocalProperty("KAKAO_APP_KEY"))
+            manifestPlaceholders["sentryEnvironment"] = "release" + manifestPlaceholders["sentryEnvironment"].toString()
         }
         debug {
             isMinifyEnabled = false
@@ -40,6 +41,7 @@ android {
             isDebuggable = true
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             resValue ("string", "key_kakao_app", getLocalProperty("KAKAO_APP_KEY"))
+            manifestPlaceholders["sentryEnvironment"] = "debug" + manifestPlaceholders["sentryEnvironment"].toString()
         }
     }
 
@@ -47,9 +49,11 @@ android {
     productFlavors {
         create("development") {
             dimension = "server"
+            manifestPlaceholders["sentryEnvironment"] = "development" + manifestPlaceholders["sentryEnvironment"].toString()
         }
         create("production") {
             dimension = "server"
+            manifestPlaceholders["sentryEnvironment"] = "production" + manifestPlaceholders["sentryEnvironment"].toString()
         }
     }
 
