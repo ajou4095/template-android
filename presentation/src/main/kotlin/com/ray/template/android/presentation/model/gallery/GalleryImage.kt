@@ -8,6 +8,5 @@ data class GalleryImage(
     val id: Long,
     val filePath: String,
     val name: String,
-    val date: String,
-    val size: Int,
+    val date: String
 ) : Parcelable

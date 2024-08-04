@@ -1,9 +1,7 @@
 package com.ray.template.android.presentation.ui.main.common.gallery
 
-import android.annotation.SuppressLint
 import android.content.ContentResolver
 import android.content.Context
-import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.provider.MediaStore
@@ -18,22 +16,6 @@ class GalleryCursor @Inject constructor(
     @ApplicationContext private val context: Context
 ) {
 
-    private val uriExternal: Uri by lazy {
-        MediaStore.Images.Media.getContentUri(
-            MediaStore.VOLUME_EXTERNAL
-        )
-    }
-
-    private val projection = arrayOf(
-        MediaStore.Images.ImageColumns.DATA,
-        MediaStore.Images.ImageColumns.DISPLAY_NAME,
-        MediaStore.Images.ImageColumns.DATE_TAKEN,
-        MediaStore.Images.ImageColumns._ID
-    )
-
-    private val contentResolver by lazy { context.contentResolver }
-    private val sortedOrder = MediaStore.Images.ImageColumns.DATE_TAKEN
-
     fun getPhotoList(
         page: Int,
         loadSize: Int,
@@ -41,32 +23,83 @@ class GalleryCursor @Inject constructor(
     ): List<GalleryImage> {
         val galleryImageList = mutableListOf<GalleryImage>()
 
-        var selection: String? = null
-        var selectionArgs: Array<String>? = null
-        if (currentLocation != null) {
-            selection = "${MediaStore.Images.Media.DATA} LIKE ?"
-            selectionArgs = arrayOf("%$currentLocation%")
+        val collection: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            MediaStore.Images.Media.getContentUri(
+                MediaStore.VOLUME_EXTERNAL
+            )
+        } else {
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        }
+
+        val projection = arrayOf(
+            MediaStore.Images.ImageColumns._ID,
+            MediaStore.Images.ImageColumns.DATA,
+            MediaStore.Images.ImageColumns.DISPLAY_NAME,
+            MediaStore.Images.ImageColumns.DATE_TAKEN
+        )
+
+        val sortedOrder = MediaStore.Images.ImageColumns.DATE_TAKEN
+
+        val selection: String? = currentLocation?.let {
+            "${MediaStore.Images.Media.DATA} LIKE ?"
+        }
+
+        val selectionArgument: Array<String>? = currentLocation?.let {
+            arrayOf("%$currentLocation%")
         }
 
         val offset = (page - 1) * loadSize
-        val query = getQuery(offset, loadSize, selection, selectionArgs)
 
-        query?.use { cursor ->
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            val bundle = bundleOf(
+                ContentResolver.QUERY_ARG_OFFSET to offset,
+                ContentResolver.QUERY_ARG_LIMIT to loadSize,
+                ContentResolver.QUERY_ARG_SORT_COLUMNS to arrayOf(MediaStore.Files.FileColumns.DATE_MODIFIED),
+                ContentResolver.QUERY_ARG_SORT_DIRECTION to ContentResolver.QUERY_SORT_DIRECTION_DESCENDING,
+                ContentResolver.QUERY_ARG_SQL_SELECTION to selection,
+                ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS to selectionArgument,
+            )
+            context.contentResolver.query(
+                collection,
+                projection,
+                bundle,
+                null
+            )
+        } else {
+            context.contentResolver.query(
+                collection,
+                projection,
+                selection,
+                selectionArgument,
+                "$sortedOrder DESC LIMIT $loadSize OFFSET $offset",
+            )
+        }?.use { cursor ->
             while (cursor.moveToNext()) {
-                val id =
-                    cursor.getLong(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns._ID))
-                val name =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DISPLAY_NAME))
-                val filePath =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATA))
-                val date =
-                    cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Images.ImageColumns.DATE_TAKEN))
+                val id = cursor.getColumnIndex(MediaStore.Images.ImageColumns._ID)
+                    .takeIf { it != -1 }
+                    ?.let { cursor.getLong(it) }
+                    ?: continue
+
+                val name = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DISPLAY_NAME)
+                    .takeIf { it != -1 }
+                    ?.let { cursor.getString(it) }
+                    ?: continue
+
+                val filePath = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+                    .takeIf { it != -1 }
+                    ?.let { cursor.getString(it) }
+                    ?: continue
+
+                val date = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATE_TAKEN)
+                    .takeIf { it != -1 }
+                    ?.let { cursor.getString(it) }
+                    ?: continue
+
                 val image = GalleryImage(
                     id = id,
                     filePath = filePath,
                     name = name,
-                    date = date ?: "",
-                    size = 0,
+                    date = date
                 )
                 galleryImageList.add(image)
             }
@@ -76,49 +109,53 @@ class GalleryCursor @Inject constructor(
 
     fun getFolderList(): List<GalleryFolder> {
         val folderList: ArrayList<GalleryFolder> = arrayListOf(GalleryFolder("최근 항목", ""))
-        val uri = MediaStore.Images.Media.EXTERNAL_CONTENT_URI
-        val projection = arrayOf(MediaStore.Images.Media.DATA)
-        val cursor = context.contentResolver.query(uri, projection, null, null, null)
-        if (cursor != null) {
+
+        val collection: Uri = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+            MediaStore.Images.Media.getContentUri(
+                MediaStore.VOLUME_EXTERNAL
+            )
+        } else {
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+        }
+
+        val projection = arrayOf(
+            MediaStore.Images.Media.DATA
+        )
+
+        if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
+            context.contentResolver.query(
+                collection,
+                projection,
+                bundleOf(),
+                null
+            )
+        } else {
+            context.contentResolver.query(
+                collection,
+                projection,
+                null,
+                null,
+                null
+            )
+        }?.use { cursor ->
             while (cursor.moveToNext()) {
-                val columnIndex = cursor.getColumnIndex(MediaStore.Images.Media.DATA)
-                File(cursor.getString(columnIndex)).parent?.let { filePath ->
-                    val folder = GalleryFolder(filePath.split("/").last(), filePath)
+                val filePath = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+                    .takeIf { it != -1 }
+                    ?.let { cursor.getString(it) }
+                    ?: continue
+
+                File(filePath).parentFile?.let { parentFile ->
+                    val folder = GalleryFolder(
+                        name = parentFile.name,
+                        location = parentFile.path
+                    )
+
                     folderList.find {
-                        it.location == filePath
+                        it.location == folder.location
                     } ?: folderList.add(folder)
                 }
             }
-            cursor.close()
         }
         return folderList
-    }
-
-    @SuppressLint("Recycle")
-    private fun getQuery(
-        offset: Int,
-        limit: Int,
-        selection: String?,
-        selectionArgs: Array<String>?,
-    ): Cursor? {
-        return if (Build.VERSION.SDK_INT > Build.VERSION_CODES.Q) {
-            val bundle = bundleOf(
-                ContentResolver.QUERY_ARG_OFFSET to offset,
-                ContentResolver.QUERY_ARG_LIMIT to limit,
-                ContentResolver.QUERY_ARG_SORT_COLUMNS to arrayOf(MediaStore.Files.FileColumns.DATE_MODIFIED),
-                ContentResolver.QUERY_ARG_SORT_DIRECTION to ContentResolver.QUERY_SORT_DIRECTION_DESCENDING,
-                ContentResolver.QUERY_ARG_SQL_SELECTION to selection,
-                ContentResolver.QUERY_ARG_SQL_SELECTION_ARGS to selectionArgs,
-            )
-            contentResolver.query(uriExternal, projection, bundle, null)
-        } else {
-            contentResolver.query(
-                uriExternal,
-                projection,
-                selection,
-                selectionArgs,
-                "$sortedOrder DESC LIMIT $limit OFFSET $offset",
-            )
-        }
     }
 }
