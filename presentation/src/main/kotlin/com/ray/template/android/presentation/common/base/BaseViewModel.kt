@@ -17,7 +17,7 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
-
+    // TODO : ioDispatcher Injection
     val coroutineContext: CoroutineContext by lazy {
         handler
     }
