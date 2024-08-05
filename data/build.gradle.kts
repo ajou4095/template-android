@@ -79,6 +79,7 @@ dependencies {
     testFixturesImplementation(libs.bundles.androidx.data)
     testFixturesImplementation(libs.bundles.network)
     testFixturesImplementation(libs.bundles.test)
+    testFixturesImplementation(libs.ktor.mock)
     kspTestFixtures(libs.hilt.android.compiler)
 }
 
