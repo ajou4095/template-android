@@ -44,8 +44,8 @@ fun HomeScreen(
     argument: HomeArgument,
     data: HomeData
 ) {
-    val (state, event, intent, logEvent, handler) = argument
-    val scope = rememberCoroutineScope() + handler
+    val (state, event, intent, logEvent, coroutineContext) = argument
+    val scope = rememberCoroutineScope() + coroutineContext
 
     val pagerState = rememberPagerState(
         pageCount = { data.homeTypeList.size }
@@ -81,7 +81,7 @@ fun HomeScreen(
         )
     }
 
-    LaunchedEffectWithLifecycle(event, handler) {
+    LaunchedEffectWithLifecycle(event, coroutineContext) {
         event.eventObserve { event ->
 
         }
@@ -133,7 +133,7 @@ private fun HomeScreenPreview() {
             event = MutableEventFlow(),
             intent = {},
             logEvent = { _, _ -> },
-            handler = CoroutineExceptionHandler { _, _ -> }
+            coroutineContext = CoroutineExceptionHandler { _, _ -> }
         ),
         data = HomeData(
             initialHomeType = HomeType.MyPage,

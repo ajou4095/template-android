@@ -7,6 +7,7 @@ import com.ray.template.android.common.util.coroutine.event.MutableEventFlow
 import com.ray.template.android.common.util.coroutine.event.asEventFlow
 import com.ray.template.android.domain.usecase.nonfeature.tracking.LogEventUseCase
 import javax.inject.Inject
+import kotlin.coroutines.CoroutineContext
 import kotlinx.coroutines.CoroutineExceptionHandler
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.flow.SharingStarted
@@ -16,7 +17,12 @@ import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.launch
 
 abstract class BaseViewModel : ViewModel() {
-    val handler = CoroutineExceptionHandler { _, throwable ->
+
+    val coroutineContext: CoroutineContext by lazy {
+        handler
+    }
+
+    protected val handler = CoroutineExceptionHandler { _, throwable ->
         viewModelScope.launch {
             _errorEvent.emit(ErrorEvent.Client(throwable))
         }
@@ -29,7 +35,7 @@ abstract class BaseViewModel : ViewModel() {
     lateinit var logEventUseCase: LogEventUseCase
 
     fun launch(block: suspend CoroutineScope.() -> Unit) {
-        viewModelScope.launch(handler, block = block)
+        viewModelScope.launch(coroutineContext, block = block)
     }
 
     protected inline fun <T, R> StateFlow<T>.map(

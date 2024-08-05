@@ -3,7 +3,7 @@ package com.ray.template.android.presentation.ui.main.common.gallery
 import androidx.compose.runtime.Immutable
 import com.ray.template.android.common.util.coroutine.event.EventFlow
 import com.ray.template.android.presentation.model.gallery.GalleryFolder
-import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlin.coroutines.CoroutineContext
 
 @Immutable
 data class GalleryArgument(
@@ -11,7 +11,7 @@ data class GalleryArgument(
     val event: EventFlow<GalleryEvent>,
     val intent: (GalleryIntent) -> Unit,
     val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
-    val handler: CoroutineExceptionHandler
+    val coroutineContext: CoroutineContext
 )
 
 sealed interface GalleryState {

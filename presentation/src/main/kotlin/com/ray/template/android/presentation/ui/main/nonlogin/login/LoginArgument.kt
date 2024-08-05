@@ -2,7 +2,7 @@ package com.ray.template.android.presentation.ui.main.nonlogin.login
 
 import androidx.compose.runtime.Immutable
 import com.ray.template.android.common.util.coroutine.event.EventFlow
-import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlin.coroutines.CoroutineContext
 
 @Immutable
 data class LoginArgument(
@@ -10,7 +10,7 @@ data class LoginArgument(
     val event: EventFlow<LoginEvent>,
     val intent: (LoginIntent) -> Unit,
     val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
-    val handler: CoroutineExceptionHandler
+    val coroutineContext: CoroutineContext
 )
 
 sealed interface LoginState {

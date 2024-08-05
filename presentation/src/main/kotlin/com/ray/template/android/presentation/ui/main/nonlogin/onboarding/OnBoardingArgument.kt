@@ -2,7 +2,7 @@ package com.ray.template.android.presentation.ui.main.nonlogin.onboarding
 
 import androidx.compose.runtime.Immutable
 import com.ray.template.android.common.util.coroutine.event.EventFlow
-import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlin.coroutines.CoroutineContext
 
 @Immutable
 data class OnBoardingArgument(
@@ -10,7 +10,7 @@ data class OnBoardingArgument(
     val event: EventFlow<OnBoardingEvent>,
     val intent: (OnBoardingIntent) -> Unit,
     val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
-    val handler: CoroutineExceptionHandler
+    val coroutineContext: CoroutineContext
 )
 
 sealed interface OnBoardingState {

@@ -2,7 +2,7 @@ package com.ray.template.android.presentation.ui.main.splash
 
 import androidx.compose.runtime.Immutable
 import com.ray.template.android.common.util.coroutine.event.EventFlow
-import kotlinx.coroutines.CoroutineExceptionHandler
+import kotlin.coroutines.CoroutineContext
 
 @Immutable
 data class SplashArgument(
@@ -10,7 +10,7 @@ data class SplashArgument(
     val event: EventFlow<SplashEvent>,
     val intent: (SplashIntent) -> Unit,
     val logEvent: (eventName: String, params: Map<String, Any>) -> Unit,
-    val handler: CoroutineExceptionHandler
+    val coroutineContext: CoroutineContext
 )
 
 sealed interface SplashState {
