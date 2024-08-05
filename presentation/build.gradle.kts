@@ -76,14 +76,16 @@ dependencies {
     implementation(libs.bundles.logging)
     implementation(libs.androidx.compose.ui.tooling)
 
-//    implementation(testFixtures(project(":common")))
-//    implementation(testFixtures(project(":data")))
-//    implementation(testFixtures(project(":domain")))
-//    implementation(testFixtures(project(":presentation")))
-    androidTestImplementation(libs.bundles.test)
+    testImplementation(testFixtures(project(":domain")))
+    testImplementation(testFixtures(project(":presentation")))
+
     testImplementation(libs.bundles.test)
     kspTest(libs.hilt.android.compiler)
-    testFixturesCompileOnly(libs.kotlin)
+
+    testFixturesImplementation(libs.bundles.kotlin)
+    testFixturesImplementation(libs.hilt.android)
+    testFixturesImplementation(libs.bundles.test)
+    kspTestFixtures(libs.hilt.android.compiler)
 }
 
 fun getLocalProperty(propertyKey: String): String {

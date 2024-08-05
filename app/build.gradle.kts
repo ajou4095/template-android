@@ -132,14 +132,19 @@ dependencies {
     implementation(libs.bundles.logging)
     debugImplementation(libs.leakcanary)
 
-//    implementation(testFixtures(project(":common")))
-//    implementation(testFixtures(project(":data")))
-//    implementation(testFixtures(project(":domain")))
-//    implementation(testFixtures(project(":presentation")))
-    androidTestImplementation(libs.bundles.test)
+    testImplementation(testFixtures(project(":app")))
+    testImplementation(testFixtures(project(":data")))
+    testImplementation(testFixtures(project(":domain")))
+    testImplementation(testFixtures(project(":presentation")))
+
     testImplementation(libs.bundles.test)
     kspTest(libs.hilt.android.compiler)
-    testFixturesCompileOnly(libs.kotlin)
+
+    testFixturesImplementation(libs.bundles.kotlin)
+    testFixturesImplementation(libs.hilt.android)
+    testFixturesImplementation(libs.bundles.test)
+    // TODO : Ksp / Kapt Test Fixtures Update 대기중
+    kspTestFixtures(libs.hilt.android.compiler)
 }
 
 fun getLocalProperty(propertyKey: String): String {
