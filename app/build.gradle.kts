@@ -68,6 +68,9 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_17.toString()
     }
+    testFixtures {
+        enable = true
+    }
 }
 
 
@@ -126,6 +129,15 @@ dependencies {
     implementation(libs.bundles.kakao)
     implementation(libs.bundles.logging)
     debugImplementation(libs.leakcanary)
+
+//    implementation(testFixtures(project(":common")))
+//    implementation(testFixtures(project(":data")))
+//    implementation(testFixtures(project(":domain")))
+//    implementation(testFixtures(project(":presentation")))
+    androidTestImplementation(libs.bundles.test)
+    testImplementation(libs.bundles.test)
+    kspTest(libs.hilt.android.compiler)
+    testFixturesCompileOnly(libs.kotlin)
 }
 
 fun getLocalProperty(propertyKey: String): String {

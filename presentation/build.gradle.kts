@@ -46,6 +46,9 @@ android {
     composeOptions {
         kotlinCompilerExtensionVersion = libs.versions.androidx.compose.compiler.get()
     }
+    testFixtures {
+        enable = true
+    }
 }
 
 dependencies {
@@ -67,6 +70,15 @@ dependencies {
     implementation(libs.bundles.kakao)
     implementation(libs.bundles.logging)
     implementation(libs.androidx.compose.ui.tooling)
+
+//    implementation(testFixtures(project(":common")))
+//    implementation(testFixtures(project(":data")))
+//    implementation(testFixtures(project(":domain")))
+//    implementation(testFixtures(project(":presentation")))
+    androidTestImplementation(libs.bundles.test)
+    testImplementation(libs.bundles.test)
+    kspTest(libs.hilt.android.compiler)
+    testFixturesCompileOnly(libs.kotlin)
 }
 
 fun getLocalProperty(propertyKey: String): String {
