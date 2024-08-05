@@ -12,9 +12,8 @@ plugin-sentry = "4.5.1"
 plugin-gms = "4.4.2"
 plugin-firebase-crashlytics = "3.0.2"
 # Kotlin
-# TODO : Kotlin 2.0.0
-kotlin = "1.9.23"
-ksp = "1.9.23-1.0.19"
+kotlin = "2.0.0"
+ksp = "2.0.0-1.0.24"
 coroutines = "1.8.1"
 kotlinx-datetime = "0.5.0"
 # Hilt
@@ -29,7 +28,6 @@ androidx-datastore = "1.1.1"
 androidx-compose = "1.6.8"
 androidx-compose-navigation = "2.7.7"
 androidx-compose-lifecycle = "2.8.4"
-androidx-compose-compiler = "1.5.13"
 androidx-compose-material3 = "1.2.1"
 androidx-compose-constraintlayout = "1.0.1"
 androidx-test = "1.6.1"
@@ -70,6 +68,7 @@ hilt-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref =
 # AndroidX Presentation
 androidx-core = { module = "androidx.core:core-ktx", version.ref = "androidx-core" }
 androidx-appcompat = { module = "androidx.appcompat:appcompat", version.ref = "androidx-appcompat" }
+androidx-compose-ui = { module = "androidx.compose.ui:ui", version.ref = "androidx-compose" }
 androidx-compose-material3 = { module = "androidx.compose.material3:material3", version.ref = "androidx-compose-material3" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "androidx-compose" }
 androidx-compose-navigation = { module = "androidx.navigation:navigation-compose", version.ref = "androidx-compose-navigation" }
@@ -125,6 +124,8 @@ kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
 kotlin-kapt = { id = "org.jetbrains.kotlin.kapt", version.ref = "kotlin" }
 kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+kotlin-parcelize = { id = "org.jetbrains.kotlin.plugin.parcelize", version.ref = "kotlin" }
+kotlin-compose = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
 ksp = { id = "com.google.devtools.ksp", version.ref = "ksp" }
 hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 sentry = { id = "io.sentry.android.gradle", version.ref = "plugin-sentry" }
@@ -133,8 +134,8 @@ firebase-crashlytics = { id = "com.google.firebase.crashlytics", version.ref = "
 
 [bundles]
 kotlin = ["kotlin", "kotlinx-coroutines-android", "kotlinx-coroutines-core", "kotlinx-datetime"]
-androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-compose-material3",
-    "androidx-compose-navigation", "androidx-compose-constraintlayout",
+androidx-presentation = ["androidx-core", "androidx-appcompat", "androidx-compose-ui",
+    "androidx-compose-material3", "androidx-compose-navigation", "androidx-compose-constraintlayout",
     "androidx-compose-lifecycle", "holix-bottomsheet", "androidx-paging-compose"]
 androidx-data = ["androidx-room-runtime", "androidx-room-coroutine", "androidx-paging-runtime",
     "androidx-datastore-preferences"]
