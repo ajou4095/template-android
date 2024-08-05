@@ -17,14 +17,14 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object LocalModule {
+object LocalModule {
     private val Context.dataStore: DataStore<Preferences> by preferencesDataStore(
         name = PreferencesConstant.PREFERENCES_NAME
     )
 
     @Provides
     @Singleton
-    fun provideDataStore(
+    internal fun provideDataStore(
         @ApplicationContext context: Context
     ): DataStore<Preferences> {
         return context.dataStore
@@ -32,7 +32,7 @@ internal object LocalModule {
 
     @Provides
     @Singleton
-    fun provideTemplateDatabase(
+    internal fun provideTemplateDatabase(
         @ApplicationContext context: Context
     ): TemplateDatabase {
         return Room.databaseBuilder(
@@ -44,7 +44,7 @@ internal object LocalModule {
 
     @Provides
     @Singleton
-    fun provideSampleDao(
+    internal fun provideSampleDao(
         templateDatabase: TemplateDatabase
     ): SampleDao {
         return templateDatabase.sampleDao()

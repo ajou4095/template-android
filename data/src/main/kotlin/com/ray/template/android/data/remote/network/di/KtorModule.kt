@@ -24,7 +24,7 @@ import okhttp3.Interceptor
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object KtorModule {
+object KtorModule {
 
     private val jsonConfiguration = Json {
         ignoreUnknownKeys = true
@@ -34,7 +34,7 @@ internal object KtorModule {
     @Provides
     @Singleton
     @NoAuthHttpClient
-    fun provideNoAuthHttpClient(
+    internal fun provideNoAuthHttpClient(
         @ApplicationContext context: Context,
         @DebugInterceptor debugInterceptor: Optional<Interceptor>
     ): HttpClient {
@@ -61,7 +61,7 @@ internal object KtorModule {
     @Provides
     @Singleton
     @AuthHttpClient
-    fun provideAuthHttpClient(
+    internal fun provideAuthHttpClient(
         @ApplicationContext context: Context,
         @DebugInterceptor debugInterceptor: Optional<Interceptor>,
         tokenRepository: TokenRepository

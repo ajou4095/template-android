@@ -14,11 +14,11 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal object NetworkEnvironmentModule {
+object NetworkEnvironmentModule {
 
     @Provides
     @Singleton
-    fun provideBaseUrlProvider(
+    internal fun provideBaseUrlProvider(
         @ApplicationContext context: Context,
         dataStore: DataStore<Preferences>
     ): BaseUrlProvider {
@@ -27,7 +27,7 @@ internal object NetworkEnvironmentModule {
 
     @Provides
     @Singleton
-    fun provideErrorMessageMapper(
+    internal fun provideErrorMessageMapper(
         @ApplicationContext context: Context
     ): ErrorMessageMapper {
         return ErrorMessageMapper(context)

@@ -16,29 +16,29 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
-internal abstract class RepositoryModule {
+abstract class RepositoryModule {
 
     @Binds
     @Singleton
-    abstract fun bindsAuthenticationRepository(
+    internal abstract fun bindsAuthenticationRepository(
         authenticationRepository: MockAuthenticationRepository
     ): AuthenticationRepository
 
     @Binds
     @Singleton
-    abstract fun bindsTokenRepository(
+    internal abstract fun bindsTokenRepository(
         tokenRepository: MockTokenRepository
     ): TokenRepository
 
     @Binds
     @Singleton
-    abstract fun bindsUserRepository(
+    internal abstract fun bindsUserRepository(
         userRepository: MockUserRepository
     ): UserRepository
 
     @Binds
     @Singleton
-    abstract fun bindsTrackingRepository(
+    internal abstract fun bindsTrackingRepository(
         userRepository: MockTrackingRepository
     ): TrackingRepository
 }

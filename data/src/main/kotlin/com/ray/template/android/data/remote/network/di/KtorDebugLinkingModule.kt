@@ -13,7 +13,7 @@ abstract class NetworkEnvironmentDebugModule {
 
     @BindsOptionalOf
     @DebugInterceptor
-    abstract fun bindsDebugInterceptor(): Interceptor
+    internal abstract fun bindsDebugInterceptor(): Interceptor
 }
 
 @Qualifier
