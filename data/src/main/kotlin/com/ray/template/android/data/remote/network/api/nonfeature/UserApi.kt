@@ -14,11 +14,9 @@ class UserApi @Inject constructor(
     private val baseUrlProvider: BaseUrlProvider,
     private val errorMessageMapper: ErrorMessageMapper
 ) {
-    private val baseUrl: String
-        get() = baseUrlProvider.get()
 
     suspend fun getProfile(): Result<ProfileRes> {
-        return client.get("$baseUrl/api/v1/user/profile")
+        return client.get("${baseUrlProvider.get()}/api/v1/user/profile")
             .convert(errorMessageMapper::map)
     }
 }

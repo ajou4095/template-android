@@ -9,25 +9,22 @@ import com.ray.template.android.data.R
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.runBlocking
 
 class BaseUrlProvider(
     @ApplicationContext private val context: Context,
     private val dataStore: DataStore<Preferences>
 ) {
-    fun get(): String {
-        val serverFlag: String = runBlocking {
-            val preferencesKey = stringPreferencesKey(KEY_SERVER_FLAG)
-            val defaultFlag = context.getString(R.string.server_flag)
+    suspend fun get(): String {
+        val preferencesKey = stringPreferencesKey(KEY_SERVER_FLAG)
+        val defaultFlag = context.getString(R.string.server_flag)
 
-            dataStore.data.map { preferences ->
-                preferences[preferencesKey]
-            }.first() ?: let {
-                dataStore.edit { preferences ->
-                    preferences[preferencesKey] = defaultFlag
-                }
-                defaultFlag
+        val serverFlag: String = dataStore.data.map { preferences ->
+            preferences[preferencesKey]
+        }.first() ?: let {
+            dataStore.edit { preferences ->
+                preferences[preferencesKey] = defaultFlag
             }
+            defaultFlag
         }
 
         when (serverFlag) {

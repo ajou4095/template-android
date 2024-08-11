@@ -14,16 +14,14 @@ class AuthenticationApi @Inject constructor(
     private val baseUrlProvider: BaseUrlProvider,
     private val errorMessageMapper: ErrorMessageMapper
 ) {
-    private val baseUrl: String
-        get() = baseUrlProvider.get()
 
     suspend fun logout(): Result<Unit> {
-        return client.post("$baseUrl/api/v1/auth/logout")
+        return client.post("${baseUrlProvider.get()}/api/v1/auth/logout")
             .convert(errorMessageMapper::map)
     }
 
     suspend fun withdraw(): Result<Unit> {
-        return client.delete("$baseUrl/api/v1/auth/withdraw")
+        return client.delete("${baseUrlProvider.get()}/api/v1/auth/withdraw")
             .convert(errorMessageMapper::map)
     }
 }
