@@ -3,11 +3,9 @@ name: android-cd
 on:
   push:
     branches: [ "main" ]
-  pull_request:
-    branches: [ "main" ]
 
 jobs:
-  build:
+  deploy:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -27,13 +25,16 @@ jobs:
 
       - name: Get versions
         run: |
-          echo "APP_VERSION_CODE=$(grep 'app-versioncode = ' gradle/libs.versions.toml | grep -oP 'app-versioncode = "\K[^"]+')" >> $GITHUB_ENV
-          echo "APP_VERSION_NAME=$(grep 'app-versionname = ' gradle/libs.versions.toml | grep -oP 'app-versionname = "\K[^"]+')" >> $GITHUB_ENV
-          TAG_EXISTS=$(git ls-remote --tags origin | grep -o "refs/tags/v${APP_VERSION_NAME}$" || true)
-          if [ "$TAG_EXISTS" ]; then
-            echo "TAG_EXISTS=true" >> $GITHUB_ENV
-          else
+          APP_VERSION_CODE=$(grep 'app-versioncode = ' gradle/libs.versions.toml | grep -oP 'app-versioncode = "\K[^"]+')
+          APP_VERSION_NAME=$(grep 'app-versionname = ' gradle/libs.versions.toml | grep -oP 'app-versionname = "\K[^"]+')
+          echo "APP_VERSION_CODE=${APP_VERSION_CODE}" >> $GITHUB_ENV
+          echo "APP_VERSION_NAME=${APP_VERSION_NAME}" >> $GITHUB_ENV
+          TAG=$(git ls-remote --tags origin | grep -o "refs/tags/v${APP_VERSION_NAME}$") || true
+          
+          if [ -z "$TAG" ]; then
             echo "TAG_EXISTS=false" >> $GITHUB_ENV
+          else
+            echo "TAG_EXISTS=true" >> $GITHUB_ENV
           fi
 
         shell: bash
@@ -47,14 +48,8 @@ jobs:
           echo $SERVICE_ACCOUNT_FILE_JSON | base64 -di > service_account_file.json
           echo "FIREBASE_APP_ID=$(grep '        "mobilesdk_app_id": "' app/google-services.json | grep -oP '        "mobilesdk_app_id": "\K[^"]+')" >> $GITHUB_ENV
 
-      - name: Stop if tag exists
-        if: env.TAG_EXISTS == 'true'
-        run: |
-          echo "Tag v${APP_VERSION_NAME} already exists. Stopping the workflow."
-          exit 0
-        shell: bash
-
       - name: Create tag
+        if: env.TAG_EXISTS == 'false'
         run: |
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
@@ -66,6 +61,7 @@ jobs:
 
       # ./gradlew :app:bundleDevelopmentDebug
       - name: Build AAB
+        if: env.TAG_EXISTS == 'false'
         run: |
           ./gradlew assembleDevelopmentDebug
         env:
@@ -74,6 +70,7 @@ jobs:
           KAKAO_APP_KEY: ${{ secrets.KAKAO_APP_KEY }}
 
       - name: Deploy to Firebase
+        if: env.TAG_EXISTS == 'false'
         run: |
           curl -sL https://firebase.tools | bash
           firebase appdistribution:distribute \
