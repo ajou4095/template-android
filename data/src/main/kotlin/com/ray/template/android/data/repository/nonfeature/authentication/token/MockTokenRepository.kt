@@ -27,11 +27,12 @@ class MockTokenRepository @Inject constructor(
         password: String
     ): Result<Long> {
         randomShortDelay()
-        return Result.success(0L).onSuccess { token ->
+        return Result.success(0L).map { token ->
             dataStore.edit { preferences ->
                 preferences[stringPreferencesKey(REFRESH_TOKEN)] = "mock_refresh_token"
                 preferences[stringPreferencesKey(ACCESS_TOKEN)] = "mock_access_token"
             }
+            token
         }
     }
 
@@ -40,11 +41,12 @@ class MockTokenRepository @Inject constructor(
         password: String
     ): Result<Long> {
         randomLongDelay()
-        return Result.success(0L).onSuccess {
+        return Result.success(0L).map { register ->
             dataStore.edit { preferences ->
                 preferences[stringPreferencesKey(REFRESH_TOKEN)] = "mock_refresh_token"
                 preferences[stringPreferencesKey(ACCESS_TOKEN)] = "mock_access_token"
             }
+            register
         }
     }
 
@@ -75,18 +77,17 @@ class MockTokenRepository @Inject constructor(
                     accessToken = "mock_access_token",
                     refreshToken = "mock_refresh_token"
                 )
-            ).onSuccess { token ->
+            ).map { token ->
                 dataStore.edit { preferences ->
                     preferences[stringPreferencesKey(REFRESH_TOKEN)] = token.refreshToken
                     preferences[stringPreferencesKey(ACCESS_TOKEN)] = token.accessToken
                 }
-            }.onFailure { exception ->
-                _refreshFailEvent.emit(Unit)
-            }.map { token ->
                 JwtToken(
                     accessToken = token.accessToken,
                     refreshToken = token.refreshToken
                 )
+            }.onFailure { exception ->
+                _refreshFailEvent.emit(Unit)
             }
         }
     }

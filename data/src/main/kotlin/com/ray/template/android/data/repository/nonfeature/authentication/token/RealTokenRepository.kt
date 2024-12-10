@@ -30,13 +30,12 @@ class RealTokenRepository @Inject constructor(
         return tokenApi.login(
             username = username,
             password = password,
-        ).onSuccess { token ->
+        ).map { token ->
             dataStore.edit { preferences ->
                 preferences[stringPreferencesKey(REFRESH_TOKEN)] = token.refreshToken
                 preferences[stringPreferencesKey(ACCESS_TOKEN)] = token.accessToken
             }
-        }.map { login ->
-            login.id
+            token.id
         }
     }
 
@@ -47,12 +46,11 @@ class RealTokenRepository @Inject constructor(
         return tokenApi.register(
             username = username,
             password = password
-        ).onSuccess { register ->
+        ).map { register ->
             dataStore.edit { preferences ->
                 preferences[stringPreferencesKey(REFRESH_TOKEN)] = register.refreshToken
                 preferences[stringPreferencesKey(ACCESS_TOKEN)] = register.accessToken
             }
-        }.map { register ->
             register.id
         }
     }
@@ -78,19 +76,18 @@ class RealTokenRepository @Inject constructor(
         } else {
             tokenApi.getAccessToken(
                 refreshToken = refreshToken
-            ).onSuccess { token ->
+            ).map { token ->
                 dataStore.edit { preferences ->
                     preferences[stringPreferencesKey(REFRESH_TOKEN)] = token.refreshToken
                     preferences[stringPreferencesKey(ACCESS_TOKEN)] = token.accessToken
                 }
-            }.onFailure { exception ->
-                removeToken()
-                _refreshFailEvent.emit(Unit)
-            }.map { token ->
                 JwtToken(
                     accessToken = token.accessToken,
                     refreshToken = token.refreshToken
                 )
+            }.onFailure { exception ->
+                removeToken()
+                _refreshFailEvent.emit(Unit)
             }
         }
     }

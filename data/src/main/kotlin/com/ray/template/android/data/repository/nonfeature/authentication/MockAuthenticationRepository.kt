@@ -21,7 +21,7 @@ class MockAuthenticationRepository @Inject constructor(
             else -> {
                 Result.success(Unit)
             }
-        }.onSuccess {
+        }.map {
             tokenRepository.removeToken()
         }
     }
@@ -37,7 +37,7 @@ class MockAuthenticationRepository @Inject constructor(
             else -> {
                 Result.success(Unit)
             }
-        }.onSuccess {
+        }.map {
             tokenRepository.removeToken()
         }
     }
